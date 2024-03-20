@@ -17,7 +17,7 @@ import java.util.List;
  *****************************************************************************/
 public class HotelControllerListMock implements HotelControllerInterface {
 
-    // the method returns a list of hotels that match the given parameters
+    // the method returns a list of hotels that should pass the tests
     public List<Hotel> searchForHotels(String location, LocalDateTime checkIn, LocalDateTime checkOut, int capacity) {
         Hotel hotelAkureyri = new Hotel(null, "Akureyri", "Hótel Akureyri", "Þetta hótel er á Akureyri", null, 10000);
         Hotel hotelIsafjordur = new Hotel(null, "Ísafjörður", "Hótel Ísafjörður", "Þetta hótel er á Ísafirði", null, 50000);

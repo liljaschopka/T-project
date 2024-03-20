@@ -17,7 +17,9 @@ import java.util.List;
  *****************************************************************************/
 public class HotelControllerEmptyMock implements HotelControllerInterface {
 
+    // the method returns an empty list of hotels
     public List<Hotel> searchForHotels(String location, LocalDateTime checkIn, LocalDateTime checkOut, int capacity) {
-        return null;
+        List<Hotel> hotels = List.of();
+        return hotels;
     }
 }

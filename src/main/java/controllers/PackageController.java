@@ -80,13 +80,13 @@ public class PackageController {
 
     }
 
-    public static Cart getCart() {
+    /* public static Cart getCart() {
         return cart;
     }
 
     public static User getUser() {
         return user;
-    }
+    } */
 
     public static void main(String[] args) {
 
