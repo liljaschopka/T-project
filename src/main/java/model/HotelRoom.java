@@ -1,4 +1,4 @@
-package com.example.tproject;
+package model;
 
 /******************************************************************************
  *  Nafn    : Lilja Kolbrún Schopka
@@ -10,7 +10,7 @@ package com.example.tproject;
  *
  *
  *****************************************************************************/
-public class HotelsController {
+public class HotelRoom {
     public static void main(String[] args) {
 
     }

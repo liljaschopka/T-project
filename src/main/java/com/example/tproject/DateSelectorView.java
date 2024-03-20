@@ -7,7 +7,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 
-public class DateSelectorController {
+public class DateSelectorView {
     @FXML
     private Label welcomeText;
     @FXML

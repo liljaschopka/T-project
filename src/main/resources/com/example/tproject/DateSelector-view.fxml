@@ -16,19 +16,19 @@
       <Label layoutX="443.0" layoutY="175.0" text="Amount of people:" />
       <Label layoutX="72.0" layoutY="175.0" text="From" />
       <Label layoutX="262.0" layoutY="175.0" text="To" />
-      <MenuButton fx:id="fxFrom" layoutX="69.0" layoutY="199.0" mnemonicParsing="false" text="MenuButton">
+      <MenuButton fx:id="fxFrom" layoutX="69.0" layoutY="199.0" mnemonicParsing="false" text="Location">
          <items>
             <MenuItem mnemonicParsing="false" text="Action 1" />
             <MenuItem mnemonicParsing="false" text="Action 2" />
          </items>
       </MenuButton>
-      <MenuButton fx:id="fxTo" layoutX="261.0" layoutY="200.0" mnemonicParsing="false" text="MenuButton">
+      <MenuButton fx:id="fxTo" layoutX="261.0" layoutY="200.0" mnemonicParsing="false" text="Location">
          <items>
             <MenuItem mnemonicParsing="false" text="Action 1" />
             <MenuItem mnemonicParsing="false" text="Action 2" />
          </items>
       </MenuButton>
-      <MenuButton fx:id="fxPeople" layoutX="439.0" layoutY="200.0" mnemonicParsing="false" text="MenuButton">
+      <MenuButton fx:id="fxPeople" layoutX="439.0" layoutY="200.0" mnemonicParsing="false" text="                  ">
          <items>
             <MenuItem mnemonicParsing="false" text="Action 1" />
             <MenuItem mnemonicParsing="false" text="Action 2" />

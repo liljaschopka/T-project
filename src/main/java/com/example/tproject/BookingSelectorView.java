@@ -12,7 +12,7 @@ import javafx.scene.control.Label;
  *  til þess að fara til baka og halda áfram?
  *
  *****************************************************************************/
-public class BookingSelectorController {
+public class BookingSelectorView {
     @FXML
     private Label description;
     @FXML

@@ -16,7 +16,7 @@ import javafx.scene.control.ListView;
  *
  *
  *****************************************************************************/
-public class PaymentController {
+public class PaymentView {
     @FXML
     private Button fxPay;
     @FXML

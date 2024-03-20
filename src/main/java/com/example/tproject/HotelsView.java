@@ -10,7 +10,7 @@ package com.example.tproject;
  *
  *
  *****************************************************************************/
-public class DaytripsController {
+public class HotelsView {
     public static void main(String[] args) {
 
     }
