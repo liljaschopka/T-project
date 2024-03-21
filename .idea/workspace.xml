@@ -21,14 +21,15 @@
       <list>
         <option value="Enum" />
         <option value="FxmlFile" />
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
   <component name="FindBugs-IDEA-Workspace">
     <analyzeAfterCompile>true</analyzeAfterCompile>
     <toolWindowToFront>false</toolWindowToFront>
+    <toolWindowEditorPreview>false</toolWindowEditorPreview>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />

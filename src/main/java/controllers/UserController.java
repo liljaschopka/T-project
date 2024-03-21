@@ -14,8 +14,7 @@ import model.PaymentInfo;
  *****************************************************************************/
 public class UserController {
     public void createNewUser(String name, String email, PaymentInfo paymentInfo) {
-        
-    }
 
-}
+    }
+    
 }

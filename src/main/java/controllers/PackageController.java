@@ -3,6 +3,8 @@ package controllers;
 import model.*;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /******************************************************************************
@@ -23,7 +25,7 @@ public class PackageController {
     private LocalDateTime checkOut;
     private int persons;
 
-    private HotelController hotelController;
+    private HotelControllerInterface hotelController;
     private FlightController flightController;
     private DayTripController dayTripController;
     private BookingController bookingController;
@@ -32,7 +34,7 @@ public class PackageController {
 
     public PackageController(User user, String origin, String destination,
                              LocalDateTime checkIn, LocalDateTime checkOut, int persons,
-                             HotelController hotelController, FlightController flightController,
+                             HotelControllerInterface hotelController, FlightController flightController,
                              DayTripController dayTripController, BookingController bookingController) {
         this.user = user;
         this.origin = origin;
@@ -60,23 +62,64 @@ public class PackageController {
     }
 
 
-    public List<Hotel> findAvailableHotels(LocalDateTime checkIn, LocalDateTime checkOut, int persons,
-                                           String destination) {
-        // implementa
-        return null;
+    public List<Hotel> findAvailableHotels() {
+
+        if (!validDates(checkIn, checkOut)) {
+            throw new IllegalArgumentException("Invalid dates");
+        }
+        
+        if (!validODP(origin, destination, persons)) {
+            throw new IllegalArgumentException("Invalid origin, destination or persons");
+        }
+
+        List<Hotel> hotels = hotelController.searchForHotels(destination, checkIn, checkOut, persons);
+
+        if (hotels.isEmpty()) {
+            throw new IllegalArgumentException("No hotels found");
+        }
+
+        Collections.sort(hotels, Comparator.comparingInt(Hotel::getPrice));
+
+        return hotels;
     }
 
-    public List<Flight> findAvailableFlights(LocalDateTime checkIn, LocalDateTime checkOut, int persons,
-                                             String destination, String origin, int capacity) {
-        // implementa
-        return null;
+    public List<Flight> findAvailableFlights() {
+        if (!validDates(checkIn, checkOut)) {
+            throw new IllegalArgumentException("Invalid dates");
+        }
+        if (!validODP(origin, destination, persons)) {
+            throw new IllegalArgumentException("Invalid origin, destination or persons");
+        }
+
+        List<Flight> flights = flightController.searchForFlights(destination, origin, checkIn, checkOut, persons);
+
+        if (flights.isEmpty()) {
+            throw new IllegalArgumentException("No flights found");
+        }
+
+        Collections.sort(flights, Comparator.comparingInt(Flight::getPrice));
+
+        return flights;
 
     }
 
-    public List<Daytrip> findAvailableDayTrips(LocalDateTime checkIn, LocalDateTime checkOut,
-                                               int capacity, String location) {
-        // implementa
-        return null;
+    public List<Daytrip> findAvailableDayTrips() {
+        if (!validDates(checkIn, checkOut)) {
+            throw new IllegalArgumentException("Invalid dates");
+        }
+        if (!validODP(origin, destination, persons)) {
+            throw new IllegalArgumentException("Invalid origin, destination or persons");
+        }
+
+        List<Daytrip> daytrips = dayTripController.searchForDaytrips(destination, checkIn, checkOut, persons);
+
+        if (daytrips.isEmpty()) {
+            throw new IllegalArgumentException("No daytrips found");
+        }
+
+        Collections.sort(daytrips, Comparator.comparingInt(Daytrip::getPrice));
+
+        return daytrips;
 
     }
 

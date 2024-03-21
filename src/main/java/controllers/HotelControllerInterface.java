@@ -1,5 +1,10 @@
 package controllers;
 
+import model.Hotel;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
 /******************************************************************************
  *  Nafn    : Lilja Kolbrún Schopka
  *  T-póstur: lks17@hi.is
@@ -11,4 +16,6 @@ package controllers;
  *
  *****************************************************************************/
 public interface HotelControllerInterface {
+
+    List<Hotel> searchForHotels(String location, LocalDateTime checkIn, LocalDateTime checkOut, int capacity);
 }
