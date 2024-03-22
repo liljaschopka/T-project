@@ -134,10 +134,10 @@ public class PackageController {
 
     }
 
-<<<<<<< Updated upstream
     public int getPersons() {
         return persons;
-=======
+    }
+
     public void createBooking() {
         if (user != null && !cart.isCartEmpty()) {
             bookingController.createHotelBooking(user, cart);
@@ -145,7 +145,7 @@ public class PackageController {
             bookingController.createDayTripBooking(user, cart);
         } else
             throw new IllegalArgumentException("You have to be logged in to make a booking");
->>>>>>> Stashed changes
+
     }
 
     /* public static Cart getCart() {
@@ -156,7 +156,5 @@ public class PackageController {
         return user;
     } */
 
-    public static void main(String[] args) {
-
-    }
 }
+
