@@ -43,7 +43,7 @@ public class PackageControllerTest {
     public void testHotelListNotEmpty() {
         HotelControllerInterface hotelControllerMock = new HotelControllerListMock();
         User john = new User("John Doe", "john@hi.is", new PaymentInfo("12345678", "12345678", "12345678", "12345678"), null);
-        // dates are valid
+        // these dates are valid
         LocalDateTime checkIn = LocalDateTime.of(2024, 6, 30, 12, 00);
         LocalDateTime checkOut = LocalDateTime.of(2024, 7, 5, 12, 00);
         PackageController packageController = new PackageController(john, "Reykjavík", "Akureyri", checkIn, checkOut, 4, hotelControllerMock, null, null, null);
@@ -61,7 +61,7 @@ public class PackageControllerTest {
     public void testIncorrectDates() {
         HotelControllerInterface hotelControllerMock = new HotelControllerListMock();
         User john = new User("John Doe", "john@hi.is", new PaymentInfo("12345678", "12345678", "12345678", "12345678"), null);
-        // dates are not valid
+        // these dates are not valid
         LocalDateTime checkIn = LocalDateTime.of(2024, 6, 30, 12, 00);
         LocalDateTime checkOut = LocalDateTime.of(2024, 6, 29, 12, 00);
         PackageController packageController = new PackageController(john, "Reykjavík", "Akureyri", checkIn, checkOut, 4, hotelControllerMock, null, null, null);
@@ -74,7 +74,16 @@ public class PackageControllerTest {
 
     @Test
     public void testCorrectODP() {
+        HotelControllerInterface hotelControllerMock = new HotelControllerListMock();
+        LocalDateTime checkIn = LocalDateTime.of(2024, 6, 30, 12, 00);
+        LocalDateTime checkOut = LocalDateTime.of(2024, 7, 5, 12, 00);
+        // User = null -> IllegalArgumentException
+        PackageController packageController = new PackageController(null, "Reykjavík", "Akureyri", checkIn, checkOut, 4, hotelControllerMock, null, null, null);
+        List<Hotel> hotels = packageController.findAvailableHotels();
 
+        assertThrows(IllegalArgumentException.class, () -> {
+            packageController.findAvailableHotels();
+        });
     }
 
 
