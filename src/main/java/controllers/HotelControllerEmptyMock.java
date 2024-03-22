@@ -1,6 +1,7 @@
 package controllers;
 
 import model.Hotel;
+import model.HotelRoom;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -21,5 +22,10 @@ public class HotelControllerEmptyMock implements HotelControllerInterface {
     public List<Hotel> searchForHotels(String location, LocalDateTime checkIn, LocalDateTime checkOut, int capacity) {
         List<Hotel> hotels = List.of();
         return hotels;
+    }
+
+    public List<HotelRoom> getAvailableRooms(Hotel hotel, int persons) {
+        List<HotelRoom> rooms = List.of();
+        return rooms;
     }
 }

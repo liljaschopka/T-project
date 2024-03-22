@@ -1,5 +1,6 @@
 package model;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /******************************************************************************
@@ -34,7 +35,7 @@ public class Hotel {
         return price;
     }
 
-    public List<HotelRoom> getAvailableRooms() {
+    public List<HotelRoom> getAvailableRooms(int persons, LocalDateTime checkIn, LocalDateTime checkOut) {
         return null;
     }
 

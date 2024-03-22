@@ -22,8 +22,8 @@ public class BookingController {
     private Cart cart;
 
     public BookingController() {
-        this.user = PackageController.getUser();
-        this.cart = PackageController.getCart();
+        // this.user = PackageController.getUser();
+        // this.cart = PackageController.getCart();
     }
 
     public void createBooking(User user, Cart cart) {

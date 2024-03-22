@@ -31,7 +31,6 @@ public class PackageControllerTest {
         LocalDateTime checkIn = LocalDateTime.of(2024, 6, 30, 12, 00);
         LocalDateTime checkOut = LocalDateTime.of(2024, 7, 5, 12, 00);
         PackageController packageController = new PackageController(john, "Reykjavík", "Akureyri", checkIn, checkOut, 4, hotelControllerMock, null, null, null);
-        List<Hotel> hotels = packageController.findAvailableHotels();
 
         assertThrows(IllegalArgumentException.class, () -> {
             packageController.findAvailableHotels();
@@ -65,7 +64,6 @@ public class PackageControllerTest {
         LocalDateTime checkIn = LocalDateTime.of(2024, 6, 30, 12, 00);
         LocalDateTime checkOut = LocalDateTime.of(2024, 6, 29, 12, 00);
         PackageController packageController = new PackageController(john, "Reykjavík", "Akureyri", checkIn, checkOut, 4, hotelControllerMock, null, null, null);
-        List<Hotel> hotels = packageController.findAvailableHotels();
 
         assertThrows(IllegalArgumentException.class, () -> {
             packageController.findAvailableHotels();
@@ -75,11 +73,11 @@ public class PackageControllerTest {
     @Test
     public void testCorrectODP() {
         HotelControllerInterface hotelControllerMock = new HotelControllerListMock();
+        User john = new User("John Doe", "john@hi.is", new PaymentInfo("12345678", "12345678", "12345678", "12345678"), null);
         LocalDateTime checkIn = LocalDateTime.of(2024, 6, 30, 12, 00);
         LocalDateTime checkOut = LocalDateTime.of(2024, 7, 5, 12, 00);
-        // User = null -> IllegalArgumentException
-        PackageController packageController = new PackageController(null, "Reykjavík", "Akureyri", checkIn, checkOut, 4, hotelControllerMock, null, null, null);
-        List<Hotel> hotels = packageController.findAvailableHotels();
+        // persons = 0 -> IllegalArgumentException
+        PackageController packageController = new PackageController(john, "Reykjavík", "Akureyri", checkIn, checkOut, 0, hotelControllerMock, null, null, null);
 
         assertThrows(IllegalArgumentException.class, () -> {
             packageController.findAvailableHotels();
