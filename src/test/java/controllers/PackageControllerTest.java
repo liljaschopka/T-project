@@ -47,12 +47,11 @@ public class PackageControllerTest {
         LocalDateTime checkOut = LocalDateTime.of(2024, 7, 5, 12, 00);
         PackageController packageController = new PackageController(john, "Reykjavík", "Akureyri", checkIn, checkOut, 4, hotelControllerMock, null, null, null);
         List<Hotel> hotels = packageController.findAvailableHotels();
-        //correct length of list
-        assert (hotels.size() == 4);
-        //hotels are sorted by price
-        assert (hotels.get(0).getPrice() <= hotels.get(1).getPrice());
-        assert (hotels.get(1).getPrice() <= hotels.get(2).getPrice());
-        assert (hotels.get(2).getPrice() <= hotels.get(3).getPrice());
+        
+        assertEquals(4, hotels.size(), "Hotel list size should be 4");
+        assertTrue(hotels.get(0).getPrice() <= hotels.get(1).getPrice(), "Hotels should be sorted by price in ascending order");
+        assertTrue(hotels.get(1).getPrice() <= hotels.get(2).getPrice(), "Hotels should be sorted by price in ascending order");
+        assertTrue(hotels.get(2).getPrice() <= hotels.get(3).getPrice(), "Hotels should be sorted by price in ascending order");
     }
 
 
