@@ -1,8 +1,6 @@
 package controllers;
 
-import model.Booking;
-import model.Cart;
-import model.User;
+import model.*;
 
 import java.util.List;
 
@@ -18,16 +16,16 @@ import java.util.List;
  *****************************************************************************/
 public class BookingController {
 
-    private User user;
-    private Cart cart;
-
-    public BookingController() {
-        // this.user = PackageController.getUser();
-        // this.cart = PackageController.getCart();
+    public void createHotelBooking(User user, Cart cart) {
+        Hotel selectedHotel = cart.getSelectedHotel();
     }
 
-    public void createBooking(User user, Cart cart) {
+    public void createFlightBooking(User user, Cart cart) {
+        Flight selectedFlight = cart.getSelectedFlight();
+    }
 
+    public void createDayTripBooking(User user, Cart cart) {
+        Daytrip selectedDaytrip = cart.getSelectedDaytrip();
     }
 
     public List<Booking> findBookings(User user) {

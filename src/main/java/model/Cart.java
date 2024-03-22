@@ -38,9 +38,17 @@ public class Cart {
         updateTotalAmount();
     }
 
+    public Hotel getSelectedHotel() {
+        return selectedHotel;
+    }
+
     public void addFlightToCart(Flight flight) {
         selectedFlight = flight;
         updateTotalAmount();
+    }
+
+    public Flight getSelectedFlight() {
+        return selectedFlight;
     }
 
     public void addDaytripToCart(Daytrip daytrip) {
@@ -48,10 +56,18 @@ public class Cart {
         updateTotalAmount();
     }
 
+    public Daytrip getSelectedDaytrip() {
+        return selectedDaytrip;
+    }
+
     public void emptyCart() {
         selectedHotel = null;
         selectedFlight = null;
         selectedDaytrip = null;
         totalAmount = 0;
+    }
+
+    public boolean isCartEmpty() {
+        return totalAmount == 0;
     }
 }
