@@ -77,7 +77,7 @@ public class PackageController {
             throw new IllegalArgumentException("No hotels found");
         }
 
-        // hotels.sort(Comparator.comparingInt(Hotel::getPrice));
+        //hotels.sort(Comparator.comparingInt(Hotel::getPrice));
 
         return hotels;
     }
@@ -132,6 +132,10 @@ public class PackageController {
 
         return daytrips;
 
+    }
+
+    public int getPersons() {
+        return persons;
     }
 
     /* public static Cart getCart() {
