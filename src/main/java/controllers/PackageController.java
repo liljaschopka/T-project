@@ -3,7 +3,6 @@ package controllers;
 import model.*;
 
 import java.time.LocalDateTime;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -67,7 +66,7 @@ public class PackageController {
         if (!validDates(checkIn, checkOut)) {
             throw new IllegalArgumentException("Invalid dates");
         }
-        
+
         if (!validODP(origin, destination, persons)) {
             throw new IllegalArgumentException("Invalid origin, destination or persons");
         }
@@ -78,9 +77,19 @@ public class PackageController {
             throw new IllegalArgumentException("No hotels found");
         }
 
-        Collections.sort(hotels, Comparator.comparingInt(Hotel::getPrice));
+        hotels.sort(Comparator.comparingInt(Hotel::getPrice));
 
         return hotels;
+    }
+
+    public List<HotelRoom> getAvailableRooms(Hotel hotel) {
+        List<HotelRoom> availabeRooms = hotelController.getAvailableRooms(hotel, persons);
+
+        if (availabeRooms.isEmpty()) {
+            throw new IllegalArgumentException("No rooms found");
+        }
+
+        return availabeRooms;
     }
 
     public List<Flight> findAvailableFlights() {
@@ -97,7 +106,7 @@ public class PackageController {
             throw new IllegalArgumentException("No flights found");
         }
 
-        Collections.sort(flights, Comparator.comparingInt(Flight::getPrice));
+        flights.sort(Comparator.comparingInt(Flight::getPrice));
 
         return flights;
 
@@ -117,7 +126,7 @@ public class PackageController {
             throw new IllegalArgumentException("No daytrips found");
         }
 
-        Collections.sort(daytrips, Comparator.comparingInt(Daytrip::getPrice));
+        daytrips.sort(Comparator.comparingInt(Daytrip::getPrice));
 
         return daytrips;
 
