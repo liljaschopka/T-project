@@ -35,7 +35,7 @@ public class HotelRoom {
         return true;
     }
 
-    public static void main(String[] args) {
-
+    public int getPrice() {
+        return price;
     }
 }

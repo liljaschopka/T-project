@@ -77,7 +77,7 @@ public class PackageController {
             throw new IllegalArgumentException("No hotels found");
         }
 
-        hotels.sort(Comparator.comparingInt(Hotel::getPrice));
+        // hotels.sort(Comparator.comparingInt(Hotel::getPrice));
 
         return hotels;
     }
@@ -88,6 +88,8 @@ public class PackageController {
         if (availabeRooms.isEmpty()) {
             throw new IllegalArgumentException("No rooms found");
         }
+
+        availabeRooms.sort(Comparator.comparingInt(HotelRoom::getPrice));
 
         return availabeRooms;
     }
