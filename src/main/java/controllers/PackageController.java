@@ -133,6 +133,16 @@ public class PackageController {
 
     }
 
+    public void clearSelection() {
+        cart.emptyCart();
+        origin = null;
+        destination = null;
+        checkIn = null;
+        checkOut = null;
+        persons = 0;
+        // user = null; viljum við þetta?
+    }
+
     public int getPersons() {
         return persons;
     }

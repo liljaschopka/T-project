@@ -21,7 +21,4 @@ public class DayTripController {
         return null;
     }
 
-    public static void main(String[] args) {
-
-    }
 }

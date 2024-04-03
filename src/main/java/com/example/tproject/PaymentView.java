@@ -1,5 +1,6 @@
 package com.example.tproject;
 
+import controllers.BookingController;
 import controllers.PackageController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -8,6 +9,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import model.Cart;
 import model.User;
+
+import java.util.Optional;
 
 /******************************************************************************
  *  Lýsing  :
@@ -30,6 +33,7 @@ public class PaymentView {
     @FXML
     private Label fxTotalPrice;
 
+    private BookingController bookingController = new BookingController();
     private PackageController packageController = DateSelectorView.getPackageController();
     private Cart cart = packageController.getCart();
     private User user = packageController.getUser();
@@ -45,12 +49,19 @@ public class PaymentView {
         cart.emptyCart();
     }
 
+    /**
+     * Ef user er ekki innskráður birtist UserDialog þar sem hann getur nýskráð sig. Svo þegar það er komið
+     * er hægt að velja pay aftur og þá myndast bókun. Svo er allt núllstillt og farið á upphafsskjá.
+     */
     @FXML
     public void fxPayHandler(ActionEvent ActionEvent) {
         if (user == null) {
-            // ViewSwitcher.switchTo(View.LOGIN);
+            newUser();
+        } else {
+            packageController.createBooking(bookingController);
+            packageController.clearSelection();
+            ViewSwitcher.switchTo(View.DATESELECTOR);
         }
-        // ViewSwitcher.switchTo(View.BOOKINGSELECTOR);
     }
 
     @FXML
@@ -62,8 +73,11 @@ public class PaymentView {
     }
 
     private void newUser() {
-        user = new User("", "", null, null);
-        // UserDialog userDialog = new UserDialog(user);
-        // Optional<User> o = userDialog.showAndWait();
+        UserDialog dialog = new UserDialog();
+        Optional<User> result = dialog.showAndWait();
+        result.ifPresent(user -> {
+            packageController.setUser(user.getName(), user.getEmail(), user.getPaymentInfo(), user.getBookings());
+            System.out.println("New user created: " + user.getName());
+        });
     }
 }

@@ -25,10 +25,10 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
-        <option value="FxmlFile" />
         <option value="Interface" />
         <option value="JavaFXApplication" />
         <option value="Class" />
+        <option value="FxmlFile" />
       </list>
     </option>
   </component>
