@@ -2,7 +2,7 @@ package controllers;
 
 import model.*;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
 
@@ -20,35 +20,24 @@ public class PackageController {
     private User user;
     private String origin;
     private String destination;
-    private LocalDateTime checkIn;
-    private LocalDateTime checkOut;
+    private LocalDate checkIn;
+    private LocalDate checkOut;
     private int persons;
 
-    private HotelControllerInterface hotelController;
-    private FlightController flightController;
-    private DayTripController dayTripController;
-    private BookingController bookingController;
 
     private Cart cart = new Cart();
 
     public PackageController(User user, String origin, String destination,
-                             LocalDateTime checkIn, LocalDateTime checkOut, int persons,
-                             HotelControllerInterface hotelController, FlightController flightController,
-                             DayTripController dayTripController, BookingController bookingController) {
+                             LocalDate checkIn, LocalDate checkOut, int persons) {
         this.user = user;
         this.origin = origin;
         this.destination = destination;
         this.checkIn = checkIn;
         this.checkOut = checkOut;
         this.persons = persons;
-        this.hotelController = hotelController;
-        this.flightController = flightController;
-        this.dayTripController = dayTripController;
-        this.bookingController = bookingController;
-
     }
 
-    private boolean validDates(LocalDateTime checkIn, LocalDateTime checkOut) {
+    private boolean validDates(LocalDate checkIn, LocalDate checkOut) {
         return checkIn.isBefore(checkOut);
     }
 
@@ -61,7 +50,7 @@ public class PackageController {
     }
 
 
-    public List<Hotel> findAvailableHotels() {
+    public List<Hotel> findAvailableHotels(HotelControllerInterface hotelController) {
 
         if (!validDates(checkIn, checkOut)) {
             throw new IllegalArgumentException("Invalid dates");
@@ -82,7 +71,7 @@ public class PackageController {
         return hotels;
     }
 
-    public List<HotelRoom> getAvailableRooms(Hotel hotel) {
+    public List<HotelRoom> getAvailableRooms(Hotel hotel, HotelControllerInterface hotelController) {
         List<HotelRoom> availabeRooms = hotelController.getAvailableRooms(hotel, persons);
 
         if (availabeRooms.isEmpty()) {
@@ -94,7 +83,7 @@ public class PackageController {
         return availabeRooms;
     }
 
-    public List<Flight> findAvailableFlights() {
+    public List<Flight> findAvailableFlights(FlightController flightController) {
         if (!validDates(checkIn, checkOut)) {
             throw new IllegalArgumentException("Invalid dates");
         }
@@ -114,7 +103,7 @@ public class PackageController {
 
     }
 
-    public List<Daytrip> findAvailableDayTrips() {
+    public List<Daytrip> findAvailableDayTrips(DayTripController dayTripController) {
         if (!validDates(checkIn, checkOut)) {
             throw new IllegalArgumentException("Invalid dates");
         }
@@ -134,11 +123,7 @@ public class PackageController {
 
     }
 
-    public int getPersons() {
-        return persons;
-    }
-
-    public void createBooking() {
+    public void createBooking(BookingController bookingController) {
         if (user != null && !cart.isCartEmpty()) {
             bookingController.createHotelBooking(user, cart);
             bookingController.createFlightBooking(user, cart);
@@ -148,13 +133,33 @@ public class PackageController {
 
     }
 
-    /* public static Cart getCart() {
+    public int getPersons() {
+        return persons;
+    }
+
+    public LocalDate getCheckIn() {
+        return checkIn;
+    }
+
+    public LocalDate getCheckOut() {
+        return checkOut;
+    }
+
+    public String getOrigin() {
+        return origin;
+    }
+
+    public String getDestination() {
+        return destination;
+    }
+
+    public Cart getCart() {
         return cart;
     }
 
-    public static User getUser() {
+    public User getUser() {
         return user;
-    } */
+    }
 
 }
 

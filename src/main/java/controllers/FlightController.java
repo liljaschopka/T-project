@@ -2,7 +2,7 @@ package controllers;
 
 import model.Flight;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 /******************************************************************************
@@ -17,7 +17,7 @@ import java.util.List;
  *****************************************************************************/
 public class FlightController {
 
-    public List<Flight> searchForFlights(String destination, String origin, LocalDateTime checkIn, LocalDateTime checkOut, int capacity) {
+    public List<Flight> searchForFlights(String destination, String origin, LocalDate checkIn, LocalDate checkOut, int capacity) {
 
         return null;
     }

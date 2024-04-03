@@ -36,7 +36,18 @@ public class BookingSelectorView {
         ViewSwitcher.switchTo(View.PAYMENT);
     }
 
-    public static void main(String[] args) {
+    @FXML
+    public void fxFlightsHandler(ActionEvent ActionEvent) {
+        ViewSwitcher.switchTo(View.FLIGHTS);
+    }
 
+    @FXML
+    public void fxHotelsHandler(ActionEvent ActionEvent) {
+        ViewSwitcher.switchTo(View.HOTELS);
+    }
+
+    @FXML
+    public void fxDaytripsHandler(ActionEvent ActionEvent) {
+        ViewSwitcher.switchTo(View.DAYTRIPS);
     }
 }

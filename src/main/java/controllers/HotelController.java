@@ -3,7 +3,7 @@ package controllers;
 import model.Hotel;
 import model.HotelRoom;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 /******************************************************************************
@@ -18,7 +18,7 @@ import java.util.List;
  *****************************************************************************/
 public class HotelController implements HotelControllerInterface {
 
-    public List<Hotel> searchForHotels(String location, LocalDateTime checkIn, LocalDateTime checkOut, int capacity) {
+    public List<Hotel> searchForHotels(String location, LocalDate checkIn, LocalDate checkOut, int capacity) {
 
         return null;
     }

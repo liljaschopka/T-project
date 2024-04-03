@@ -2,7 +2,7 @@ package controllers;
 
 import model.Daytrip;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 /******************************************************************************
@@ -17,7 +17,7 @@ import java.util.List;
  *****************************************************************************/
 public class DayTripController {
 
-    public List<Daytrip> searchForDaytrips(String location, LocalDateTime checkIn, LocalDateTime checkOut, int capacity) {
+    public List<Daytrip> searchForDaytrips(String location, LocalDate checkIn, LocalDate checkOut, int capacity) {
         return null;
     }
 

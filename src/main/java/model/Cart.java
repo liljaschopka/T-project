@@ -12,7 +12,7 @@ package model;
  *****************************************************************************/
 public class Cart {
 
-    private Hotel selectedHotel;
+    private HotelRoom selectedRoom;
     private Flight selectedFlight;
     private Daytrip selectedDaytrip;
     private int totalAmount;
@@ -22,8 +22,8 @@ public class Cart {
     }
 
     private void updateTotalAmount() {
-        if (selectedHotel != null) {
-            totalAmount += selectedHotel.getPrice();
+        if (selectedRoom != null) {
+            totalAmount += selectedRoom.getPrice();
         }
         if (selectedFlight != null) {
             totalAmount += selectedFlight.getPrice();
@@ -33,13 +33,13 @@ public class Cart {
         }
     }
 
-    public void addHotelToCart(Hotel hotel) {
-        selectedHotel = hotel;
+    public void addHotelRoomToCart(HotelRoom room) {
+        selectedRoom = room;
         updateTotalAmount();
     }
 
-    public Hotel getSelectedHotel() {
-        return selectedHotel;
+    public HotelRoom getSelectedHotelRoom() {
+        return selectedRoom;
     }
 
     public void addFlightToCart(Flight flight) {
@@ -61,7 +61,7 @@ public class Cart {
     }
 
     public void emptyCart() {
-        selectedHotel = null;
+        selectedRoom = null;
         selectedFlight = null;
         selectedDaytrip = null;
         totalAmount = 0;

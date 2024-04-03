@@ -27,6 +27,7 @@
         <option value="Enum" />
         <option value="FxmlFile" />
         <option value="Interface" />
+        <option value="JavaFXApplication" />
         <option value="Class" />
       </list>
     </option>
