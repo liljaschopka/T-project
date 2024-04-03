@@ -3,7 +3,7 @@ package controllers;
 import model.Hotel;
 import model.HotelRoom;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 /******************************************************************************
@@ -19,7 +19,7 @@ import java.util.List;
 public class HotelControllerListMock implements HotelControllerInterface {
 
     // the method returns a list of hotels that should pass the tests
-    public List<Hotel> searchForHotels(String location, LocalDateTime checkIn, LocalDateTime checkOut, int capacity) {
+    public List<Hotel> searchForHotels(String location, LocalDate checkIn, LocalDate checkOut, int capacity) {
         Hotel hotelAkureyri = new Hotel(null, "Akureyri", "Hótel Akureyri", "Þetta hótel er á Akureyri", null, 10000);
         Hotel hotelIsafjordur = new Hotel(null, "Ísafjörður", "Hótel Ísafjörður", "Þetta hótel er á Ísafirði", null, 50000);
         Hotel hotelEgilsstadir = new Hotel(null, "Egilsstaðir", "Hótel Egilsstaðir", "Þetta hótel er á Egilsstöðum", null, 35000);

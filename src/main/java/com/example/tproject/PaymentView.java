@@ -48,7 +48,7 @@ public class PaymentView {
     @FXML
     public void fxPayHandler(ActionEvent ActionEvent) {
         if (user == null) {
-            ViewSwitcher.switchTo(View.LOGIN);
+            // ViewSwitcher.switchTo(View.LOGIN);
         }
         // ViewSwitcher.switchTo(View.BOOKINGSELECTOR);
     }
@@ -63,7 +63,7 @@ public class PaymentView {
 
     private void newUser() {
         user = new User("", "", null, null);
-        UserDialog userDialog = new UserDialog(user);
+        // UserDialog userDialog = new UserDialog(user);
         // Optional<User> o = userDialog.showAndWait();
     }
 }

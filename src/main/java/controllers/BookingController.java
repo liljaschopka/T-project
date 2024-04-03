@@ -17,7 +17,7 @@ import java.util.List;
 public class BookingController {
 
     public void createHotelBooking(User user, Cart cart) {
-        Hotel selectedHotel = cart.getSelectedHotel();
+        HotelRoom selectedHotelRoom = cart.getSelectedHotelRoom();
     }
 
     public void createFlightBooking(User user, Cart cart) {
