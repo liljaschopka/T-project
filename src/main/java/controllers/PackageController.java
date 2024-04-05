@@ -23,8 +23,6 @@ public class PackageController {
     private LocalDate checkIn;
     private LocalDate checkOut;
     private int persons;
-
-
     private Cart cart = new Cart();
 
     public PackageController(User user, String origin, String destination,

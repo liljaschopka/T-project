@@ -30,15 +30,30 @@ public class BookingController {
     public void createDayTripBooking(User user, Cart cart) {
         Daytrip selectedDaytrip = cart.getSelectedDaytrip();
 
-        // TODO: create booking by using the BookingController from the D-team
+        // TODO: create booking by using the DaytripController from the D-team
     }
 
-    public List<Booking> findBookings(User user) {
+    public List<Booking> findHotelBookings(User user) {
         return null;
     }
 
-    public void cancelBooking(String bookingID) {
+    public List<Booking> findFlightBookings(User user) {
+        return null;
+    }
+
+    public List<DaytripBooking> findDaytripBookings(User user) {
+        return null;
+    }
+
+    public void cancelHotelBooking(String bookingID) {
 
     }
 
+    public void cancelFlightBooking(String bookingID) {
+
+    }
+
+    public void cancelDaytripBooking(String bookingID) {
+
+    }
 }

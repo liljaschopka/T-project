@@ -1,5 +1,7 @@
 package model;
 
+import java.util.List;
+
 /******************************************************************************
  *  Nafn    : Lilja Kolbrún Schopka
  *  T-póstur: lks17@hi.is
@@ -12,16 +14,26 @@ package model;
  *****************************************************************************/
 public class User {
 
+    private Integer id;
     private String name;
     private String email;
     private PaymentInfo paymentInfo;
-    private Booking[] bookings;
+    private List<String> bookingIds;
 
-    public User(String name, String email, PaymentInfo paymentInfo, Booking[] bookings) {
+    public User(Integer id, String name, String email, PaymentInfo paymentInfo, List<String> bookingIds) {
+        this.id = id;
         this.name = name;
         this.email = email;
         this.paymentInfo = paymentInfo;
-        this.bookings = bookings;
+        this.bookingIds = bookingIds;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -34,15 +46,6 @@ public class User {
         }
     }
 
-    public Booking[] getBookings() {
-        return bookings;
-    }
-
-    public void setBookings(Booking[] bookings) {
-        if (bookings != null) {
-            this.bookings = bookings;
-        }
-    }
 
     public String getEmail() {
         return email;
@@ -62,5 +65,13 @@ public class User {
         if (paymentInfo != null) {
             this.paymentInfo = paymentInfo;
         }
+    }
+
+    public List<String> getReservationIds() {
+        return bookingIds;
+    }
+
+    public void addReservationId(String bookingId) {
+        this.bookingIds.add(bookingId);
     }
 }
