@@ -43,8 +43,8 @@ public class PackageController {
         return origin != null && destination != null && persons != 0;
     }
 
-    public void setUser(String name, String email, PaymentInfo paymentInfo, Booking[] bookings) {
-        this.user = new User(name, email, paymentInfo, bookings);
+    public void setUser(Integer id, String name, String email, PaymentInfo paymentInfo, List<String> bookingIDs) {
+        this.user = new User(id, name, email, paymentInfo, bookingIDs);
     }
 
 
@@ -115,7 +115,7 @@ public class PackageController {
             throw new IllegalArgumentException("No daytrips found");
         }
 
-        daytrips.sort(Comparator.comparingInt(Daytrip::getPrice));
+        daytrips.sort(Comparator.comparingDouble(Daytrip::getPrice));
 
         return daytrips;
 

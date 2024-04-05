@@ -9,6 +9,7 @@ import model.PaymentInfo;
 import model.User;
 
 import java.io.IOException;
+import java.util.Random;
 
 /******************************************************************************
  *  Nafn    : Lilja Kolbrún Schopka
@@ -53,7 +54,11 @@ public class UserDialog extends Dialog<User> {
 
         setResultConverter(dialogButton -> {
             if (dialogButton == fxConfirm) {
-                return new User(fxName.getText(),
+                // make a new random number that will be the users ID
+                // þarf að breyta í aðra aðferð
+                Random random = new Random();
+                Integer id = random.nextInt();
+                return new User(id, fxName.getText(),
                         fxEmail.getText(),
                         new PaymentInfo(
                                 fxCardNumber.getText(),
