@@ -60,7 +60,6 @@ public class CustomerController {
      * @return true if the customer was successfully added, false otherwise.
      */
     public boolean addNewCustomer(String name, String email, PaymentInfo paymentInfo) {
-        // Assuming Customer constructor matches the parameters.
         Customer newCustomer = new Customer(null, name, email, paymentInfo);
         return customerDAL.addNewCustomer(newCustomer);
     }
