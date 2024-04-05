@@ -48,14 +48,13 @@ public class CustomerDAL implements CustomerInterface {
      */
     @Override
     public boolean updateCustomer(Integer customerId, Customer updatedCustomer) {
-        String sql = "UPDATE Customers SET Name = ?, Email = ?, PhoneNumber = ? WHERE CustomerID = ?";
+        String sql = "UPDATE Customers SET Name = ?, Email = ? WHERE CustomerID = ?";
 
         try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, updatedCustomer.getName());
             pstmt.setString(2, updatedCustomer.getEmail());
-            pstmt.setString(3, updatedCustomer.getPhoneNumber());
-            pstmt.setInt(4, customerId);
+            pstmt.setInt(3, customerId);
 
             int affectedRows = pstmt.executeUpdate();
             return affectedRows > 0;
@@ -86,7 +85,7 @@ public class CustomerDAL implements CustomerInterface {
                         rs.getInt("CustomerID"),
                         rs.getString("Name"),
                         rs.getString("Email"),
-                        rs.getString("PhoneNumber")
+                        null
                 );
             }
         } catch (SQLException e) {
@@ -114,7 +113,7 @@ public class CustomerDAL implements CustomerInterface {
                         rs.getInt("CustomerID"),
                         rs.getString("Name"),
                         rs.getString("Email"),
-                        rs.getString("PhoneNumber")
+                        null
 
                 ));
             }
@@ -123,4 +122,20 @@ public class CustomerDAL implements CustomerInterface {
         }
         return customers;
     }
+
+    public boolean addNewCustomer(Customer customer) {
+        String sql = "INSERT INTO Customers (Name, Email) VALUES (?, ?)";
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, customer.getName());
+            pstmt.setString(2, customer.getEmail());
+            // Add more parameters as needed
+            int affectedRows = pstmt.executeUpdate();
+            return affectedRows > 0;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+
 }

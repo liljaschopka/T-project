@@ -3,6 +3,7 @@ package daytrip.controller;
 import daytrip.model.Customer;
 import daytrip.repository.CustomerInterface;
 import daytrip.repository.ReservationInterface;
+import model.PaymentInfo;
 
 import java.util.List;
 
@@ -22,22 +23,19 @@ public class CustomerController {
     public CustomerController(CustomerInterface customerDAL, ReservationInterface reservationDAL) {
         this.customerDAL = customerDAL;
     }
-
     /**
-     * Updates the details of a customer.
+     * Updates the details of a customer, including their payment information.
      *
-     * @param customerId The ID of the customer to update.
-     * @param newName The new name of the customer.
-     * @param newEmail The new email of the customer.
-     * @param newPhoneNumber The new phone number of the customer.
+     * @param customerId   The ID of the customer to update.
+     * @param newName      The new name of the customer.
+     * @param newEmail     The new email of the customer.
      * @return true if the update was successful, false otherwise.
      */
-    public boolean updateCustomerDetails(Integer customerId, String newName, String newEmail, String newPhoneNumber) {
+    public boolean updateCustomerDetails(Integer customerId, String newName, String newEmail) {
         Customer customer = customerDAL.getCustomerDetails(customerId);
         if (customer != null) {
             customer.setName(newName);
             customer.setEmail(newEmail);
-            customer.setPhoneNumber(newPhoneNumber);
             return customerDAL.updateCustomer(customerId, customer);
         }
         return false;
@@ -50,5 +48,19 @@ public class CustomerController {
      */
     public List<Customer> getAllCustomers(){
         return customerDAL.getAllCustomers();
+    }
+
+    /**
+     * Adds a new customer to the database.
+     *
+     * @param name The name of the new customer.
+     * @param email The email address of the new customer.
+     * @param paymentInfo The payment information of the new customer.
+     * @return true if the customer was successfully added, false otherwise.
+     */
+    public boolean addNewCustomer(String name, String email, PaymentInfo paymentInfo) {
+        // Assuming Customer constructor matches the parameters.
+        Customer newCustomer = new Customer(null, name, email, paymentInfo);
+        return customerDAL.addNewCustomer(newCustomer);
     }
 }

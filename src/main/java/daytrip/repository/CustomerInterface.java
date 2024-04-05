@@ -34,4 +34,12 @@ public interface CustomerInterface {
      * @return an instance of {@link Customer} representing the customer's details; or null if no such customer exists.
      */
     Customer getCustomerDetails(Integer customerId);
+
+    /**
+     * Adds a new customer to the system.
+     *
+     * @param newCustomer An instance of {@link Customer} containing the information for the new customer.
+     * @return The unique identifier of the newly added customer; or null if the customer could not be added.
+     */
+    boolean addNewCustomer(Customer newCustomer);
 }

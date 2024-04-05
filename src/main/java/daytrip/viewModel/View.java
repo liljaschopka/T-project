@@ -60,7 +60,8 @@ public class View {
             System.out.println("9. Update reservation");
             System.out.println("10. Check if a reservation exists");
             System.out.println("11. Cancel reservation");
-            System.out.println("12. Exit");
+            System.out.println("12. Add a new customer");
+            System.out.println("13. Exit");
             int choice = scanner.nextInt();
             scanner.nextLine();
 
@@ -99,6 +100,9 @@ public class View {
                     cancelReservation();
                     break;
                 case 12:
+                    addNewCustomer();
+                    break;
+                case 13:
                     exit = true;
                     System.out.println("Exiting...");
                     break;
@@ -191,8 +195,7 @@ public class View {
         for (Customer customer : customers){
             System.out.println("Customer ID: " + customer.getId() +
                     ", Name: " + customer.getName() +
-                    ", Email: " + customer.getEmail() +
-                    ", Phone number: " + customer.getPhoneNumber());
+                    ", Email: " + customer.getEmail());
         }
     }
 
@@ -313,6 +316,22 @@ public class View {
         }
     }
 
+    private void addNewCustomer() {
+        System.out.println("Enter customer name:");
+        String name = scanner.nextLine();
+
+        System.out.println("Enter customer email:");
+        String email = scanner.nextLine();
+
+        boolean success = customerController.addNewCustomer(name, email, null); // Adjust according to your constructor
+
+        if (success) {
+            System.out.println("New customer added successfully.");
+        } else {
+            System.out.println("Failed to add new customer.");
+        }
+    }
+
     /**
      * Handles the updating of customer information.
      */
@@ -327,10 +346,7 @@ public class View {
         System.out.println("Enter new email:");
         String newEmail = scanner.nextLine();
 
-        System.out.println("Enter new phone number:");
-        String newPhoneNumber = scanner.nextLine();
-
-        boolean success = customerController.updateCustomerDetails(customerId, newName, newEmail, newPhoneNumber);
+        boolean success = customerController.updateCustomerDetails(customerId, newName, newEmail);
         if (success) {
             System.out.println("Customer information updated successfully.");
         } else {
