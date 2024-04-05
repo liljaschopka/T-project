@@ -99,6 +99,9 @@ public class View {
                     cancelReservation();
                     break;
                 case 12:
+                    addNewCustomer();
+                    break;
+                case 13:
                     exit = true;
                     System.out.println("Exiting...");
                     break;
@@ -146,11 +149,9 @@ public class View {
             System.out.println("No tours found matching the criteria.");
         } else {
             System.out.println("Found tours:");
-            foundTours.forEach(tour -> {
-                System.out.println("ID: " + tour.getTourID() + ", Name: " + tour.getName() +
-                        ", Location: " + tour.getLocation() + ", Date: " + tour.getDate() +
-                        ", Max Participants: " + tour.getMaxParticipants() + ", Price: $" + tour.getPrice());
-            });
+            foundTours.forEach(tour -> System.out.println("ID: " + tour.getTourID() + ", Name: " + tour.getName() +
+                    ", Location: " + tour.getLocation() + ", Date: " + tour.getDate() +
+                    ", Max Participants: " + tour.getMaxParticipants() + ", Price: $" + tour.getPrice()));
         }
     }
 
@@ -191,8 +192,7 @@ public class View {
         for (Customer customer : customers){
             System.out.println("Customer ID: " + customer.getId() +
                     ", Name: " + customer.getName() +
-                    ", Email: " + customer.getEmail() +
-                    ", Phone number: " + customer.getPhoneNumber());
+                    ", Email: " + customer.getEmail());
         }
     }
 
@@ -327,10 +327,7 @@ public class View {
         System.out.println("Enter new email:");
         String newEmail = scanner.nextLine();
 
-        System.out.println("Enter new phone number:");
-        String newPhoneNumber = scanner.nextLine();
-
-        boolean success = customerController.updateCustomerDetails(customerId, newName, newEmail, newPhoneNumber);
+        boolean success = customerController.updateCustomerDetails(customerId, newName, newEmail);
         if (success) {
             System.out.println("Customer information updated successfully.");
         } else {
@@ -351,6 +348,21 @@ public class View {
             System.out.println("Reservation canceled successfully.");
         } else {
             System.out.println("Failed to cancel reservation. Please check the reservation ID and try again.");
+        }
+    }
+    private void addNewCustomer() {
+        System.out.println("Enter customer name:");
+        String name = scanner.nextLine();
+
+        System.out.println("Enter customer email:");
+        String email = scanner.nextLine();
+
+        boolean success = customerController.addNewCustomer(name, email, null);
+
+        if (success) {
+            System.out.println("New customer added successfully.");
+        } else {
+            System.out.println("Failed to add new customer.");
         }
     }
 
