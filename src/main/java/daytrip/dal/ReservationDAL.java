@@ -357,4 +357,36 @@ public class ReservationDAL implements ReservationInterface {
         Reservation reservation = getReservationDetails(reservationID);
         return reservation != null ? reservation.getNumberOfParticipants() : 0;
     }
+
+    /**
+     * Retrieves all reservations made by a specific customer from the database.
+     *
+     * @param customerId The unique identifier of the customer whose reservations are to be retrieved.
+     * @return A list containing all reservations associated with the specified customer ID. If no reservations are found, an empty list is returned.
+     */
+    @Override
+    public List<Reservation> getReservationsByCustomerId(Integer customerId) {
+        List<Reservation> reservations = new ArrayList<>();
+        String sql = "SELECT * FROM Reservations WHERE CustomerID = ?";
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, customerId);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                reservations.add(new Reservation(
+                        rs.getInt("ReservationID"),
+                        customerId,
+                        rs.getInt("TourID"),
+                        rs.getInt("NumberOfParticipants"),
+                        LocalDate.parse(rs.getString("DateBooked"))
+                ));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return reservations;
+    }
+
 }
