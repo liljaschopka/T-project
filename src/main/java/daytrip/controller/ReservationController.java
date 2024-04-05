@@ -134,4 +134,19 @@ public class ReservationController {
         }
         return reservationDAL.getNumberOfParticipants(reservationID);
     }
+
+    /**
+     * Retrieves a list of all reservations made by a specific customer. This method acts as a bridge between the view and data access layer, providing a more accessible interface for retrieving customer-specific reservations.
+     *
+     * @param customerId The unique identifier of the customer whose reservations are requested.
+     * @return A list of Reservation objects associated with the specified customer. If the customer has no reservations, an empty list is returned.
+     * @throws NullPointerException if the provided customerId is null, indicating that the method requires a valid customer ID to function properly.
+     */
+    public List<Reservation> getReservationsByCustomerId(Integer customerId) {
+        if (customerId == null) {
+            throw new NullPointerException("Customer ID cannot be null");
+        }
+        return reservationDAL.getReservationsByCustomerId(customerId);
+    }
+
 }

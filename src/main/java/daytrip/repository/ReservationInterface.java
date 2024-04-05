@@ -90,4 +90,13 @@ public interface ReservationInterface {
      */
     int getNumberOfParticipants(Integer reservationID);
 
+    /**
+     * Retrieves all reservations made by a specific customer.
+     *
+     * @param customerId The unique identifier of the customer.
+     * @return A list of reservations associated with the given customer ID. The list may be empty if no reservations exist.
+     */
+    List<Reservation> getReservationsByCustomerId(Integer customerId);
+
+
 }

@@ -60,7 +60,9 @@ public class View {
             System.out.println("9. Update reservation");
             System.out.println("10. Check if a reservation exists");
             System.out.println("11. Cancel reservation");
-            System.out.println("12. Exit");
+            System.out.println("12. Add new customer");
+            System.out.println("13. Show all reservations made by specific customer");
+            System.out.println("14. Exit");
             int choice = scanner.nextInt();
             scanner.nextLine();
 
@@ -102,6 +104,9 @@ public class View {
                     addNewCustomer();
                     break;
                 case 13:
+                    viewCustomerReservations();
+                    break;
+                case 14:
                     exit = true;
                     System.out.println("Exiting...");
                     break;
@@ -350,6 +355,10 @@ public class View {
             System.out.println("Failed to cancel reservation. Please check the reservation ID and try again.");
         }
     }
+
+    /**
+     * Adds new customer. ID is automatically generated
+     */
     private void addNewCustomer() {
         System.out.println("Enter customer name:");
         String name = scanner.nextLine();
@@ -365,6 +374,30 @@ public class View {
             System.out.println("Failed to add new customer.");
         }
     }
+
+    /**
+     * Prompts the user to enter a customer ID and displays all reservations made by the specified customer.
+     */
+    private void viewCustomerReservations() {
+        System.out.println("Enter customer ID:");
+        int customerId = scanner.nextInt();
+        scanner.nextLine(); // Consume the newline
+
+        List<Reservation> reservations = reservationController.getReservationsByCustomerId(customerId);
+
+        if (reservations.isEmpty()) {
+            System.out.println("No reservations found for the customer ID: " + customerId);
+        } else {
+            System.out.println("Reservations for Customer ID " + customerId + ":");
+            for (Reservation reservation : reservations) {
+                System.out.println("Reservation ID: " + reservation.getReservationID() +
+                        ", Tour ID: " + reservation.getTourID() +
+                        ", Number of Participants: " + reservation.getNumberOfParticipants() +
+                        ", Date Booked: " + reservation.getDateBooked());
+            }
+        }
+    }
+
 
 
     public static void main(String[] args) {
