@@ -1,5 +1,7 @@
 package daytrip.model;
 
+import model.PaymentInfo;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,8 +12,8 @@ public class Customer {
     private Integer id;
     private String name;
     private String email;
-    private String phoneNumber;
-    private List<String> reservationIds;
+    private PaymentInfo paymentInfo;
+    private List<Integer> reservationIds;
 
     /**
      * Constructs a new Customer instance with specified details.
@@ -19,13 +21,13 @@ public class Customer {
      * @param id The unique identifier for the customer.
      * @param name The name of the customer.
      * @param email The email address of the customer.
-     * @param phoneNumber The phone number of the customer.
+     * @param paymentInfo The phone number of the customer.
      */
-    public Customer(Integer id, String name, String email, String phoneNumber) {
+    public Customer(Integer id, String name, String email, PaymentInfo paymentInfo) {
         this.id = id;
         this.name = name;
         this.email = email;
-        this.phoneNumber = phoneNumber;
+        this.paymentInfo = paymentInfo;
         this.reservationIds = new ArrayList<>();
     }
 
@@ -54,19 +56,19 @@ public class Customer {
         this.email = email;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public PaymentInfo getPaymentInfo() {
+        return paymentInfo;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setPaymentInfo(PaymentInfo paymentInfo) {
+        this.paymentInfo = paymentInfo;
     }
 
-    public List<String> getReservationIds() {
+    public List<Integer> getReservationIds() {
         return reservationIds;
     }
 
-    public void addReservationId(String reservationId) {
+    public void addReservationId(Integer reservationId) {
         this.reservationIds.add(reservationId);
     }
 }
