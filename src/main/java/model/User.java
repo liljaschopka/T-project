@@ -67,11 +67,11 @@ public class User {
         }
     }
 
-    public List<String> getReservationIds() {
+    public List<String> getBookingIds() {
         return bookingIds;
     }
 
-    public void addReservationId(String bookingId) {
+    public void addBookingId(String bookingId) {
         this.bookingIds.add(bookingId);
     }
 }

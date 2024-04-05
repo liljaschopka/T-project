@@ -1,5 +1,7 @@
 package model;
 
+import daytrip.model.Tour;
+
 /******************************************************************************
  *  Nafn    : Lilja Kolbrún Schopka
  *  T-póstur: lks17@hi.is
@@ -14,7 +16,7 @@ public class Cart {
 
     private HotelRoom selectedRoom;
     private Flight selectedFlight;
-    private Daytrip selectedDaytrip;
+    private Tour selectedTour;
     private int totalAmount;
 
     public int getTotalAmount() {
@@ -28,8 +30,8 @@ public class Cart {
         if (selectedFlight != null) {
             totalAmount += selectedFlight.getPrice();
         }
-        if (selectedDaytrip != null) {
-            totalAmount += selectedDaytrip.getPrice();
+        if (selectedTour != null) {
+            totalAmount += selectedTour.getPrice();
         }
     }
 
@@ -51,19 +53,19 @@ public class Cart {
         return selectedFlight;
     }
 
-    public void addDaytripToCart(Daytrip daytrip) {
-        selectedDaytrip = daytrip;
+    public void addTourToCart(Tour tour) {
+        selectedTour = tour;
         updateTotalAmount();
     }
 
-    public Daytrip getSelectedDaytrip() {
-        return selectedDaytrip;
+    public Tour getSelectedTour() {
+        return selectedTour;
     }
 
     public void emptyCart() {
         selectedRoom = null;
         selectedFlight = null;
-        selectedDaytrip = null;
+        selectedTour = null;
         totalAmount = 0;
     }
 

@@ -1,5 +1,7 @@
 package controllers;
 
+import daytrip.controller.TourController;
+import daytrip.model.Tour;
 import model.*;
 
 import java.time.LocalDate;
@@ -43,8 +45,8 @@ public class PackageController {
         return origin != null && destination != null && persons != 0;
     }
 
-    public void setUser(Integer id, String name, String email, PaymentInfo paymentInfo, List<String> bookingIDs) {
-        this.user = new User(id, name, email, paymentInfo, bookingIDs);
+    public void setUser(String name, String email, PaymentInfo paymentInfo, List<String> bookingIDs) {
+        this.user = new User(null, name, email, paymentInfo, bookingIDs);
     }
 
 
@@ -101,7 +103,7 @@ public class PackageController {
 
     }
 
-    public List<Daytrip> findAvailableDayTrips(DayTripController dayTripController) {
+    public List<Tour> findAvailableDayTrips(TourController tourController) {
         if (!validDates(checkIn, checkOut)) {
             throw new IllegalArgumentException("Invalid dates");
         }
@@ -109,15 +111,15 @@ public class PackageController {
             throw new IllegalArgumentException("Invalid origin, destination or persons");
         }
 
-        List<Daytrip> daytrips = dayTripController.searchForDaytrips(destination, checkIn, checkOut, persons);
+        List<Tour> foundTours = tourController.searchTours(destination, checkIn, persons);
 
-        if (daytrips.isEmpty()) {
+        if (foundTours.isEmpty()) {
             throw new IllegalArgumentException("No daytrips found");
         }
 
-        daytrips.sort(Comparator.comparingDouble(Daytrip::getPrice));
+        foundTours.sort(Comparator.comparingDouble(Tour::getPrice));
 
-        return daytrips;
+        return foundTours;
 
     }
 

@@ -76,7 +76,7 @@ public class PaymentView {
         UserDialog dialog = new UserDialog();
         Optional<User> result = dialog.showAndWait();
         result.ifPresent(user -> {
-            packageController.setUser(user.getName(), user.getEmail(), user.getPaymentInfo(), user.getBookings());
+            packageController.setUser(user.getName(), user.getEmail(), user.getPaymentInfo(), user.getBookingIds());
             System.out.println("New user created: " + user.getName());
         });
     }
