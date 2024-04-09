@@ -72,4 +72,8 @@ public class DateSelectorView {
             menuButton.setText(item.getText());
         }));
     }
+
+    public void goToCart(ActionEvent actionEvent) {
+        ViewSwitcher.switchTo(View.CART);
+    }
 }

@@ -32,5 +32,6 @@
          </image>
       </ImageView>
       <Label layoutX="153.0" layoutY="98.0" text="Click what you are looking for to see what's available!" />
+      <Button layoutX="510.0" layoutY="11.0" mnemonicParsing="false" prefWidth="70.0" fx:id="fxCartButton" text="View Cart" onAction="#goToCart" />
     </children>
 </AnchorPane>

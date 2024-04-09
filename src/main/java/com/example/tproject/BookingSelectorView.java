@@ -33,7 +33,7 @@ public class BookingSelectorView {
 
     @FXML
     public void fxConfirmHandler(ActionEvent ActionEvent) {
-        ViewSwitcher.switchTo(View.PAYMENT);
+        ViewSwitcher.switchTo(View.CART);
     }
 
     @FXML
@@ -49,5 +49,9 @@ public class BookingSelectorView {
     @FXML
     public void fxDaytripsHandler(ActionEvent ActionEvent) {
         ViewSwitcher.switchTo(View.DAYTRIPS);
+    }
+
+    public void goToCart(ActionEvent actionEvent) {
+        ViewSwitcher.switchTo(View.CART);
     }
 }

@@ -5,10 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f7df97bd-a9f0-419d-91ae-3e77b6e46efb" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/tproject/Cart-view.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tproject/DaytripsView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tproject/DaytripsView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tproject/FlightsView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tproject/FlightsView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tproject/BookingSelectorView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tproject/BookingSelectorView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tproject/DateSelectorView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tproject/DateSelectorView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tproject/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tproject/View.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/tproject/BookingSelector-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/tproject/BookingSelector-view.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/tproject/DateSelector-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/tproject/DateSelector-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/tproject/Payment-view.fxml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
