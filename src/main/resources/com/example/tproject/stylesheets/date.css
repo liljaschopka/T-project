@@ -23,11 +23,12 @@
 }
 
 .date-picker, .menu-button {
-    -fx-background-color: linear-gradient(to bottom, #cae8d5 0%, #a7d8c9 100%);
+    -fx-pref-width: 280px;
+    -fx-background-color: #cae8d5; /* Simple solid color for background */
     -fx-background-radius: 5;
     -fx-border-color: #88a2ac;
     -fx-border-width: 0.5;
-    -fx-padding: 5 15 5 15;
+    -fx-padding: 5 10; /* Uniform padding */
 }
 
 .menu-button .label {
@@ -35,11 +36,20 @@
 }
 
 .menu-item {
-    -fx-padding: 5 10 5 10;
     -fx-text-fill: #354545;
-    -fx-background-color: #bde0fe;
+    -fx-background-color: #f0f4f8; /* Lighter color for better visibility */
+    -fx-padding: 5 10; /* Padding for menu items */
 }
 
 .menu-button:hover, .date-picker:hover {
-    -fx-background-color: linear-gradient(to bottom, #a7d8c9 0%, #cae8d5 100%);
+    -fx-background-color: #a7d8c9; /* Simple color change on hover */
+}
+
+.confirm-button {
+    -fx-background-color: #005A69; /* Simple solid color for background */
+    -fx-background-radius: 5;
+    -fx-border-color: #88a2ac;
+    -fx-border-width: 0.5;
+    -fx-padding: 5 10; /* Uniform padding */
+    -fx-text-fill: white;
 }
