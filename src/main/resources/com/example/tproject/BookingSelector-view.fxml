@@ -1,25 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="mainVBox" alignment="CENTER" spacing="20.0" stylesheets="@stylesheets/booking.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tproject.BookingSelectorView">
+<AnchorPane fx:id="mainAnchorPane" prefHeight="400.0" prefWidth="600.0" stylesheets="@stylesheets/booking.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tproject.BookingSelectorView">
     <children>
-        <Label fx:id="description" styleClass="title" text="Select Your Options" />
-        <HBox alignment="CENTER" spacing="10.0">
-            <Button fx:id="fxFlights" onAction="#fxFlightsHandler" styleClass="function-button" text="Flights" />
-            <Button fx:id="fxHotels" onAction="#fxHotelsHandler" styleClass="function-button" text="Hotels" />
-            <Button fx:id="fxDaytrips" onAction="#fxDaytripsHandler" styleClass="function-button" text="Day Trips" />
-        </HBox>
-        <HBox alignment="CENTER" spacing="10.0">
-            <Button fx:id="fxGoBack" onAction="#fxGoBackHandler" styleClass="function-button" text="Go Back" />
-            <Button fx:id="fxConfirm" onAction="#fxConfirmHandler" styleClass="function-button" text="Confirm" />
-        </HBox>
+        <Label fx:id="description" layoutX="141.0" layoutY="24.0" prefWidth="317.0" styleClass="title" text="Search available..." />
+        <HBox alignment="CENTER" layoutX="77.0" layoutY="62.0" spacing="10.0" />
+        <HBox alignment="CENTER" layoutX="77.0" layoutY="106.0" spacing="10.0" />
+         <Button fx:id="fxConfirm" layoutX="300.0" layoutY="311.0" onAction="#fxConfirmHandler" styleClass="function-button" text="Confirm" />
+         <Button fx:id="fxGoBack" layoutX="197.0" layoutY="311.0" onAction="#fxGoBackHandler" styleClass="function-button" text="Go Back" />
+         <Button fx:id="fxDaytrips" layoutX="386.0" layoutY="147.0" onAction="#fxDaytripsHandler" styleClass="function-button" text="Day Trips" />
+         <Button fx:id="fxHotels" layoutX="257.0" layoutY="147.0" onAction="#fxHotelsHandler" styleClass="function-button" text="Hotels" />
+         <Button fx:id="fxFlights" layoutX="111.0" layoutY="147.0" onAction="#fxFlightsHandler" styleClass="function-button" text="Flights" />
+      <ImageView fitHeight="87.0" fitWidth="70.0" layoutX="119.0" layoutY="196.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@myndir/flugvel2.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="79.0" fitWidth="86.0" layoutX="258.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@myndir/bygging1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="87.0" fitWidth="70.0" layoutX="404.0" layoutY="199.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@myndir/lest2.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="108.0" layoutY="98.0" text="Click what you are looking for, and then confirm to see what's available!" />
     </children>
-    <padding>
-        <Insets bottom="20" left="50" right="50" top="20" />
-    </padding>
-</VBox>
+</AnchorPane>
