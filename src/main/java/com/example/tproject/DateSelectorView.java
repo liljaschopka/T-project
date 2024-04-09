@@ -27,7 +27,7 @@ public class DateSelectorView {
         return packageController;
     }
 
-    @FXML
+    /*@FXML
     public void fxConfirmHandler(ActionEvent ActionEvent) {
 
         String origin = getMenuButtonValue(fxOrigin);
@@ -36,8 +36,31 @@ public class DateSelectorView {
 
         packageController = new PackageController(null, origin, destination, fxArrival.getValue(), fxDeparture.getValue(), persons);
         ViewSwitcher.switchTo(View.BOOKINGSELECTOR);
-    }
+    } */
 
+    @FXML
+    public void fxConfirmHandler(ActionEvent event) {
+        try {
+            String origin = getMenuButtonValue(fxOrigin);
+            String destination = getMenuButtonValue(fxDestination);
+            int persons = Integer.parseInt(getMenuButtonValue(fxPeople));
+
+            if (origin == null || destination == null || fxArrival.getValue() == null || fxDeparture.getValue() == null) {
+                // Show an error message or log it
+                System.out.println("Please complete all fields.");
+                return;
+            }
+
+            packageController = new PackageController(null, origin, destination, fxArrival.getValue(), fxDeparture.getValue(), persons);
+            ViewSwitcher.switchTo(View.BOOKINGSELECTOR);
+        } catch (NumberFormatException e) {
+            // Handle error in case of number format issue
+            System.out.println("Error in number of persons: " + e.getMessage());
+        } catch (Exception e) {
+            // General error handling
+            System.out.println("An error occurred: " + e.getMessage());
+        }
+    }
 
     private String getMenuButtonValue(MenuButton menuButton) {
         for (MenuItem item : menuButton.getItems()) {

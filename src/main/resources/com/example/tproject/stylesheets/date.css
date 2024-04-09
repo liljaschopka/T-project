@@ -1,0 +1,45 @@
+.root {
+    -fx-font-family: 'Segoe UI', Arial, sans-serif;
+    -fx-background-color: #D8EFED; /* Light background for freshness */
+    -fx-border-color: #005B6A; /* Adding a subtle border around the app */
+    -fx-border-width: 9; /* Defined border width */
+    -fx-border-style: solid; /* Solid border style */
+}
+
+.title {
+    -fx-font-size: 26px; /* Slightly larger font size for prominence */
+    -fx-font-family: 'Courier New', Courier, monospace; /* More distinct font */
+    -fx-font-weight: bold;
+    -fx-text-fill: #345995; /* Strong but not overwhelming blue */
+    -fx-background-color: linear-gradient(to bottom, #cae8d5 0%, #a7d8c9 100%);
+    -fx-padding: 10; /* Padding around text for better visibility */
+    -fx-background-radius: 10; /* Rounded corners for the background */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 0); /* More pronounced shadow for depth */
+}
+
+.form-label {
+    -fx-font-size: 16px;
+    -fx-text-fill: #3B6978; /* Consistent with the other texts */
+}
+
+.date-picker, .menu-button {
+    -fx-background-color: linear-gradient(to bottom, #cae8d5 0%, #a7d8c9 100%);
+    -fx-background-radius: 5;
+    -fx-border-color: #88a2ac;
+    -fx-border-width: 0.5;
+    -fx-padding: 5 15 5 15;
+}
+
+.menu-button .label {
+    -fx-text-fill: #354545;
+}
+
+.menu-item {
+    -fx-padding: 5 10 5 10;
+    -fx-text-fill: #354545;
+    -fx-background-color: #bde0fe; /* Light blue for a fresh look */
+}
+
+.menu-button:hover, .date-picker:hover {
+    -fx-background-color: linear-gradient(to bottom, #a7d8c9 0%, #cae8d5 100%);
+}
