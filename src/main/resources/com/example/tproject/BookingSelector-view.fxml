@@ -32,6 +32,6 @@
             <Image url="@myndir/lest2.png" />
          </image>
       </ImageView>
-      <Label layoutX="108.0" layoutY="98.0" text="Click what you are looking for, and then confirm to see what's available!" />
+      <Label layoutX="153.0" layoutY="98.0" text="Click what you are looking for to see what's available!" />
     </children>
 </AnchorPane>
