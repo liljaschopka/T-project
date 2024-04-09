@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.layout.VBox?>
-
-<VBox fx:id="mainVBox" stylesheets="@stylesheets/daytrips.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tproject.DaytripsView">
+<VBox fx:id="mainVBox" stylesheets="@stylesheets/lists.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tproject.DaytripsView">
     <ScrollPane fitToWidth="true">
         <VBox.margin>
             <Insets bottom="10" left="10" right="10" top="10" />
@@ -20,6 +16,11 @@
         </VBox.margin>
     </Label>
     <Button fx:id="fxAddToCart" onAction="#fxAddTourToCartHandler" text="Add to Cart">
+        <VBox.margin>
+            <Insets bottom="10" left="10" right="10" />
+        </VBox.margin>
+    </Button>
+    <Button fx:id="fxGoBack" onAction="#fxGoBackHandler" text="Go Back">
         <VBox.margin>
             <Insets bottom="10" left="10" right="10" />
         </VBox.margin>

@@ -5,6 +5,7 @@ import daytrip.model.Tour;
 import model.*;
 
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -50,7 +51,7 @@ public class PackageController {
     }
 
 
-    public List<Hotel> findAvailableHotels(HotelControllerInterface hotelController) {
+   /* public List<Hotel> findAvailableHotels(HotelControllerInterface hotelController) {
 
         if (!validDates(checkIn, checkOut)) {
             throw new IllegalArgumentException("Invalid dates");
@@ -69,7 +70,32 @@ public class PackageController {
         //hotels.sort(Comparator.comparingInt(Hotel::getPrice));
 
         return hotels;
+    }*/
+
+    //þurfti að breyta findavailablehotels aðeins svo ég gæti keyrt með tóman lista af hotelum:
+    public List<Hotel> findAvailableHotels(HotelControllerInterface hotelController) {
+        if (!validDates(checkIn, checkOut)) {
+            System.out.println("Invalid dates provided");
+            return Collections.emptyList();
+        }
+
+        if (!validODP(origin, destination, persons)) {
+            System.out.println("Invalid origin, destination, or number of persons");
+            return Collections.emptyList();
+        }
+
+        List<Hotel> hotels = hotelController.searchForHotels(destination, checkIn, checkOut, persons);
+
+        if (hotels == null || hotels.isEmpty()) {
+            System.out.println("No hotels found for the specified criteria");
+            return Collections.emptyList();
+        }
+
+        // hotels.sort(Comparator.comparingInt(Hotel::getPrice));
+
+        return hotels;
     }
+
 
     public List<HotelRoom> getAvailableRooms(Hotel hotel, HotelControllerInterface hotelController) {
         List<HotelRoom> availabeRooms = hotelController.getAvailableRooms(hotel, persons);

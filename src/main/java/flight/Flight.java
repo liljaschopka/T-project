@@ -1,15 +1,5 @@
-package model;
+package flight;
 
-/******************************************************************************
- *  Nafn    : Lilja Kolbrún Schopka
- *  T-póstur: lks17@hi.is
- *
- *  Lýsing  :
- *
- *
- *
- *
- *****************************************************************************/
 public class Flight{
     private int flightID;
     private String origin;

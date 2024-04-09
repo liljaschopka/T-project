@@ -1,9 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.AnchorPane?>
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="controllers.FlightController"
-            prefHeight="400.0" prefWidth="600.0">
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.VBox?>
 
-</AnchorPane>
+<VBox stylesheets="@stylesheets/lists.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tproject.FlightsView">
+    <ListView fx:id="fxFlightsList" prefHeight="200" prefWidth="300">
+        <VBox.margin>
+            <Insets bottom="10" left="10" right="10" top="10" />
+        </VBox.margin>
+    </ListView>
+    <Label fx:id="fxFlightDescription" maxWidth="300" text="Select a flight to see details" wrapText="true">
+        <VBox.margin>
+            <Insets bottom="10" left="10" right="10" top="10" />
+        </VBox.margin>
+    </Label>
+    <Button fx:id="fxAddToCart" onAction="#fxAddToCartHandler" text="Add to Cart">
+        <VBox.margin>
+            <Insets bottom="10" left="10" right="10" />
+        </VBox.margin>
+    </Button>
+    <Button fx:id="fxGoBack" onAction="#fxGoBackHandler" text="Go Back">
+        <VBox.margin>
+            <Insets bottom="10" left="10" right="10" />
+        </VBox.margin>
+    </Button>
+</VBox>

@@ -17,11 +17,11 @@
          <Label styleClass="title" text="Plan Your Journey" />
          <HBox alignment="CENTER" spacing="15.0">
             <VBox spacing="10.0">
-               <Label styleClass="form-label" text="Arrival" />
+               <Label styleClass="form-label" text="Check-in date" />
                <DatePicker fx:id="fxArrival" styleClass="date-picker" />
             </VBox>
             <VBox spacing="10.0">
-               <Label styleClass="form-label" text="Departure" />
+               <Label styleClass="form-label" text="Check-out date" />
                <DatePicker fx:id="fxDeparture" styleClass="date-picker" />
             </VBox>
          </HBox>

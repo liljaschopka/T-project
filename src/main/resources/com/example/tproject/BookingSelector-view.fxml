@@ -12,8 +12,7 @@
         <Label fx:id="description" layoutX="141.0" layoutY="24.0" prefWidth="317.0" styleClass="title" text="Search available..." />
         <HBox alignment="CENTER" layoutX="77.0" layoutY="62.0" spacing="10.0" />
         <HBox alignment="CENTER" layoutX="77.0" layoutY="106.0" spacing="10.0" />
-         <Button fx:id="fxConfirm" layoutX="300.0" layoutY="311.0" onAction="#fxConfirmHandler" styleClass="function-button" text="Confirm" />
-         <Button fx:id="fxGoBack" layoutX="197.0" layoutY="311.0" onAction="#fxGoBackHandler" styleClass="function-button" text="Go Back" />
+         <Button fx:id="fxGoBack" layoutX="251.0" layoutY="309.0" onAction="#fxGoBackHandler" styleClass="function-button" text="Go Back" />
          <Button fx:id="fxDaytrips" layoutX="386.0" layoutY="147.0" onAction="#fxDaytripsHandler" styleClass="function-button" text="Day Trips" />
          <Button fx:id="fxHotels" layoutX="257.0" layoutY="147.0" onAction="#fxHotelsHandler" styleClass="function-button" text="Hotels" />
          <Button fx:id="fxFlights" layoutX="111.0" layoutY="147.0" onAction="#fxFlightsHandler" styleClass="function-button" text="Flights" />
