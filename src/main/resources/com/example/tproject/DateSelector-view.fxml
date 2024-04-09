@@ -52,7 +52,7 @@
                   <items>
                      <MenuItem text="1" />
                      <MenuItem text="2" />
-                     <MenuItem text="3+" />
+                     <MenuItem text="3" />
                   </items>
                </MenuButton>
             </VBox>

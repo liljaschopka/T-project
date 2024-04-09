@@ -96,7 +96,6 @@ public class DaytripsView {
      */
     @FXML
     private void fxGoBackHandler(ActionEvent event) {
-        // Assuming ViewSwitcher has a method to handle view transitions
         ViewSwitcher.switchTo(View.BOOKINGSELECTOR);
     }
 }

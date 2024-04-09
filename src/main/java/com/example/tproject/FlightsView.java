@@ -31,7 +31,7 @@ public class FlightsView {
 
     @FXML
     public void initialize() {
-        ObservableList<Flight> flights = FXCollections.observableArrayList(); // Assume this comes from somewhere
+        ObservableList<Flight> flights = FXCollections.observableArrayList();
         fxFlightsList.setItems(flights);
 
         fxFlightsList.setCellFactory(lv -> new ListCell<Flight>() {
@@ -41,7 +41,7 @@ public class FlightsView {
                 if (empty || flight == null) {
                     setText(null);
                 } else {
-                    setText(flight.toString()); // Make sure toString() is implemented in Flight
+                    setText(flight.toString());
                 }
             }
         });
