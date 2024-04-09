@@ -5,28 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f7df97bd-a9f0-419d-91ae-3e77b6e46efb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/tproject/myndir/bg1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/tproject/myndir/bg2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/tproject/myndir/bygging1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/tproject/myndir/bygging2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/tproject/myndir/car.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/tproject/myndir/earth.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/tproject/myndir/ehv.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/tproject/myndir/flugvel.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/tproject/myndir/flugvel2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/tproject/myndir/flugvel3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/tproject/myndir/lest.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/tproject/myndir/lest2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/tproject/myndir/passp.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/tproject/myndir/plane.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/tproject/myndir/suitcase.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/tproject/myndir/trip.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/tproject/stylesheets/booking.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/tproject/stylesheets/date.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tproject/DateSelectorView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tproject/DateSelectorView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/tproject/BookingSelector-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/tproject/BookingSelector-view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/tproject/DateSelector-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/tproject/DateSelector-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/tproject/stylesheets/booking.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/tproject/stylesheets/booking.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/tproject/stylesheets/date.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/tproject/stylesheets/date.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

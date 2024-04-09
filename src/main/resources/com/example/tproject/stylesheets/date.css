@@ -1,25 +1,25 @@
 .root {
     -fx-font-family: 'Segoe UI', Arial, sans-serif;
-    -fx-background-color: #D8EFED; /* Light background for freshness */
-    -fx-border-color: #005B6A; /* Adding a subtle border around the app */
-    -fx-border-width: 9; /* Defined border width */
-    -fx-border-style: solid; /* Solid border style */
+    -fx-background-color: #D8EFED;
+    -fx-border-color: #005B6A;
+    -fx-border-width: 9;
+    -fx-border-style: solid;
 }
 
 .title {
-    -fx-font-size: 26px; /* Slightly larger font size for prominence */
-    -fx-font-family: 'Courier New', Courier, monospace; /* More distinct font */
+    -fx-font-size: 26px;
+    -fx-font-family: 'Courier New', Courier, monospace;
     -fx-font-weight: bold;
-    -fx-text-fill: #345995; /* Strong but not overwhelming blue */
+    -fx-text-fill: #345995;
     -fx-background-color: linear-gradient(to bottom, #cae8d5 0%, #a7d8c9 100%);
-    -fx-padding: 10; /* Padding around text for better visibility */
-    -fx-background-radius: 10; /* Rounded corners for the background */
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 0); /* More pronounced shadow for depth */
+    -fx-padding: 10;
+    -fx-background-radius: 10; /* Rounded corners */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 0);
 }
 
 .form-label {
     -fx-font-size: 16px;
-    -fx-text-fill: #3B6978; /* Consistent with the other texts */
+    -fx-text-fill: #3B6978;
 }
 
 .date-picker, .menu-button {
@@ -37,7 +37,7 @@
 .menu-item {
     -fx-padding: 5 10 5 10;
     -fx-text-fill: #354545;
-    -fx-background-color: #bde0fe; /* Light blue for a fresh look */
+    -fx-background-color: #bde0fe;
 }
 
 .menu-button:hover, .date-picker:hover {
