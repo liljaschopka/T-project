@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import model.Cart;
+
 import java.util.List;
 
 public class DaytripsView {
@@ -69,7 +70,7 @@ public class DaytripsView {
             @Override
             protected void updateItem(Tour tour, boolean empty) {
                 super.updateItem(tour, empty);
-                setText(empty || tour == null ? null : tour.getName());
+                setText(empty || tour == null ? null : (tour.getName() + ", " + tour.getPrice() + "€"));
             }
         });
 
