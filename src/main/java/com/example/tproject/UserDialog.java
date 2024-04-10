@@ -60,7 +60,7 @@ public class UserDialog extends Dialog<User> {
                                 fxSecurityCode.getText()
                         ), null);
             }
-            return null; // This will be the case when the cancelButton is pressed
+            return null; // when cancel is pressed
         });
     }
 }
