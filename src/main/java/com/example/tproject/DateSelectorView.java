@@ -7,6 +7,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import model.User;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 public class DateSelectorView {
@@ -88,6 +89,8 @@ public class DateSelectorView {
         setupMenuButton(fxOrigin, "Select Location");
         setupMenuButton(fxDestination, "Select Destination");
         setupMenuButton(fxPeople, "Select Number");
+        packageController = new PackageController(null, "Default Origin", "Default Destination",
+                LocalDate.now(), LocalDate.now().plusDays(1), 1); //placeholders
     }
 
     private void setupMenuButton(MenuButton menuButton, String defaultText) {
@@ -104,17 +107,32 @@ public class DateSelectorView {
 
     @FXML
     public void fxUserHandler(ActionEvent actionEvent) {
-        try {
+        if (packageController.getUser() != null) {
+            // User is already registered, open the User Area dialog
+            showUserArea(packageController.getUser());
+        } else {
+            // No user registered, open the registration dialog
             UserDialog dialog = new UserDialog();
             Optional<User> result = dialog.showAndWait();
             result.ifPresent(user -> {
                 packageController.setUser(user.getName(), user.getEmail(), user.getPaymentInfo(), user.getBookingIds());
                 System.out.println("New user created: " + user.getName());
+                showUserInfo(user);  // Optionally show immediate confirmation
             });
-        } catch (Exception e) {
-            e.printStackTrace();
-            showAlert(Alert.AlertType.ERROR, "Failed to open user dialog: " + e.getMessage());
         }
+    }
+    private void showUserInfo(User user) {
+        Alert infoAlert = new Alert(Alert.AlertType.INFORMATION);
+        infoAlert.setTitle("User Information");
+        infoAlert.setHeaderText("Welcome, " + user.getName());
+        infoAlert.setContentText("Here are your details:\nEmail: " + user.getEmail() +
+                "\n\nYou can now use the system features to view and manage your bookings.");
+        infoAlert.showAndWait();
+    }
+    private void showUserArea(User user) {
+        // Create a new dialog or window to display user information
+        UserAreaDialog userAreaDialog = new UserAreaDialog(user);
+        userAreaDialog.showAndWait();
     }
 }
 

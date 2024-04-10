@@ -8,6 +8,7 @@ import model.PaymentInfo;
 import model.User;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class UserDialog extends Dialog<User> {
     @FXML
@@ -15,7 +16,6 @@ public class UserDialog extends Dialog<User> {
 
     private ButtonType okButton;
     private ButtonType cancelButton;
-    private User user;
     private PackageController packageController = DateSelectorView.getPackageController();
 
     public UserDialog() {
@@ -51,14 +51,19 @@ public class UserDialog extends Dialog<User> {
     private void setupResultConverter() {
         setResultConverter(dialogButton -> {
             if (dialogButton == okButton) {
-                return new User(null, fxName.getText(),
+                User newUser = new User(null, fxName.getText(),
                         fxEmail.getText(),
                         new PaymentInfo(
                                 fxCardNumber.getText(),
                                 fxCardHolder.getText(),
                                 fxExpirationDate.getText(),
                                 fxSecurityCode.getText()
-                        ), null);
+                        ), new ArrayList<>());  // bookingIDs
+
+                if (packageController != null) {
+                    packageController.setUser(newUser.getName(), newUser.getEmail(), newUser.getPaymentInfo(), newUser.getBookingIds());
+                }
+                return newUser;  // Return the newly created user
             }
             return null; // when cancel is pressed
         });
