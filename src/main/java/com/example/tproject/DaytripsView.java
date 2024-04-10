@@ -2,6 +2,7 @@ package com.example.tproject;
 
 import controllers.PackageController;
 import daytrip.controller.TourController;
+import daytrip.dal.TourDAL;
 import daytrip.model.Tour;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -24,9 +25,9 @@ public class DaytripsView {
     @FXML
     private Label fxTourDescription;
 
-    private TourController tourController;
-    private PackageController packageController;
-    private Cart cart;
+    private TourController tourController = new TourController(new TourDAL());
+    private PackageController packageController = DateSelectorView.getPackageController();
+    private Cart cart = packageController.getCart();
 
     public void setTourController(TourController tourController) {
         this.tourController = tourController;
