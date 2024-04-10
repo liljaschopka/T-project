@@ -7,10 +7,11 @@
     <list default="true" id="f7df97bd-a9f0-419d-91ae-3e77b6e46efb" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tproject/DateSelectorView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tproject/DateSelectorView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tproject/UserDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tproject/UserDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tproject/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tproject/View.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/tproject/DateSelector-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/tproject/DateSelector-view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/tproject/user-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/tproject/User-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tproject/PaymentView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tproject/CartView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Cart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Cart.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Flight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Flight.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/HotelRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/HotelRoom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/tproject/Cart-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/tproject/Cart-view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

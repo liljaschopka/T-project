@@ -71,4 +71,9 @@ public class Flight{
     public int getPrice() {
         return price;
     }
+
+    //TODO þetta
+    public String getDescription() {
+        return null;
+    }
 }

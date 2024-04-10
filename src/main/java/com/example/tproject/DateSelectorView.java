@@ -105,9 +105,12 @@ public class DateSelectorView {
     @FXML
     public void fxUserHandler(ActionEvent actionEvent) {
         try {
-            UserDialog userDialog = new UserDialog();
-            Optional<User> result = userDialog.showAndWait();
-            result.ifPresent(user -> System.out.println("User Created: " + user.getName()));
+            UserDialog dialog = new UserDialog();
+            Optional<User> result = dialog.showAndWait();
+            result.ifPresent(user -> {
+                packageController.setUser(user.getName(), user.getEmail(), user.getPaymentInfo(), user.getBookingIds());
+                System.out.println("New user created: " + user.getName());
+            });
         } catch (Exception e) {
             e.printStackTrace();
             showAlert(Alert.AlertType.ERROR, "Failed to open user dialog: " + e.getMessage());
