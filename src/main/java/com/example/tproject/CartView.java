@@ -47,6 +47,7 @@ public class CartView {
     @FXML
     public void fxEmptyCartHandler(ActionEvent ActionEvent) {
         cart.emptyCart();
+        updateCartDisplay();
     }
 
     /**
