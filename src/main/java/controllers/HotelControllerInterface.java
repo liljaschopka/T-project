@@ -5,11 +5,7 @@ import model.HotelRoom;
 
 import java.time.LocalDate;
 import java.util.List;
-
 /******************************************************************************
- *  Nafn    : Lilja Kolbrún Schopka
- *  T-póstur: lks17@hi.is
- *
  *  Lýsing  :
  *
  *

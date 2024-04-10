@@ -1,9 +1,5 @@
 package model;
-
 /******************************************************************************
- *  Nafn    : Lilja Kolbrún Schopka
- *  T-póstur: lks17@hi.is
- *
  *  Lýsing  :
  *
  *

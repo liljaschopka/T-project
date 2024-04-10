@@ -10,11 +10,7 @@ import model.*;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
-
 /******************************************************************************
- *  Nafn    : Lilja Kolbrún Schopka
- *  T-póstur: lks17@hi.is
- *
  *  Lýsing  :
  *
  *
