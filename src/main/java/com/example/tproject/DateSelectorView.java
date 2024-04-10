@@ -3,10 +3,8 @@ package com.example.tproject;
 import controllers.PackageController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuButton;
+import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
 
 public class DateSelectorView {
 
@@ -43,22 +41,38 @@ public class DateSelectorView {
                 if (origin.equals("Select Location") || destination.equals("Select Destination") ||
                         fxArrival.getValue() == null || fxDeparture.getValue() == null) {
                     System.out.println("Please complete all fields.");
+                    showAlert(AlertType.WARNING, "Please complete all fields.");
                     return;
                 }
+
+                if (origin.equals(destination)) {
+                    System.out.print("Origin can not be the same as destination.");
+                    showAlert(AlertType.WARNING, "Origin can not be the same as destination.");
+                    return;
+                }
+
 
                 packageController = new PackageController(null, origin, destination, fxArrival.getValue(),
                         fxDeparture.getValue(), persons);
                 ViewSwitcher.switchTo(View.BOOKINGSELECTOR);
             } else {
                 System.out.println("Please select a valid number of persons.");
+                showAlert(AlertType.WARNING, "Please select a valid number of persons.");
                 return;
             }
+
         } catch (NumberFormatException e) {
             System.out.println("Error in number of persons: " + e.getMessage());
         } catch (Exception e) {
             System.out.println("An error occurred: " + e.getMessage());
             e.printStackTrace();
         }
+    }
+
+    private void showAlert(AlertType type, String contentText) {
+        Alert alert = new Alert(type);
+        alert.setContentText(contentText);
+        alert.showAndWait();
     }
 
     @FXML
