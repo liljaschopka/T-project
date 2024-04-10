@@ -11,9 +11,9 @@ public class DateSelectorView {
     @FXML
     private Label welcomeText;
     @FXML
-    private DatePicker fxArrival;
+    private DatePicker fxCheckIn;
     @FXML
-    private DatePicker fxDeparture;
+    private DatePicker fxCheckOut;
     @FXML
     private MenuButton fxPeople;
     @FXML
@@ -39,7 +39,7 @@ public class DateSelectorView {
                 int persons = Integer.parseInt(personsText);
 
                 if (origin.equals("Select Location") || destination.equals("Select Destination") ||
-                        fxArrival.getValue() == null || fxDeparture.getValue() == null) {
+                        fxCheckIn.getValue() == null || fxCheckOut.getValue() == null) {
                     System.out.println("Please complete all fields.");
                     showAlert(AlertType.WARNING, "Please complete all fields.");
                     return;
@@ -51,9 +51,14 @@ public class DateSelectorView {
                     return;
                 }
 
+                if (fxCheckOut.getValue().isBefore(fxCheckIn.getValue())) {
+                    System.out.print("Invalid dates.");
+                    showAlert(AlertType.WARNING, "Invalid dates.");
+                    return;
+                }
 
-                packageController = new PackageController(null, origin, destination, fxArrival.getValue(),
-                        fxDeparture.getValue(), persons);
+                packageController = new PackageController(null, origin, destination, fxCheckIn.getValue(),
+                        fxCheckOut.getValue(), persons);
                 ViewSwitcher.switchTo(View.BOOKINGSELECTOR);
             } else {
                 System.out.println("Please select a valid number of persons.");
