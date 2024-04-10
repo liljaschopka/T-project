@@ -1,7 +1,11 @@
 package controllers;
 
 import model.PaymentInfo;
+
 /******************************************************************************
+ *  Nafn    : Lilja Kolbrún Schopka
+ *  T-póstur: lks17@hi.is
+ *
  *  Lýsing  :
  *
  *

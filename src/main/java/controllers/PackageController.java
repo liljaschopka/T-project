@@ -9,6 +9,16 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+/******************************************************************************
+ *  Nafn    : Lilja Kolbrún Schopka
+ *  T-póstur: lks17@hi.is
+ *
+ *  Lýsing  :
+ *
+ *
+ *
+ *
+ *****************************************************************************/
 public class PackageController {
     private User user;
     private String origin;

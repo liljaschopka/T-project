@@ -1,7 +1,11 @@
 package model;
 
 import java.time.LocalDateTime;
+
 /******************************************************************************
+ *  Nafn    : Lilja Kolbrún Schopka
+ *  T-póstur: lks17@hi.is
+ *
  *  Lýsing  :
  *
  *

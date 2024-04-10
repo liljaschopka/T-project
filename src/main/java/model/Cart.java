@@ -2,7 +2,11 @@ package model;
 
 import com.example.tproject.CartView;
 import daytrip.model.Tour;
+
 /******************************************************************************
+ *  Nafn    : Lilja Kolbrún Schopka
+ *  T-póstur: lks17@hi.is
+ *
  *  Lýsing  :
  *
  *

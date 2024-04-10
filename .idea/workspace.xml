@@ -6,20 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="f7df97bd-a9f0-419d-91ae-3e77b6e46efb" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/BookingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/BookingController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/HotelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/HotelController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/HotelControllerEmptyMock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/HotelControllerEmptyMock.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/HotelControllerInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/HotelControllerInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/HotelControllerListMock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/HotelControllerListMock.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/PackageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/PackageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Booking.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Booking.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tproject/DateSelectorView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tproject/DateSelectorView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tproject/PaymentView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tproject/CartView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/model/Cart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Cart.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/model/Flight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Flight.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Hotel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Hotel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/model/HotelRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/HotelRoom.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/PaymentInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/PaymentInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/tproject/Cart-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/tproject/Cart-view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
