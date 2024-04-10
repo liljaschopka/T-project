@@ -3,7 +3,10 @@ package com.example.tproject;
 import controllers.PackageController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
+import javafx.scene.control.MenuButton;
 
 public class DateSelectorView {
 
@@ -37,7 +40,7 @@ public class DateSelectorView {
             if (personsText.matches("\\d+")) {  // passa það sé tala
                 int persons = Integer.parseInt(personsText);
 
-                if (origin.isEmpty() || destination.isEmpty() ||
+                if (origin.equals("Select Location") || destination.equals("Select Destination") ||
                         fxArrival.getValue() == null || fxDeparture.getValue() == null) {
                     System.out.println("Please complete all fields.");
                     return;
