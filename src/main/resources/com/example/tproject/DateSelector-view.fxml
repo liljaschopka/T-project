@@ -30,9 +30,10 @@
                <Label styleClass="form-label" text="From" />
                <MenuButton fx:id="fxOrigin" styleClass="menu-button" text="Select Location">
                   <items>
-                     <MenuItem text="New York" />
-                     <MenuItem text="London" />
-                     <MenuItem text="Paris" />
+                     <MenuItem text="Reykjavík" />
+                     <MenuItem text="Akureyri" />
+                     <MenuItem text="Egilsstaðir" />
+                     <MenuItem text="Ísafjörður" />
                   </items>
                </MenuButton>
             </VBox>
@@ -40,9 +41,10 @@
                <Label styleClass="form-label" text="To" />
                <MenuButton fx:id="fxDestination" styleClass="menu-button" text="Select Destination">
                   <items>
-                     <MenuItem text="Reykjavik" />
-                     <MenuItem text="Copenhagen" />
-                     <MenuItem text="Oslo" />
+                     <MenuItem text="Reykjavík" />
+                     <MenuItem text="Akureyri" />
+                     <MenuItem text="Egilsstaðir" />
+                     <MenuItem text="Ísafjörður" />
                   </items>
                </MenuButton>
             </VBox>
@@ -53,6 +55,9 @@
                      <MenuItem text="1" />
                      <MenuItem text="2" />
                      <MenuItem text="3" />
+                     <MenuItem text="4" />
+                     <MenuItem text="5" />
+                     <MenuItem text="6" />
                   </items>
                </MenuButton>
             </VBox>
