@@ -64,7 +64,8 @@
          </HBox>
       </VBox>
       <Button fx:id="fxConfirm" layoutX="253.0" layoutY="272.0" onAction="#fxConfirmHandler" prefHeight="37.0" prefWidth="94.0" styleClass="confirm-button" text="Confirm" />
-      <Button layoutX="510.0" layoutY="11.0" mnemonicParsing="false" prefWidth="70.0" fx:id="fxCartButton" text="View Cart" onAction="#goToCart"  />
+      <Button fx:id="fxCartButton" layoutX="510.0" layoutY="11.0" mnemonicParsing="false" onAction="#goToCart" prefWidth="70.0" text="View Cart" />
+      <Button layoutX="457.0" layoutY="11.0" mnemonicParsing="false" text="User" onAction="#fxUserHandler" />
       <ImageView fitHeight="148.0" fitWidth="180.0" layoutX="356.0" layoutY="252.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@myndir/flugvel3.png" />

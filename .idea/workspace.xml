@@ -7,7 +7,10 @@
     <list default="true" id="f7df97bd-a9f0-419d-91ae-3e77b6e46efb" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tproject/DateSelectorView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tproject/DateSelectorView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tproject/UserDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tproject/UserDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tproject/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tproject/View.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/tproject/DateSelector-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/tproject/DateSelector-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/tproject/user-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/tproject/User-view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,5 +92,16 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

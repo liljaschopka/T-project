@@ -5,6 +5,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
+import model.User;
+
+import java.util.Optional;
 
 public class DateSelectorView {
 
@@ -98,4 +101,17 @@ public class DateSelectorView {
     public void goToCart(ActionEvent actionEvent) {
         ViewSwitcher.switchTo(View.CART);
     }
+
+    @FXML
+    public void fxUserHandler(ActionEvent actionEvent) {
+        try {
+            UserDialog userDialog = new UserDialog();
+            Optional<User> result = userDialog.showAndWait();
+            result.ifPresent(user -> System.out.println("User Created: " + user.getName()));
+        } catch (Exception e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Failed to open user dialog: " + e.getMessage());
+        }
+    }
 }
+

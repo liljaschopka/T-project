@@ -9,7 +9,8 @@ public enum View {
     CART("Cart-view.fxml"),
     HOTELS("Hotels-view.fxml"),
     FLIGHTS("Flights-view.fxml"),
-    DAYTRIPS("Daytrips-view.fxml");
+    DAYTRIPS("Daytrips-view.fxml"),
+    USER("User-view.fxml");
 
     private final String fileName;
 

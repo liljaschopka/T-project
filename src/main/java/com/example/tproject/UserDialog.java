@@ -3,56 +3,54 @@ package com.example.tproject;
 import controllers.PackageController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import model.PaymentInfo;
 import model.User;
 
 import java.io.IOException;
 
-/******************************************************************************
- *  Nafn    : Lilja Kolbrún Schopka
- *  T-póstur: lks17@hi.is
- *
- *  Lýsing  :
- *
- *
- *
- *
- *****************************************************************************/
 public class UserDialog extends Dialog<User> {
+    @FXML
+    private TextField fxName, fxEmail, fxCardNumber, fxCardHolder, fxExpirationDate, fxSecurityCode;
 
-    @FXML
-    private TextField fxName;
-    @FXML
-    private TextField fxEmail;
-    @FXML
-    private TextField fxCardNumber;
-    @FXML
-    private TextField fxCardHolder;
-    @FXML
-    private TextField fxExpirationDate;
-    @FXML
-    private TextField fxSecurityCode;
-
-    @FXML
-    private ButtonType fxConfirm;
-    @FXML
-    private ButtonType fxCancel;
-
+    private ButtonType okButton;
+    private ButtonType cancelButton;
     private User user;
     private PackageController packageController = DateSelectorView.getPackageController();
 
     public UserDialog() {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/tproject/User-view.fxml"));
+        fxmlLoader.setController(this);
+        try {
+            DialogPane dialogPane = fxmlLoader.load();
+            setDialogPane(dialogPane);
 
-        setDialogPane(readUserDialog());
-        check();
+            okButton = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
+            cancelButton = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+            getDialogPane().getButtonTypes().addAll(okButton, cancelButton);
 
-        fxConfirm = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
-        getDialogPane().getButtonTypes().addAll(fxConfirm, ButtonType.CANCEL);
+            bindButtonDisableProperties();
+            setupResultConverter();
+        } catch (IOException e) {
+            throw new RuntimeException("Unable to load User-view.fxml", e);
+        }
+    }
 
+    private void bindButtonDisableProperties() {
+        Button okButtonNode = (Button) getDialogPane().lookupButton(okButton);
+        okButtonNode.disableProperty().bind(
+                fxName.textProperty().isEmpty()
+                        .or(fxEmail.textProperty().isEmpty())
+                        .or(fxCardNumber.textProperty().isEmpty())
+                        .or(fxCardHolder.textProperty().isEmpty())
+                        .or(fxExpirationDate.textProperty().isEmpty())
+                        .or(fxSecurityCode.textProperty().isEmpty())
+        );
+    }
+
+    private void setupResultConverter() {
         setResultConverter(dialogButton -> {
-            if (dialogButton == fxConfirm) {
+            if (dialogButton == okButton) {
                 return new User(null, fxName.getText(),
                         fxEmail.getText(),
                         new PaymentInfo(
@@ -62,32 +60,7 @@ public class UserDialog extends Dialog<User> {
                                 fxSecurityCode.getText()
                         ), null);
             }
-            return null;
+            return null; // This will be the case when the cancelButton is pressed
         });
-
     }
-
-    private DialogPane readUserDialog() {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("user-view.fxml"));
-        try {
-            fxmlLoader.setController(this);
-            DialogPane dialogPane = fxmlLoader.load();
-            return dialogPane;
-        } catch (IOException exception) {
-            throw new RuntimeException(exception);
-        }
-    }
-
-    private void check() {
-
-        Node iLagi = getDialogPane().lookupButton(fxConfirm);
-        iLagi.disableProperty()
-                .bind(fxName.textProperty().isEmpty()
-                        .or(fxEmail.textProperty().isEmpty())
-                        .or(fxCardNumber.textProperty().isEmpty())
-                        .or(fxCardHolder.textProperty().isEmpty())
-                        .or(fxExpirationDate.textProperty().isEmpty())
-                        .or(fxSecurityCode.textProperty().isEmpty()));
-    }
-
 }
