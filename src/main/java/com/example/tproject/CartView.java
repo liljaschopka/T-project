@@ -79,7 +79,7 @@ public class CartView {
             // Find and remove the tour from the selected tours list
             Tour tourToRemove = null;
             for (Tour tour : cart.getSelectedTours()) {
-                if (tour.getDescription().equals(tourDescription)) {
+                if (tour.getName().equals(tourDescription)) {
                     tourToRemove = tour;
                     break;
                 }
