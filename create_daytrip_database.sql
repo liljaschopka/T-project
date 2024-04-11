@@ -67,6 +67,34 @@ INSERT INTO Tours (Name, Description, Location, Duration, MaxParticipants, Date,
                                                                                                             ('Ísafjörður Historical Walk', 'Take a guided walk through the historical town of Ísafjörður.', 'Ísafjörður', 3, 20, '2024-08-15', 20, 55.00);
 
 
+-- Even more tours
+-- More tours
+-- Reykjavík Tours
+INSERT INTO Tours (Name, Description, Location, Duration, MaxParticipants, Date, AvailableSeats, Price) VALUES
+                                                                                                            ('Reykjavík Museums Tour', 'Explore the rich history and culture of Reykjavík by visiting its top museums.', 'Reykjavík', 4, 20, '2024-04-10', 20, 60.00),
+                                                                                                            ('Reykjavík Coastal Walk', 'Enjoy a guided walk along the scenic coast of Reykjavík, featuring iconic landmarks.', 'Reykjavík', 2, 25, '2024-05-20', 25, 30.00),
+                                                                                                            ('Golden Circle Express', 'Experience the famous Golden Circle, with stops at Gullfoss, Geysir, and Þingvellir National Park.', 'Reykjavík', 8, 30, '2024-06-15', 30, 100.00);
+
+-- Akureyri Tours
+INSERT INTO Tours (Name, Description, Location, Duration, MaxParticipants, Date, AvailableSeats, Price) VALUES
+                                                                                                            ('Akureyri Northern Lights', 'Chase the Northern Lights with an expert guide in the areas around Akureyri.', 'Akureyri', 3, 15, '2024-04-05', 15, 95.00),
+                                                                                                            ('Akureyri Hiking Tour', 'Explore the natural beauty surrounding Akureyri on a guided hiking tour.', 'Akureyri', 5, 12, '2024-05-10', 12, 80.00),
+                                                                                                            ('Akureyri Horse Riding', 'Experience the unique Icelandic horse with a riding tour through the Akureyri countryside.', 'Akureyri', 4, 10, '2024-06-25', 10, 110.00);
+
+-- Egilsstaðir Tours
+INSERT INTO Tours (Name, Description, Location, Duration, MaxParticipants, Date, AvailableSeats, Price) VALUES
+                                                                                                            ('Egilsstaðir Waterfall Hike', 'Hike to some of the most beautiful waterfalls near Egilsstaðir.', 'Egilsstaðir', 6, 10, '2024-04-20', 10, 90.00),
+                                                                                                            ('Egilsstaðir Local Farms Tour', 'Visit local farms to learn about rural life and traditional farming in Iceland.', 'Egilsstaðir', 4, 15, '2024-05-25', 15, 70.00),
+                                                                                                            ('Egilsstaðir Bird Watching', 'Discover the diverse birdlife of the region with a guided bird watching tour.', 'Egilsstaðir', 3, 20, '2024-06-10', 20, 50.00);
+
+-- Ísafjörður Tours
+INSERT INTO Tours (Name, Description, Location, Duration, MaxParticipants, Date, AvailableSeats, Price) VALUES
+                                                                                                            ('Ísafjörður Fishing Experience', 'Join a fishing trip and experience the rich marine life of the Westfjords.', 'Ísafjörður', 4, 12, '2024-04-15', 12, 130.00),
+                                                                                                            ('Ísafjörður Glacier Tour', 'Explore the majestic glaciers near Ísafjörður with an expert guide.', 'Ísafjörður', 7, 8, '2024-05-05', 8, 160.00),
+                                                                                                            ('Ísafjörður Viking History', 'Dive into the Viking history of Ísafjörður and visit historical sites.', 'Ísafjörður', 3, 20, '2024-06-20', 20, 80.00);
+
+
+
 -- Insert example reservations
 -- John Doe books the Historical City Tour with 3 participants
 INSERT INTO Reservations (CustomerID, TourID, NumberOfParticipants, DateBooked) VALUES
