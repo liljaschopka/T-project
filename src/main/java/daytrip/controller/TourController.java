@@ -90,21 +90,24 @@ public class TourController {
         return true;
     }
 
+
     /**
-     * Searches for tours that match the specified location, date, and number of participants.
-     * Filters available tours to find those that meet the criteria and have enough spots for the specified number of participants.
+     * Searches for tours that match the specified location and fall within the specified date range,
+     * and have enough spots for the specified number of participants.
      *
      * @param location The location where the user wants to find a tour.
-     * @param date The date on which the user wants to attend the tour. The method will consider tours on this date and onwards.
+     * @param startDate The start date of the date range for which the user wants to attend the tour.
+     * @param endDate The end date of the date range for which the user wants to attend the tour.
      * @param participants The number of participants for which the user is seeking availability.
      * @return A list of tours that match the criteria. The list will be empty if no tours are found.
      */
-    public List<Tour> searchTours(String location, LocalDate date, int participants){
+    public List<Tour> searchTours(String location, LocalDate startDate, LocalDate endDate, int participants){
         List<Tour> availableTours = tourInter.getAvailableTours();
+
 
         return availableTours.stream()
                 .filter(tour -> tour.getLocation().equalsIgnoreCase(location))
-                .filter(tour -> tour.getDate().isEqual(date) || tour.getDate().isAfter(date))
+                .filter(tour -> !tour.getDate().isBefore(startDate) && !tour.getDate().isAfter(endDate))
                 .filter(tour -> participants <= tour.getMaxParticipants())
                 .collect(Collectors.toList());
     }
