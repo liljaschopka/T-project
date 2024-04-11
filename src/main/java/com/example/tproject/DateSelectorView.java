@@ -7,7 +7,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import model.User;
 
-import java.time.LocalDate;
 import java.util.Optional;
 
 public class DateSelectorView {
@@ -60,18 +59,20 @@ public class DateSelectorView {
                     showAlert(AlertType.WARNING, "Invalid dates.");
                     return;
                 }
-                
-                packageController.setOrigin(origin);
-                packageController.setDestination(destination);
-                packageController.setCheckIn(fxCheckIn.getValue());
-                packageController.setCheckOut(fxCheckOut.getValue());
-                packageController.setPersons(persons);
+
+                //packageController.setOrigin(origin);
+                //packageController.setDestination(destination);
+                //packageController.setCheckIn(fxCheckIn.getValue());
+                //packageController.setCheckOut(fxCheckOut.getValue());
+                //packageController.setPersons(persons);
+
+                packageController = new PackageController(null, origin, destination,
+                        fxCheckIn.getValue(), fxCheckOut.getValue(), persons); //placeholders
 
                 ViewSwitcher.switchTo(View.BOOKINGSELECTOR);
             } else {
                 System.out.println("Please select a valid number of persons.");
                 showAlert(AlertType.WARNING, "Please select a valid number of persons.");
-                return;
             }
 
         } catch (NumberFormatException e) {
@@ -93,8 +94,8 @@ public class DateSelectorView {
         setupMenuButton(fxOrigin, "Select Location");
         setupMenuButton(fxDestination, "Select Destination");
         setupMenuButton(fxPeople, "Select Number");
-        packageController = new PackageController(null, "Default Origin", "Default Destination",
-                LocalDate.now(), LocalDate.now().plusDays(1), 1); //placeholders
+        //packageController = new PackageController(null, "Default Origin", "Default Destination",
+        //        LocalDate.now(), LocalDate.now().plusDays(1), 1); //placeholders
     }
 
     private void setupMenuButton(MenuButton menuButton, String defaultText) {

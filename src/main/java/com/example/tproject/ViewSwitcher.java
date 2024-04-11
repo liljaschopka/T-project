@@ -33,18 +33,18 @@ public class ViewSwitcher {
         try {
             Parent root;
             FXMLLoader loader = null;
-            if (cache.containsKey(view)) {
-                System.out.println("Loading from cache");
-                root = cache.get(view);
-            } else {
-                System.out.println("Loading from FXML");
-                loader = new
-                        FXMLLoader(ViewSwitcher.class.getResource(view.getFileName()));
-                root = loader.load();
-                cache.put(view, root);
-                scene.setRoot(root);
-                controllers.put(view, loader.getController());
-            }
+            //if (cache.containsKey(view)) {
+            System.out.println("Loading from cache");
+            root = cache.get(view);
+            // } else {
+            System.out.println("Loading from FXML");
+            loader = new
+                    FXMLLoader(ViewSwitcher.class.getResource(view.getFileName()));
+            root = loader.load();
+            cache.put(view, root);
+            scene.setRoot(root);
+            controllers.put(view, loader.getController());
+            //}
             scene.setRoot(root);
             //bætt við
             pushToHistory(view);
@@ -70,6 +70,7 @@ public class ViewSwitcher {
             viewHistory.push(view);
         }
     }
+
     public static Object lookup(View v) {
         return controllers.get(v);
     }
