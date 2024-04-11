@@ -1,6 +1,5 @@
 package model;
 
-import com.example.tproject.CartView;
 import daytrip.model.Tour;
 
 import java.util.ArrayList;
@@ -22,7 +21,6 @@ public class Cart {
     private Flight selectedFlight;
     private Tour selectedTour;
     private int totalAmount;
-    private CartView cartView;
     private List<Tour> selectedTours;
 
     public Cart() {
@@ -50,7 +48,6 @@ public class Cart {
     public void addHotelRoomToCart(HotelRoom room) {
         selectedRoom = room;
         updateTotalAmount();
-        //cartView.updateCartDisplay();
     }
 
     public HotelRoom getSelectedHotelRoom() {
@@ -81,7 +78,6 @@ public class Cart {
         selectedTours.add(tour); // Add the tour to the list of selected tours
         selectedTour = tour;
         updateTotalAmount();
-        cartView.updateCartDisplay();
     }
 
     public void setSelectedTours(List<Tour> tours) {
@@ -106,7 +102,7 @@ public class Cart {
     public void emptyCart() {
         selectedRoom = null;
         selectedFlight = null;
-        selectedTour = null;
+        selectedTours.clear();
         totalAmount = 0;
     }
 
