@@ -60,9 +60,13 @@ public class DateSelectorView {
                     showAlert(AlertType.WARNING, "Invalid dates.");
                     return;
                 }
+                
+                packageController.setOrigin(origin);
+                packageController.setDestination(destination);
+                packageController.setCheckIn(fxCheckIn.getValue());
+                packageController.setCheckOut(fxCheckOut.getValue());
+                packageController.setPersons(persons);
 
-                packageController = new PackageController(null, origin, destination, fxCheckIn.getValue(),
-                        fxCheckOut.getValue(), persons);
                 ViewSwitcher.switchTo(View.BOOKINGSELECTOR);
             } else {
                 System.out.println("Please select a valid number of persons.");
@@ -121,6 +125,7 @@ public class DateSelectorView {
             });
         }
     }
+
     private void showUserInfo(User user) {
         Alert infoAlert = new Alert(Alert.AlertType.INFORMATION);
         infoAlert.setTitle("User Information");
@@ -129,6 +134,7 @@ public class DateSelectorView {
                 "\n\nYou can now use the system features to view and manage your bookings.");
         infoAlert.showAndWait();
     }
+
     private void showUserArea(User user) {
         // Create a new dialog or window to display user information
         UserAreaDialog userAreaDialog = new UserAreaDialog(user);

@@ -40,7 +40,7 @@ public class Cart {
     public void addHotelRoomToCart(HotelRoom room) {
         selectedRoom = room;
         updateTotalAmount();
-        cartView.updateCartDisplay();
+        //cartView.updateCartDisplay();
     }
 
     public HotelRoom getSelectedHotelRoom() {
@@ -55,7 +55,7 @@ public class Cart {
     public void addFlightToCart(Flight flight) {
         selectedFlight = flight;
         updateTotalAmount();
-        cartView.updateCartDisplay();
+        //cartView.updateCartDisplay();
     }
 
     public Flight getSelectedFlight() {
@@ -70,7 +70,7 @@ public class Cart {
     public void addTourToCart(Tour tour) {
         selectedTour = tour;
         updateTotalAmount();
-        cartView.updateCartDisplay();
+        //cartView.updateCartDisplay();
     }
 
     public Tour getSelectedTour() {

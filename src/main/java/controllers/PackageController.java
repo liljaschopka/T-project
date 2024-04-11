@@ -197,5 +197,24 @@ public class PackageController {
         return user;
     }
 
+    public void setCheckIn(LocalDate checkIn) {
+        this.checkIn = checkIn;
+    }
+
+    public void setCheckOut(LocalDate checkOut) {
+        this.checkOut = checkOut;
+    }
+
+    public void setDestination(String destination) {
+        this.destination = destination;
+    }
+
+    public void setOrigin(String origin) {
+        this.origin = origin;
+    }
+
+    public void setPersons(int persons) {
+        this.persons = persons;
+    }
 }
 
