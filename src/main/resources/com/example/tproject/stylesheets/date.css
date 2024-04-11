@@ -1,0 +1,55 @@
+.root {
+    -fx-font-family: 'Segoe UI', Arial, sans-serif;
+    -fx-background-color: #D8EFED;
+    -fx-border-color: #005B6A;
+    -fx-border-width: 9;
+    -fx-border-style: solid;
+}
+
+.title {
+    -fx-font-size: 26px;
+    -fx-font-family: 'Courier New', Courier, monospace;
+    -fx-font-weight: bold;
+    -fx-text-fill: #345995;
+    -fx-background-color: linear-gradient(to bottom, #cae8d5 0%, #a7d8c9 100%);
+    -fx-padding: 10;
+    -fx-background-radius: 10; /* Rounded corners */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 0);
+}
+
+.form-label {
+    -fx-font-size: 16px;
+    -fx-text-fill: #3B6978;
+}
+
+.date-picker, .menu-button {
+    -fx-pref-width: 280px;
+    -fx-background-color: #cae8d5; /* Simple solid color for background */
+    -fx-background-radius: 5;
+    -fx-border-color: #88a2ac;
+    -fx-border-width: 0.5;
+    -fx-padding: 5 10; /* Uniform padding */
+}
+
+.menu-button .label {
+    -fx-text-fill: #354545;
+}
+
+.menu-item {
+    -fx-text-fill: #354545;
+    -fx-background-color: #f0f4f8; /* Lighter color for better visibility */
+    -fx-padding: 5 10; /* Padding for menu items */
+}
+
+.menu-button:hover, .date-picker:hover {
+    -fx-background-color: #a7d8c9; /* Simple color change on hover */
+}
+
+.confirm-button {
+    -fx-background-color: #005A69; /* Simple solid color for background */
+    -fx-background-radius: 5;
+    -fx-border-color: #88a2ac;
+    -fx-border-width: 0.5;
+    -fx-padding: 5 10; /* Uniform padding */
+    -fx-text-fill: white;
+}

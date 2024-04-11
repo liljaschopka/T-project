@@ -1,0 +1,50 @@
+.root {
+    -fx-font-family: 'Segoe UI', Arial, sans-serif;
+    -fx-background-color: #D8EFED;
+    -fx-border-color: #005B6A;
+    -fx-border-width: 2;
+    -fx-border-style: solid;
+}
+
+.list-cell {
+    -fx-padding: 10;
+    -fx-border-color: transparent;
+    -fx-text-fill: #2C3E50;
+    -fx-font-size: 16px;
+}
+
+.list-cell:filled:selected, .list-cell:filled:selected:hover {
+    -fx-background-color: #A3D2CA;
+    -fx-text-fill: #FFFFFF;
+}
+
+.list-view {
+    -fx-background-insets: 0;
+    -fx-padding: 5;
+}
+
+.label {
+    -fx-font-size: 14px;
+    -fx-font-family: 'Courier New', Courier, monospace;
+    -fx-font-weight: normal;
+    -fx-text-fill: #345995;
+    -fx-background-color: linear-gradient(to bottom, #cae8d5 0%, #a7d8c9 100%);
+    -fx-background-radius: 10;
+    -fx-padding: 10;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 0);
+}
+
+.button {
+    -fx-background-color: #005A69;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 5;
+    -fx-border-color: #88a2ac;
+    -fx-border-width: 0.5;
+    -fx-padding: 10 20;
+    -fx-effect: dropshadow(one-pass-box, black, 5, 0.5, 1, 1);
+}
+
+.button:hover {
+    -fx-background-color: #3B6978;
+}

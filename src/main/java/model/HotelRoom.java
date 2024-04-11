@@ -38,4 +38,9 @@ public class HotelRoom {
     public int getPrice() {
         return price;
     }
+
+    //TODO:
+    public String getDescription() {
+        return null;
+    }
 }

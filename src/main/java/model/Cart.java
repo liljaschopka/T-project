@@ -1,5 +1,6 @@
 package model;
 
+import com.example.tproject.CartView;
 import daytrip.model.Tour;
 
 /******************************************************************************
@@ -18,6 +19,7 @@ public class Cart {
     private Flight selectedFlight;
     private Tour selectedTour;
     private int totalAmount;
+    private CartView cartView;
 
     public int getTotalAmount() {
         return totalAmount;
@@ -38,28 +40,46 @@ public class Cart {
     public void addHotelRoomToCart(HotelRoom room) {
         selectedRoom = room;
         updateTotalAmount();
+        cartView.updateCartDisplay();
     }
 
     public HotelRoom getSelectedHotelRoom() {
         return selectedRoom;
     }
 
+    public void setSelectedHotelRoom(HotelRoom room) {
+        selectedRoom = room;
+        updateTotalAmount();
+    }
+
     public void addFlightToCart(Flight flight) {
         selectedFlight = flight;
         updateTotalAmount();
+        cartView.updateCartDisplay();
     }
 
     public Flight getSelectedFlight() {
         return selectedFlight;
     }
 
+    public void setSelectedFlight(Flight flight) {
+        selectedFlight = flight;
+        updateTotalAmount();
+    }
+
     public void addTourToCart(Tour tour) {
         selectedTour = tour;
         updateTotalAmount();
+        cartView.updateCartDisplay();
     }
 
     public Tour getSelectedTour() {
         return selectedTour;
+    }
+
+    public void setSelectedTour(Tour tour) {
+        selectedTour = tour;
+        updateTotalAmount();
     }
 
     public void emptyCart() {

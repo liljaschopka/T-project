@@ -1,0 +1,36 @@
+.root {
+    -fx-font-family: 'Segoe UI', Arial, sans-serif;
+    -fx-background-color: #D8EFED;
+    -fx-border-color: #005B6A;
+    -fx-border-width: 9;
+    -fx-border-style: solid;
+}
+
+.title {
+    -fx-font-size: 26px;
+    -fx-font-family: 'Courier New', Courier, monospace;
+    -fx-font-weight: bold;
+    -fx-text-fill: #345995;
+    -fx-background-color: linear-gradient(to bottom, #cae8d5 0%, #a7d8c9 100%);
+    -fx-padding: 10;
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 0);
+}
+
+.function-button {
+    -fx-font-size: 16px;
+    -fx-font-family: 'Segoe UI', Arial, sans-serif;
+    -fx-background-color: linear-gradient(to bottom, #cae8d5 0%, #a7d8c9 100%);
+    -fx-background-radius: 5; /* Rounded button corners */
+    -fx-border-color: #005B6A;
+    -fx-border-width: 1;
+    -fx-border-style: solid;
+    -fx-text-fill: #345995;
+    -fx-padding: 10 20 10 20;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 0);
+}
+
+.function-button:hover {
+    -fx-background-color: linear-gradient(to bottom, #a7d8c9 0%, #cae8d5 100%);
+    -fx-text-fill: #262626;
+}

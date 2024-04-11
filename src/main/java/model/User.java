@@ -1,6 +1,8 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /******************************************************************************
  *  Nafn    : Lilja Kolbrún Schopka
@@ -46,7 +48,6 @@ public class User {
         }
     }
 
-
     public String getEmail() {
         return email;
     }
@@ -73,5 +74,15 @@ public class User {
 
     public void addBookingId(String bookingId) {
         this.bookingIds.add(bookingId);
+    }
+
+    public List<String> getBookingDetails() {
+        //TODO ná í booking úr eh dataset eða eh hm idk á eftir að figure it out
+        if (bookingIds == null || bookingIds.isEmpty()) {
+            return new ArrayList<>();
+        }
+        return bookingIds.stream()
+                .map(id -> "Booking ID: " + id + " - Details of booking here.")
+                .collect(Collectors.toList());
     }
 }

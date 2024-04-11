@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox fx:id="cartVBox" prefHeight="373.0" prefWidth="452.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tproject.CartView">
+    <Label styleClass="header" text="Your Cart">
+        <VBox.margin>
+            <Insets bottom="10" left="10" right="10" top="20" />
+        </VBox.margin>
+    </Label>
+    <ListView fx:id="fxCart" prefHeight="200" prefWidth="300">
+        <VBox.margin>
+            <Insets bottom="10" left="10" right="10" />
+        </VBox.margin>
+    </ListView>
+    <Label fx:id="fxTotalPrice" text="Total: $0">
+        <VBox.margin>
+            <Insets bottom="10" left="10" right="10" />
+        </VBox.margin>
+    </Label>
+    <HBox spacing="10">
+        <Button fx:id="fxPay" onAction="#fxPayHandler" text="Pay">
+            <HBox.margin>
+                <Insets left="10" />
+            </HBox.margin>
+        </Button>
+        <Button fx:id="fxRemove" onAction="#fxRemoveHandler" text="Remove Selected" />
+        <Button fx:id="fxEmptyCart" onAction="#fxEmptyCartHandler" text="Empty Cart" />
+        <Button fx:id="fxGoBack" onAction="#fxGoBackHandler" text="Go Back" />
+        <HBox.margin>
+            <Insets bottom="20" left="10" right="10" />
+        </HBox.margin>
+    </HBox>
+   <stylesheets>
+      <URL value="@stylesheets/lists.css" />
+   </stylesheets>
+</VBox>

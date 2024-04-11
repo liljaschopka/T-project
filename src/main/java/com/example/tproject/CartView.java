@@ -19,7 +19,7 @@ import java.util.Optional;
  *
  *
  *****************************************************************************/
-public class PaymentView {
+public class CartView {
     @FXML
     private Button fxPay;
     @FXML
@@ -47,6 +47,7 @@ public class PaymentView {
     @FXML
     public void fxEmptyCartHandler(ActionEvent ActionEvent) {
         cart.emptyCart();
+        updateCartDisplay();
     }
 
     /**
@@ -65,11 +66,24 @@ public class PaymentView {
     }
 
     @FXML
-    public void fxRemoveHandler(ActionEvent ActionEvent) { // þarf þetta nokkuð?
+    public void fxRemoveHandler(ActionEvent ActionEvent) {
+        // Example of removing the selected hotel room
+        if (!fxCart.getSelectionModel().getSelectedItems().isEmpty()) {
+            String selected = fxCart.getSelectionModel().getSelectedItem().toString();
+            if (selected.startsWith("Room:")) {
+                cart.setSelectedHotelRoom(null);  // bjó til settera í cart til að gera þetta idk ef það er gott
+            } else if (selected.startsWith("Flight:")) {
+                cart.setSelectedFlight(null);
+            } else if (selected.startsWith("Tour:")) {
+                cart.setSelectedTour(null);
+            }
+            updateCartDisplay();
+        }
     }
 
     public void initialize() {
         fxTotalPrice.setText(String.valueOf(cart.getTotalAmount()));
+        updateCartDisplay();
     }
 
     private void newUser() {
@@ -80,4 +94,19 @@ public class PaymentView {
             System.out.println("New user created: " + user.getName());
         });
     }
+
+    public void updateCartDisplay() {
+        fxCart.getItems().clear(); // Clear existing items
+        if (cart.getSelectedHotelRoom() != null) {
+            fxCart.getItems().add("Room: " + cart.getSelectedHotelRoom().getDescription() + " Price: $" + cart.getSelectedHotelRoom().getPrice());
+        }
+        if (cart.getSelectedFlight() != null) {
+            fxCart.getItems().add("Flight: " + cart.getSelectedFlight().getDescription() + " Price: $" + cart.getSelectedFlight().getPrice());
+        }
+        if (cart.getSelectedTour() != null) {
+            fxCart.getItems().add("Tour: " + cart.getSelectedTour().getDescription() + " Price: $" + cart.getSelectedTour().getPrice());
+        }
+        fxTotalPrice.setText("Total: $" + cart.getTotalAmount()); // Update total price
+    }
+
 }

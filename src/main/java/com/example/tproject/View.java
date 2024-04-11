@@ -6,10 +6,11 @@ package com.example.tproject;
 public enum View {
     DATESELECTOR("DateSelector-view.fxml"),
     BOOKINGSELECTOR("BookingSelector-view.fxml"),
-    PAYMENT("Payment-view.fxml"),
+    CART("Cart-view.fxml"),
     HOTELS("Hotels-view.fxml"),
     FLIGHTS("Flights-view.fxml"),
-    DAYTRIPS("Daytrips-view.fxml");
+    DAYTRIPS("Daytrips-view.fxml"),
+    USER("User-view.fxml");
 
     private final String fileName;
 
