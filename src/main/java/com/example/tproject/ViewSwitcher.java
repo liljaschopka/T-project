@@ -19,9 +19,7 @@ public class ViewSwitcher {
     private static final Map<View, Parent> cache = new HashMap<>();
     private static final Map<View, Object> controllers = new HashMap<>();
     private static Scene scene;
-
-    //bætt við
-    private static final Deque<View> viewHistory = new ArrayDeque<>();
+    private static final Deque<View> viewHistory = new ArrayDeque<>(); //bætt við
 
     public static void setScene(Scene scene) {
         ViewSwitcher.scene = scene;

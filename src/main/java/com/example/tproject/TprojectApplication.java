@@ -14,8 +14,7 @@ public class TprojectApplication extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 600, 400);
         stage.setTitle("T-project");
         ViewSwitcher.setScene(scene);
-        //bætt við
-        ViewSwitcher.pushToHistory(View.DATESELECTOR);
+        ViewSwitcher.pushToHistory(View.DATESELECTOR);   //bætt við
         stage.setScene(scene);
         stage.show();
     }
