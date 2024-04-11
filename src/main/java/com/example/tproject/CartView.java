@@ -115,7 +115,7 @@ public class CartView {
             fxCart.getItems().add("Flight: " + cart.getSelectedFlight().getDescription() + " Price: $" + cart.getSelectedFlight().getPrice());
         }
         for (Tour tour : cart.getSelectedTours()) {
-            fxCart.getItems().add("Tour: " + tour.getDescription() + " Price: $" + tour.getPrice());
+            fxCart.getItems().add("Tour: " + tour.getName() + " Price: $" + tour.getPrice());
         }
 
         fxTotalPrice.setText("Total: $" + cart.getTotalAmount()); // Update total price

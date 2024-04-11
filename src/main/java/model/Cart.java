@@ -43,6 +43,7 @@ public class Cart {
         for (Tour tour : selectedTours) {
             totalAmount += tour.getPrice();
         }
+
     }
 
     public void addHotelRoomToCart(HotelRoom room) {
