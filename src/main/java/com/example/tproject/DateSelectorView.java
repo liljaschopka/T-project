@@ -32,7 +32,7 @@ public class DateSelectorView {
     public static PackageController getPackageController() {
         if (packageController == null) {
             packageController = new PackageController(null, "Default Origin", "Default Destination",
-                    LocalDate.now(), LocalDate.now().plusDays(1), 1);
+                    LocalDate.now(), LocalDate.now().plusDays(1), 0);
         }
         return packageController;
     }
@@ -43,47 +43,38 @@ public class DateSelectorView {
             String origin = fxOrigin.getText().replace("Select Location: ", "");
             String destination = fxDestination.getText().replace("Select Destination: ", "");
             String personsText = fxPeople.getText().replace("Select Number: ", "");
-            if (personsText.matches("\\d+")) {  // passa það sé tala
+
+            if (personsText.matches("\\d+")) {  // Ensure it is a number
                 int persons = Integer.parseInt(personsText);
 
+                // Check if all necessary fields are filled or if origin and destination are the same
                 if (origin.equals("Select Location") || destination.equals("Select Destination") ||
                         fxCheckIn.getValue() == null || fxCheckOut.getValue() == null) {
-                    System.out.println("Please complete all fields.");
                     showAlert(AlertType.WARNING, "Please complete all fields.");
                     return;
                 }
 
                 if (origin.equals(destination)) {
-                    System.out.print("Origin can not be the same as destination.");
-                    showAlert(AlertType.WARNING, "Origin can not be the same as destination.");
+                    showAlert(AlertType.WARNING, "Origin cannot be the same as destination.");
                     return;
                 }
 
                 if (fxCheckOut.getValue().isBefore(fxCheckIn.getValue())) {
-                    System.out.print("Invalid dates.");
-                    showAlert(AlertType.WARNING, "Invalid dates.");
+                    showAlert(AlertType.WARNING, "Please complete all fields."); // Generalizing the alert for invalid dates
                     return;
                 }
 
-                //packageController.setOrigin(origin);
-                //packageController.setDestination(destination);
-                //packageController.setCheckIn(fxCheckIn.getValue());
-                //packageController.setCheckOut(fxCheckOut.getValue());
-                //packageController.setPersons(persons);
-
                 packageController = new PackageController(null, origin, destination,
-                        fxCheckIn.getValue(), fxCheckOut.getValue(), persons); //placeholders
+                        fxCheckIn.getValue(), fxCheckOut.getValue(), persons); // Update global state
 
                 ViewSwitcher.switchTo(View.BOOKINGSELECTOR);
             } else {
-                System.out.println("Please select a valid number of persons.");
-                showAlert(AlertType.WARNING, "Please select a valid number of persons.");
+                showAlert(AlertType.WARNING, "Please complete all fields."); // Generalizing the alert for invalid person count
             }
-
         } catch (NumberFormatException e) {
-            System.out.println("Error in number of persons: " + e.getMessage());
+            showAlert(AlertType.ERROR, "Please complete all fields."); // Generalizing the alert for format errors
         } catch (Exception e) {
-            System.out.println("An error occurred: " + e.getMessage());
+            showAlert(AlertType.ERROR, "An error occurred: " + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -96,16 +87,18 @@ public class DateSelectorView {
 
     @FXML
     public void initialize() {
-        setupMenuButton(fxOrigin, "Select Location");
-        setupMenuButton(fxDestination, "Select Destination");
-        setupMenuButton(fxPeople, "Select Number");
-        //packageController = new PackageController(null, "Default Origin", "Default Destination",
-        //        LocalDate.now(), LocalDate.now().plusDays(1), 1); //placeholders
+        if (packageController == null) {
+            getPackageController(); // Ensure the controller is initialized
+        }
+        setupMenuButton(fxOrigin, "Select Location", packageController.getOrigin());
+        setupMenuButton(fxDestination, "Select Destination", packageController.getDestination());
+        setupMenuButton(fxPeople, "Select Number", Integer.toString(packageController.getPersons()));
+        fxCheckIn.setValue(packageController.getCheckIn());
+        fxCheckOut.setValue(packageController.getCheckOut());
     }
 
-    private void setupMenuButton(MenuButton menuButton, String defaultText) {
-        menuButton.setText(defaultText);
-
+    private void setupMenuButton(MenuButton menuButton, String defaultText, String value) {
+        menuButton.setText(value.equals("Default Origin") || value.equals("Default Destination") ? defaultText : value);
         menuButton.getItems().forEach(item -> item.setOnAction(e -> {
             menuButton.setText(item.getText());
         }));
