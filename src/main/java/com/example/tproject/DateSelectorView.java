@@ -7,6 +7,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import model.User;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 public class DateSelectorView {
@@ -29,6 +30,10 @@ public class DateSelectorView {
     private static PackageController packageController;
 
     public static PackageController getPackageController() {
+        if (packageController == null) {
+            packageController = new PackageController(null, "Default Origin", "Default Destination",
+                    LocalDate.now(), LocalDate.now().plusDays(1), 1);
+        }
         return packageController;
     }
 
@@ -112,15 +117,18 @@ public class DateSelectorView {
 
     @FXML
     public void fxUserHandler(ActionEvent actionEvent) {
-        if (packageController.getUser() != null) {
-            // User is already registered, open the User Area dialog
-            showUserArea(packageController.getUser());
+        if (getPackageController() == null) {
+            showAlert(AlertType.ERROR, "Operation cannot be completed at this time.");
+            return;
+        }
+        if (getPackageController().getUser() != null) {
+            showUserArea(getPackageController().getUser());
         } else {
             // No user registered, open the registration dialog
             UserDialog dialog = new UserDialog();
             Optional<User> result = dialog.showAndWait();
             result.ifPresent(user -> {
-                packageController.setUser(user.getName(), user.getEmail(), user.getPaymentInfo(), user.getBookingIds());
+                getPackageController().setUser(user.getName(), user.getEmail(), user.getPaymentInfo(), user.getBookingIds());
                 System.out.println("New user created: " + user.getName());
                 showUserInfo(user);  // Optionally show immediate confirmation
             });
