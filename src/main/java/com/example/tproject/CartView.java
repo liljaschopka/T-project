@@ -41,7 +41,7 @@ public class CartView {
 
     @FXML
     public void fxGoBackHandler(ActionEvent ActionEvent) {
-        ViewSwitcher.switchTo(View.BOOKINGSELECTOR); // hvert viljum við skipta hér?
+        ViewSwitcher.goBack();
     }
 
     @FXML
