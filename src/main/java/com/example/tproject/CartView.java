@@ -2,6 +2,7 @@ package com.example.tproject;
 
 import controllers.BookingController;
 import controllers.PackageController;
+import daytrip.model.Tour;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -67,18 +68,27 @@ public class CartView {
 
     @FXML
     public void fxRemoveHandler(ActionEvent ActionEvent) {
-        // Example of removing the selected hotel room
-        if (!fxCart.getSelectionModel().getSelectedItems().isEmpty()) {
-            String selected = fxCart.getSelectionModel().getSelectedItem().toString();
-            if (selected.startsWith("Room:")) {
-                cart.setSelectedHotelRoom(null);  // bjó til settera í cart til að gera þetta idk ef það er gott
-            } else if (selected.startsWith("Flight:")) {
-                cart.setSelectedFlight(null);
-            } else if (selected.startsWith("Tour:")) {
-                cart.setSelectedTour(null);
+        String selected = fxCart.getSelectionModel().getSelectedItem().toString();
+        if (selected.startsWith("Room:")) {
+            cart.setSelectedHotelRoom(null);
+        } else if (selected.startsWith("Flight:")) {
+            cart.setSelectedFlight(null);
+        } else if (selected.startsWith("Tour:")) {
+            // Identify the tour to remove
+            String tourDescription = selected.substring(selected.indexOf(":") + 2, selected.indexOf("Price") - 1);
+            // Find and remove the tour from the selected tours list
+            Tour tourToRemove = null;
+            for (Tour tour : cart.getSelectedTours()) {
+                if (tour.getDescription().equals(tourDescription)) {
+                    tourToRemove = tour;
+                    break;
+                }
             }
-            updateCartDisplay();
+            if (tourToRemove != null) {
+                cart.getSelectedTours().remove(tourToRemove);
+            }
         }
+        updateCartDisplay();
     }
 
     public void initialize() {
@@ -103,9 +113,10 @@ public class CartView {
         if (cart.getSelectedFlight() != null) {
             fxCart.getItems().add("Flight: " + cart.getSelectedFlight().getDescription() + " Price: $" + cart.getSelectedFlight().getPrice());
         }
-        if (cart.getSelectedTour() != null) {
-            fxCart.getItems().add("Tour: " + cart.getSelectedTour().getDescription() + " Price: $" + cart.getSelectedTour().getPrice());
+        for (Tour tour : cart.getSelectedTours()) {
+            fxCart.getItems().add("Tour: " + tour.getDescription() + " Price: $" + tour.getPrice());
         }
+
         fxTotalPrice.setText("Total: $" + cart.getTotalAmount()); // Update total price
     }
 

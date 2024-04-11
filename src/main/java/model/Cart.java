@@ -3,6 +3,9 @@ package model;
 import com.example.tproject.CartView;
 import daytrip.model.Tour;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /******************************************************************************
  *  Nafn    : Lilja Kolbrún Schopka
  *  T-póstur: lks17@hi.is
@@ -20,10 +23,17 @@ public class Cart {
     private Tour selectedTour;
     private int totalAmount;
     private CartView cartView;
+    private List<Tour> selectedTours;
+
+    public Cart() {
+        selectedTours = new ArrayList<>(); // Initialize the list of selected tours
+    }
 
     public int getTotalAmount() {
         return totalAmount;
+
     }
+
 
     private void updateTotalAmount() {
         if (selectedRoom != null) {
@@ -32,8 +42,8 @@ public class Cart {
         if (selectedFlight != null) {
             totalAmount += selectedFlight.getPrice();
         }
-        if (selectedTour != null) {
-            totalAmount += selectedTour.getPrice();
+        for (Tour tour : selectedTours) {
+            totalAmount += tour.getPrice();
         }
     }
 
@@ -68,10 +78,21 @@ public class Cart {
     }
 
     public void addTourToCart(Tour tour) {
+        selectedTours.add(tour); // Add the tour to the list of selected tours
         selectedTour = tour;
         updateTotalAmount();
-        //cartView.updateCartDisplay();
+        cartView.updateCartDisplay();
     }
+
+    public void setSelectedTours(List<Tour> tours) {
+        selectedTours = tours;
+        updateTotalAmount();
+    }
+
+    public List<Tour> getSelectedTours() {
+        return selectedTours;
+    }
+
 
     public Tour getSelectedTour() {
         return selectedTour;
