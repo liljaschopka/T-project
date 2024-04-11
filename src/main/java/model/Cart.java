@@ -40,10 +40,6 @@ public class Cart {
         if (selectedFlight != null) {
             totalAmount += selectedFlight.getPrice();
         }
-        for (Tour tour : selectedTours) {
-            totalAmount += tour.getPrice();
-        }
-
     }
 
     public void addHotelRoomToCart(HotelRoom room) {
@@ -78,12 +74,11 @@ public class Cart {
     public void addTourToCart(Tour tour) {
         selectedTours.add(tour); // Add the tour to the list of selected tours
         selectedTour = tour;
-        updateTotalAmount();
+        totalAmount += tour.getPrice();
     }
 
-    public void setSelectedTours(List<Tour> tours) {
-        selectedTours = tours;
-        updateTotalAmount();
+    public Tour getSelectedTour() {
+        return selectedTour;
     }
 
     public void removeSelectedTour(Tour tour) {
@@ -93,16 +88,6 @@ public class Cart {
 
     public List<Tour> getSelectedTours() {
         return selectedTours;
-    }
-
-
-    public Tour getSelectedTour() {
-        return selectedTour;
-    }
-
-    public void setSelectedTour(Tour tour) {
-        selectedTour = tour;
-        updateTotalAmount();
     }
 
     public void emptyCart() {
