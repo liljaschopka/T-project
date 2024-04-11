@@ -142,13 +142,17 @@ public class View {
         System.out.println("Enter location:");
         String location = scanner.nextLine().trim();
 
-        System.out.println("Enter date (yyyy-MM-dd):");
-        LocalDate date = LocalDate.parse(scanner.nextLine().trim(), DateTimeFormatter.ISO_LOCAL_DATE);
+        System.out.println("Enter start date range (yyyy-MM-dd):");
+        LocalDate startDate = LocalDate.parse(scanner.nextLine().trim(), DateTimeFormatter.ISO_LOCAL_DATE);
+
+        System.out.println("Enter end date range (yyyy-MM-dd):");
+        LocalDate endDate = LocalDate.parse(scanner.nextLine().trim(), DateTimeFormatter.ISO_LOCAL_DATE);
 
         System.out.println("Enter number of participants:");
         int participants = Integer.parseInt(scanner.nextLine().trim());
 
-        List<Tour> foundTours = tourController.searchTours(location, date, participants);
+        // Call the updated searchTours method with startDate and endDate
+        List<Tour> foundTours = tourController.searchTours(location, startDate, endDate, participants);
 
         if (foundTours.isEmpty()) {
             System.out.println("No tours found matching the criteria.");
@@ -159,6 +163,7 @@ public class View {
                     ", Max Participants: " + tour.getMaxParticipants() + ", Price: $" + tour.getPrice()));
         }
     }
+
 
 
     /**

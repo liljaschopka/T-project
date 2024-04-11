@@ -5,9 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f7df97bd-a9f0-419d-91ae-3e77b6e46efb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/create_daytrip_database.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/03b317aa-23e3-4680-a8c0-e75f5ac2add4.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/03b317aa-23e3-4680-a8c0-e75f5ac2add4.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/c687a3a9-6b60-4761-aec6-110fc2328817.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/c687a3a9-6b60-4761-aec6-110fc2328817/storage_v2/_src_/schema/main.uQUzAA.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/daytrip/controller/CustomerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/daytrip/controller/CustomerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/create_daytrip_database.sql" beforeDir="false" afterPath="$PROJECT_DIR$/create_daytrip_database.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/daytrip_database.db" beforeDir="false" afterPath="$PROJECT_DIR$/daytrip_database.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/daytrip/controller/TourController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/daytrip/controller/TourController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/daytrip/viewModel/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/daytrip/viewModel/View.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -138,7 +143,8 @@
       <updated>1712317024632</updated>
       <workItem from="1712317025645" duration="972000" />
       <workItem from="1712318683419" duration="5448000" />
-      <workItem from="1712324195950" duration="330000" />
+      <workItem from="1712324195950" duration="517000" />
+      <workItem from="1712761572972" duration="1708000" />
     </task>
     <servers />
   </component>

@@ -111,7 +111,7 @@ public class PackageController {
             throw new IllegalArgumentException("Invalid origin, destination or persons");
         }
 
-        List<Tour> foundTours = tourController.searchTours(destination, checkIn, persons);
+        List<Tour> foundTours = tourController.searchTours(destination, checkIn, checkOut, persons);
 
         if (foundTours.isEmpty()) {
             throw new IllegalArgumentException("No daytrips found");
