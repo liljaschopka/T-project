@@ -85,7 +85,8 @@ public class CartView {
                 }
             }
             if (tourToRemove != null) {
-                cart.getSelectedTours().remove(tourToRemove);
+                cart.removeSelectedTour(tourToRemove);
+                //cart.getSelectedTours().remove(tourToRemove);
             }
         }
         updateCartDisplay();

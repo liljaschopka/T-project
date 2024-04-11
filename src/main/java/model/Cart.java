@@ -85,6 +85,11 @@ public class Cart {
         updateTotalAmount();
     }
 
+    public void removeSelectedTour(Tour tour) {
+        totalAmount -= tour.getPrice();
+        selectedTours.remove(tour);
+    }
+
     public List<Tour> getSelectedTours() {
         return selectedTours;
     }
