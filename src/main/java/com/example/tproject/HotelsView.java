@@ -104,7 +104,7 @@ public class HotelsView {
         Alert infoAlert = new Alert(Alert.AlertType.INFORMATION);
         infoAlert.setTitle("User Information");
         infoAlert.setHeaderText("Added to cart!");
-        infoAlert.setContentText("Room number " + selectedRoom.getRoomNumber() + " at " + selectedRoom.getHotelName() + " has been added to your cart.");
+        infoAlert.setContentText("A hotel room for " + selectedRoom.getPersons() + " guest/s at " + selectedRoom.getHotelName() + " has been added to your cart.");
         infoAlert.showAndWait();
     }
 
