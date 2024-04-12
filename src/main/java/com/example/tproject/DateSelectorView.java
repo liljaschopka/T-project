@@ -49,7 +49,7 @@ public class DateSelectorView {
 
                 // Check if all necessary fields are filled or if origin and destination are the same
                 if (origin.equals("Select Location") || destination.equals("Select Destination") ||
-                        fxCheckIn.getValue() == null || fxCheckOut.getValue() == null) {
+                        fxCheckIn.getValue() == null || fxCheckOut.getValue() == null || persons == 0) {
                     showAlert(AlertType.WARNING, "Please complete all fields.");
                     return;
                 }
