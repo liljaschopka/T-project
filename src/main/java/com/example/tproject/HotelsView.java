@@ -6,6 +6,7 @@ import controllers.PackageController;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -100,6 +101,11 @@ public class HotelsView {
         if (selectedRoom != null) {
             cart.addHotelRoomToCart(selectedRoom);
         }
+        Alert infoAlert = new Alert(Alert.AlertType.INFORMATION);
+        infoAlert.setTitle("User Information");
+        infoAlert.setHeaderText("Added to cart!");
+        infoAlert.setContentText("Room number " + selectedRoom.getRoomNumber() + " at " + selectedRoom.getHotelName() + " has been added to your cart.");
+        infoAlert.showAndWait();
     }
 
     @FXML

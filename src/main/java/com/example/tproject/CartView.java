@@ -9,6 +9,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import model.Cart;
+import model.Flight;
+import model.HotelRoom;
 import model.User;
 
 import java.util.Optional;
@@ -69,9 +71,13 @@ public class CartView {
     @FXML
     public void fxRemoveHandler(ActionEvent ActionEvent) {
         String selected = fxCart.getSelectionModel().getSelectedItem().toString();
-        if (selected.startsWith("Room:")) {
+        if (selected.startsWith("Room number:")) {
+            HotelRoom room = cart.getSelectedHotelRoom();
+            cart.removeSelectedHotelRoom(room);
             cart.setSelectedHotelRoom(null);
         } else if (selected.startsWith("Flight:")) {
+            Flight flight = cart.getSelectedFlight();
+            cart.removeSelectedFlight(flight);
             cart.setSelectedFlight(null);
         } else if (selected.startsWith("Tour:")) {
             // Identify the tour to remove

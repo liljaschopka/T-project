@@ -1,6 +1,7 @@
 package model;
 
 import daytrip.model.Tour;
+import javafx.scene.control.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +23,7 @@ public class Cart {
     private Tour selectedTour;
     private int totalAmount;
     private List<Tour> selectedTours;
+    private ListView fxCart;
 
     public Cart() {
         selectedTours = new ArrayList<>(); // Initialize the list of selected tours
@@ -86,6 +88,10 @@ public class Cart {
         selectedTours.remove(tour);
     }
 
+    public void removeSelectedHotelRoom(HotelRoom hotel) {
+        totalAmount -= hotel.getPrice();
+    }
+
     public List<Tour> getSelectedTours() {
         return selectedTours;
     }
@@ -99,5 +105,9 @@ public class Cart {
 
     public boolean isCartEmpty() {
         return totalAmount == 0;
+    }
+
+    public void removeSelectedFlight(Flight flight) {
+        totalAmount -= flight.getPrice();
     }
 }
