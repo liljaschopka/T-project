@@ -11,12 +11,19 @@ public class UserAreaController {
     @FXML
     private Label userEmailLabel;
     @FXML
-    private ListView<String> bookingsListView;
+    public ListView<Object> bookingsListView;
 
     // Method to initialize data in the user area
     public void initData(User user) {
         userNameLabel.setText("User Name: " + user.getName());
         userEmailLabel.setText("Email: " + user.getEmail());
-        bookingsListView.getItems().setAll(user.getBookingDetails()); // Assumes User class has a getBookingDetails method returning List<String>
+
+        // Ensure bookingsListView is not null before accessing its methods
+        if (bookingsListView != null) {
+            bookingsListView.getItems().setAll(user.getBookingDetails());
+        } else {
+            // Handle the case where bookingsListView is null (maybe log a warning)
+            System.out.println("bookingsListView is null. Ensure it's properly initialized.");
+        }
     }
 }

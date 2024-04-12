@@ -134,7 +134,7 @@ public class DateSelectorView {
         }
     }
 
-    private void showUserInfo(User user) {
+    public void showUserInfo(User user) {
         Alert infoAlert = new Alert(Alert.AlertType.INFORMATION);
         infoAlert.setTitle("User Information");
         infoAlert.setHeaderText("Welcome, " + user.getName());
@@ -143,7 +143,7 @@ public class DateSelectorView {
         infoAlert.showAndWait();
     }
 
-    private void showUserArea(User user) {
+    public void showUserArea(User user) {
         // Create a new dialog or window to display user information
         UserAreaDialog userAreaDialog = new UserAreaDialog(user);
         userAreaDialog.showAndWait();
