@@ -109,7 +109,7 @@ public class CartView {
     public void updateCartDisplay() {
         fxCart.getItems().clear(); // Clear existing items
         if (cart.getSelectedHotelRoom() != null) {
-            fxCart.getItems().add("Room: " + cart.getSelectedHotelRoom().getDescription() + " Price: $" + cart.getSelectedHotelRoom().getPrice());
+            fxCart.getItems().add("Room number: " + cart.getSelectedHotelRoom().getRoomNumber() + " in " + cart.getSelectedHotelRoom().getHotelName() + ", price: " + cart.getSelectedHotelRoom().getPrice() + "$");
         }
         if (cart.getSelectedFlight() != null) {
             fxCart.getItems().add("Flight: " + cart.getSelectedFlight().getDescription() + " Price: $" + cart.getSelectedFlight().getPrice());
