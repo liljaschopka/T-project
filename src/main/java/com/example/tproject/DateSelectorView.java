@@ -67,6 +67,12 @@ public class DateSelectorView {
                 packageController = new PackageController(null, origin, destination,
                         fxCheckIn.getValue(), fxCheckOut.getValue(), persons); // Update global state
 
+                /*packageController.setOrigin(origin);
+                packageController.setDestination(destination);
+                packageController.setCheckIn(fxCheckIn.getValue());
+                packageController.setCheckOut(fxCheckOut.getValue());
+                packageController.setPersons(persons);*/
+
                 ViewSwitcher.switchTo(View.BOOKINGSELECTOR);
             } else {
                 showAlert(AlertType.WARNING, "Please complete all fields."); // Generalizing the alert for invalid person count
