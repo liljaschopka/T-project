@@ -9,6 +9,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import model.Cart;
+import model.Flight;
+import model.HotelRoom;
 import model.User;
 
 import java.util.Optional;
@@ -69,7 +71,7 @@ public class CartView {
     @FXML
     public void fxRemoveHandler(ActionEvent ActionEvent) {
         String selected = fxCart.getSelectionModel().getSelectedItem().toString();
-        if (selected.startsWith("Room:")) {
+        if (selected.startsWith("Room number:")) {
             cart.setSelectedHotelRoom(null);
         } else if (selected.startsWith("Flight:")) {
             cart.setSelectedFlight(null);
@@ -108,11 +110,11 @@ public class CartView {
 
     public void updateCartDisplay() {
         fxCart.getItems().clear(); // Clear existing items
-        if (cart.getSelectedHotelRoom() != null) {
-            fxCart.getItems().add("Room number: " + cart.getSelectedHotelRoom().getRoomNumber() + " in " + cart.getSelectedHotelRoom().getHotelName() + ", price: " + cart.getSelectedHotelRoom().getPrice() + "$ per night");
+        for (HotelRoom hotelRoom : cart.getSelectedHotelRooms()) {
+            fxCart.getItems().add("Room number: " + hotelRoom.getRoomNumber() + " in " + hotelRoom.getHotelName() + ", price: " + hotelRoom.getPrice() + "$ per night");
         }
-        if (cart.getSelectedFlight() != null) {
-            fxCart.getItems().add("Flight: " + cart.getSelectedFlight().getDescription() + " Price: $" + cart.getSelectedFlight().getPrice());
+        for (Flight flight : cart.getSelectedFlights()) {
+            fxCart.getItems().add("Flight: " + flight.getDescription() + " Price: $" + flight.getPrice());
         }
         for (Tour tour : cart.getSelectedTours()) {
             fxCart.getItems().add("Tour: " + tour.getName() + " Price: $" + tour.getPrice());

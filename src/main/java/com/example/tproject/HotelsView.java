@@ -65,7 +65,7 @@ public class HotelsView {
         Hotel selectedHotel = fxHotelsList.getSelectionModel().getSelectedItem();
         if (selectedHotel != null) {
             //List<HotelRoom> availableRooms = hotelController.getAvailableRooms(selectedHotel, packageController.getPersons());
-            List<HotelRoom> availableRooms = hotelControllerListMock.getAvailableRooms(selectedHotel, packageController.getPersons());
+            List<HotelRoom> availableRooms = packageController.getAvailableRooms(selectedHotel, hotelControllerListMock);
             setupHotelRoomListView();
             fxHotelRoomsList.setItems(FXCollections.observableArrayList(availableRooms));
             fxHotelRoomsList.setVisible(true);

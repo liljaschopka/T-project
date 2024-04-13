@@ -24,18 +24,18 @@ import java.util.Optional;
 public class BookingController {
 
     public void createHotelBooking(User user, Cart cart) {
-        HotelRoom selectedHotelRoom = cart.getSelectedHotelRoom();
+        List<HotelRoom> selectedHotelRooms = cart.getSelectedHotelRooms();
         // TODO: create booking by using the BookingController from the H-team
     }
 
     public void createFlightBooking(User user, Cart cart) {
-        Flight selectedFlight = cart.getSelectedFlight();
+        List<Flight> selectedFlights = cart.getSelectedFlights();
 
         // TODO: create booking by using the BookingController from the F-team
     }
 
     public void createDayTripBooking(User user, Cart cart) {
-        Tour selectedTour = cart.getSelectedTour();
+        List<Tour> selectedTours = cart.getSelectedTours();
 
         // TODO: create booking by using the ReservationController from the D-team
         TourDAL tourDal = new TourDAL();
@@ -43,17 +43,19 @@ public class BookingController {
         TourController tourController = new TourController(tourDal);
         ReservationController reservationController = new ReservationController(reservationDal, tourController);
 
-        int daytripId = selectedTour.getTourID();
-        String userName = user.getName();
-        String userEmail = user.getEmail();
-        LocalDate date = selectedTour.getDate();
-        int participants = selectedTour.getMaxParticipants();
+        for (Tour tour : selectedTours) {
+            int daytripId = tour.getTourID();
+            String userName = user.getName();
+            String userEmail = user.getEmail();
+            LocalDate date = tour.getDate();
+            int participants = tour.getMaxParticipants();
 
-        boolean success = reservationController.makeReservation(daytripId, userName, userEmail, date, participants, Optional.empty());
-        if (success) {
-            System.out.println("Daytrip booking successful.");
-        } else {
-            System.out.println("Daytrip booking failed. Please try again or check the tour availability.");
+            boolean success = reservationController.makeReservation(daytripId, userName, userEmail, date, participants, Optional.empty());
+            if (success) {
+                System.out.println("Daytrip booking successful.");
+            } else {
+                System.out.println("Daytrip booking failed. Please try again or check the tour availability.");
+            }
         }
     }
 

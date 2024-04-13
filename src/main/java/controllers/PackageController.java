@@ -98,15 +98,15 @@ public class PackageController {
 
 
     public List<HotelRoom> getAvailableRooms(Hotel hotel, HotelControllerInterface hotelController) {
-        List<HotelRoom> availabeRooms = hotelController.getAvailableRooms(hotel, persons);
+        List<HotelRoom> availableRooms = hotelController.getAvailableRooms(hotel, persons);
 
-        if (availabeRooms.isEmpty()) {
+        if (availableRooms.isEmpty()) {
             throw new IllegalArgumentException("No rooms found");
         }
 
-        availabeRooms.sort(Comparator.comparingInt(HotelRoom::getPrice));
+        // availabeRooms.sort(Comparator.comparingInt(HotelRoom::getPrice));
 
-        return availabeRooms;
+        return availableRooms;
     }
 
     public List<Flight> findAvailableFlights(FlightController flightController) {
