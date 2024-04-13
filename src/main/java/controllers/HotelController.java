@@ -19,7 +19,6 @@ import java.util.List;
 public class HotelController implements HotelControllerInterface {
 
     public List<Hotel> searchForHotels(String location, LocalDate checkIn, LocalDate checkOut, int capacity) {
-
         return null;
     }
 

@@ -117,7 +117,8 @@ public class PackageController {
             throw new IllegalArgumentException("Invalid origin, destination or persons");
         }
 
-        List<Flight> flights = flightController.searchForFlights(destination, origin, checkIn, checkOut, persons);
+        //það þarf að útfæra searchflight aðferðina
+        List<Flight> flights = flightController.searchFlight(origin, destination, checkIn, checkOut, persons);
 
         if (flights.isEmpty()) {
             throw new IllegalArgumentException("No flights found");
