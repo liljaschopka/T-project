@@ -168,7 +168,7 @@ public class CartView {
             fxCart.getItems().add("Room number: " + hotelRoom.getRoomNumber() + " in " + hotelRoom.getHotelName() + ", price: " + hotelRoom.getPrice() + "$ per night");
         }
         for (Flight flight : cart.getSelectedFlights()) {
-            fxCart.getItems().add("Flight: " + flight.getDescription() + " Price: $" + flight.getPrice());
+            fxCart.getItems().add("Flight: " + flight.getFlightDetails() + " Price: $" + flight.getPrice());
         }
         for (Tour tour : cart.getSelectedTours()) {
             fxCart.getItems().add("Tour: " + tour.getName() + " Price: $" + tour.getPrice());

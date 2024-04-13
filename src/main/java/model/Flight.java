@@ -90,4 +90,11 @@ public class Flight {
     public int getAvailableSeats() {
         return availableSeats;
     }
+
+    //bætti við þessu fyrir cartview:
+    public String getFlightDetails() {
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+        return "FlightID: " + flightID + ", Departure: " + departureTime.format(timeFormatter) +
+                ", Arrival: " + arrivalTime.format(timeFormatter);
+    }
 }

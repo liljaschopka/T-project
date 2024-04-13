@@ -5,24 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f7df97bd-a9f0-419d-91ae-3e77b6e46efb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/flight/BookingInventory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/flight/FlightInventoryInterface.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/flight/Flights.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/flight/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/flight/PaymentInfo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/flight/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tproject/FlightsView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tproject/FlightsView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/flight/Booking.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/flight/Booking.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/flight/BookingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/flight/BookingController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/flight/Flight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/flight/Flight.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/flight/FlightController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/flight/FlightController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/flight/FlightInventory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/flight/FlightInventory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/flight/FlightSearch.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/flight/LuggageOption.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/flight/StubFlightInventory.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/flight/bookingControllerInterface.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/flight/flightControllerInterface.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tproject/CartView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tproject/CartView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/model/Flight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Flight.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -106,15 +90,6 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="TestNG">
-      <option name="TEST_OBJECT" value="CLASS" />
-      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration default="true" type="Application" factoryName="Application">
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <method v="2">
@@ -124,6 +99,15 @@
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <option name="TEST_OBJECT" value="class" />
       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="TestNG">
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
