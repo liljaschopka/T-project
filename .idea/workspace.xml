@@ -12,10 +12,14 @@
       <change afterPath="$PROJECT_DIR$/src/main/java/flight/PaymentInfo.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/flight/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tproject/CartView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tproject/CartView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tproject/FlightsView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tproject/FlightsView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/FlightController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/FlightController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/HotelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/HotelController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/PackageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/PackageController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/flight/Booking.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/flight/Booking.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/flight/BookingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/flight/BookingController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/flight/Flight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/flight/Flight.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/flight/Flight.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/flight/FlightController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/flight/FlightController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/flight/FlightInventory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/flight/FlightInventory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/flight/FlightSearch.java" beforeDir="false" />
@@ -23,7 +27,6 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/flight/StubFlightInventory.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/flight/bookingControllerInterface.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/flight/flightControllerInterface.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Flight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Flight.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

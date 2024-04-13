@@ -1,5 +1,7 @@
 package flight;
 
+import model.Flight;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -28,7 +30,7 @@ public class FlightInventory implements FlightInventoryInterface {
     public boolean removeFlight(int flightID) {
         return flights.removeIf(flight -> flight.getFlightID() == flightID);
     }
-
+    
     public List<Flight> searchFlight(String origin, String destination, LocalDate date) {
         return flights.stream()
                 .filter(flight -> flight.getOrigin().equalsIgnoreCase(origin) &&
