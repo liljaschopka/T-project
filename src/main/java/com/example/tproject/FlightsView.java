@@ -1,7 +1,7 @@
 package com.example.tproject;
 
+import controllers.FlightController;
 import controllers.PackageController;
-import flight.FlightController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
