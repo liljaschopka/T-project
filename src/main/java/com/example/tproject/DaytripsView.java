@@ -7,10 +7,7 @@ import daytrip.model.Tour;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import model.Cart;
 
 import java.util.List;
@@ -91,6 +88,11 @@ public class DaytripsView {
         } else {
             System.out.println("No tour selected. Please select a tour first.");
         }
+        Alert infoAlert = new Alert(Alert.AlertType.INFORMATION);
+        infoAlert.setTitle("User Information");
+        infoAlert.setHeaderText("Added to cart!");
+        infoAlert.setContentText(selectedTour.getName() + " has been added to your cart.");
+        infoAlert.showAndWait();
     }
 
     /**

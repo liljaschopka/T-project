@@ -2,9 +2,11 @@ package com.example.tproject;
 
 import controllers.BookingController;
 import controllers.PackageController;
+import controllers.UserAreaController;
 import daytrip.model.Tour;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -13,6 +15,7 @@ import model.Flight;
 import model.HotelRoom;
 import model.User;
 
+import java.util.List;
 import java.util.Optional;
 
 /******************************************************************************
@@ -35,12 +38,21 @@ public class CartView {
     private ListView fxCart;
     @FXML
     private Label fxTotalPrice;
+    private DateSelectorView date;
+
 
     private BookingController bookingController = new BookingController();
     private PackageController packageController = DateSelectorView.getPackageController();
     private Cart cart = packageController.getCart();
     private User user = packageController.getUser();
+    private UserAreaController userAreaController;
 
+
+    public CartView() {
+        // Initialize the date object
+        this.date = new DateSelectorView();
+        this.userAreaController = new UserAreaController();
+    }
 
     @FXML
     public void fxGoBackHandler(ActionEvent ActionEvent) {
@@ -59,21 +71,63 @@ public class CartView {
      */
     @FXML
     public void fxPayHandler(ActionEvent ActionEvent) {
-        if (user == null) {
-            newUser();
-        } else {
-            packageController.createBooking(bookingController);
-            packageController.clearSelection();
+        //if (user == null) {
+        //  newUser();
+        //} else {
+        //  packageController.createBooking(bookingController);
+        //packageController.clearSelection();
+        //ViewSwitcher.switchTo(View.DATESELECTOR);
+        // cart.emptyCart();
+        //    }
+        User loggedInUser = packageController.getUser();
+        if (loggedInUser != null) {
+            // this.date.showUserArea(loggedInUser);
+            //ObservableList<String> cartItems = fxCart.getItems();
+            //userAreaController.bookingsListView.getItems().addAll(cartItems);
             ViewSwitcher.switchTo(View.DATESELECTOR);
+            borga();
+
+        } else {
+            // No user registered, open the registration dialog
+            UserDialog dialog = new UserDialog();
+            Optional<User> result = dialog.showAndWait();
+            result.ifPresent(user -> {
+                //packageController.setUser(user.getName(), user.getEmail(), user.getPaymentInfo(), user.getBookingIds());
+                this.user = user;
+                System.out.println("New user created: " + user.getName());
+                this.date.showUserInfo(user);  // Optionally show immediate confirmation
+            });
         }
+
     }
+
+    public void borga() {
+        User loggedInUser = packageController.getUser();
+        Alert infoAlert = new Alert(Alert.AlertType.INFORMATION);
+        infoAlert.setTitle(loggedInUser.getName());
+        infoAlert.setHeaderText("Booking completed!");
+        infoAlert.setContentText("Dear " + loggedInUser.getName() + ", your trip has been booked and paid for. Have a nice trip!");
+        infoAlert.showAndWait();
+        while (1 == 1) {
+            if (!infoAlert.isShowing()) {
+                this.date.showUserArea(loggedInUser);
+                break;
+            }
+        }
+        cart.emptyCart();
+    }
+
 
     @FXML
     public void fxRemoveHandler(ActionEvent ActionEvent) {
         String selected = fxCart.getSelectionModel().getSelectedItem().toString();
         if (selected.startsWith("Room number:")) {
+            List<HotelRoom> rooms = cart.getSelectedHotelRooms();
+            // cart.removeSelectedHotelRoom(room);
             cart.setSelectedHotelRoom(null);
         } else if (selected.startsWith("Flight:")) {
+            List<Flight> flights = cart.getSelectedFlights();
+            // cart.removeSelectedFlight(flight);
             cart.setSelectedFlight(null);
         } else if (selected.startsWith("Tour:")) {
             // Identify the tour to remove

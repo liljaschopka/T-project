@@ -34,8 +34,8 @@ public class ViewSwitcher {
             Parent root;
             FXMLLoader loader = null;
             //if (cache.containsKey(view)) {
-            System.out.println("Loading from cache");
-            root = cache.get(view);
+            //    System.out.println("Loading from cache");
+            //    root = cache.get(view);
             // } else {
             System.out.println("Loading from FXML");
             loader = new
@@ -44,7 +44,7 @@ public class ViewSwitcher {
             cache.put(view, root);
             scene.setRoot(root);
             controllers.put(view, loader.getController());
-            //}
+            // }
             scene.setRoot(root);
             //bætt við
             pushToHistory(view);

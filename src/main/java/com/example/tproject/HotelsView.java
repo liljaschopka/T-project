@@ -6,9 +6,11 @@ import controllers.PackageController;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import model.Cart;
 import model.Hotel;
@@ -18,6 +20,8 @@ import java.util.List;
 
 public class HotelsView {
 
+    @FXML
+    public ImageView fxHotelImageView;
     @FXML
     private Button fxAddToCart, fxGoBack;
     @FXML
@@ -48,6 +52,9 @@ public class HotelsView {
         } else {
             fxHotelsList.setItems(FXCollections.observableArrayList(hotels));
         }
+
+        //Image placeholderImage = new Image("/com/example/tproject/myndir/HotelPlaceholder.png");
+        //fxHotelImageView.setImage(placeholderImage);
     }
 
     private void setupHotelListView() {
@@ -70,6 +77,8 @@ public class HotelsView {
             fxHotelRoomsList.setItems(FXCollections.observableArrayList(availableRooms));
             fxHotelRoomsList.setVisible(true);
             fxAddToCart.setVisible(true);
+
+
         } else {
             fxHotelRoomsList.setVisible(false);
             fxAddToCart.setVisible(false);
@@ -92,6 +101,11 @@ public class HotelsView {
         if (selectedRoom != null) {
             cart.addHotelRoomToCart(selectedRoom);
         }
+        Alert infoAlert = new Alert(Alert.AlertType.INFORMATION);
+        infoAlert.setTitle("User Information");
+        infoAlert.setHeaderText("Added to cart!");
+        infoAlert.setContentText("A hotel room for " + selectedRoom.getPersons() + " guest/s at " + selectedRoom.getHotelName() + " has been added to your cart.");
+        infoAlert.showAndWait();
     }
 
     @FXML

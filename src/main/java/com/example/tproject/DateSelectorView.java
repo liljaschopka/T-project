@@ -49,7 +49,7 @@ public class DateSelectorView {
 
                 // Check if all necessary fields are filled or if origin and destination are the same
                 if (origin.equals("Select Location") || destination.equals("Select Destination") ||
-                        fxCheckIn.getValue() == null || fxCheckOut.getValue() == null) {
+                        fxCheckIn.getValue() == null || fxCheckOut.getValue() == null || persons == 0) {
                     showAlert(AlertType.WARNING, "Please complete all fields.");
                     return;
                 }
@@ -66,6 +66,12 @@ public class DateSelectorView {
 
                 packageController = new PackageController(null, origin, destination,
                         fxCheckIn.getValue(), fxCheckOut.getValue(), persons); // Update global state
+
+                /*packageController.setOrigin(origin);
+                packageController.setDestination(destination);
+                packageController.setCheckIn(fxCheckIn.getValue());
+                packageController.setCheckOut(fxCheckOut.getValue());
+                packageController.setPersons(persons);*/
 
                 ViewSwitcher.switchTo(View.BOOKINGSELECTOR);
             } else {
@@ -128,7 +134,7 @@ public class DateSelectorView {
         }
     }
 
-    private void showUserInfo(User user) {
+    public void showUserInfo(User user) {
         Alert infoAlert = new Alert(Alert.AlertType.INFORMATION);
         infoAlert.setTitle("User Information");
         infoAlert.setHeaderText("Welcome, " + user.getName());
@@ -137,7 +143,7 @@ public class DateSelectorView {
         infoAlert.showAndWait();
     }
 
-    private void showUserArea(User user) {
+    public void showUserArea(User user) {
         // Create a new dialog or window to display user information
         UserAreaDialog userAreaDialog = new UserAreaDialog(user);
         userAreaDialog.showAndWait();
