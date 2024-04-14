@@ -1,7 +1,9 @@
 package hotel.dal;
 
+import hotel.model.Booking;
+import hotel.model.HotelRoom;
+import model.User;
 
-import hotel.model.*;
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -11,18 +13,28 @@ import java.util.List;
 public class BookingDAL {
 
     private static Connection connection;
-    private static final String DATABASE_URL = "jdbc:sqlite:hotel_database.db";
 
-    private static void Connect() {
+    private static void connect() {
         try {
             Class.forName("org.sqlite.JDBC");
-            connection = DriverManager.getConnection(DATABASE_URL);
+            connection = DriverManager.getConnection("jdbc:sqlite:hotel_database.db");
+            connection.setAutoCommit(true);
         } catch (SQLException e) {
             System.err.println(e);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
+    private static void close(){
+        try {
+            if(!connection.getAutoCommit()) connection.commit();
+            connection.close();
+            connection = null;
+        } catch (SQLException e) {
+            System.err.println(e);
+        }
+    }
+
 
     /**
      * Gets a list of bookings the user currently has booked
@@ -31,10 +43,10 @@ public class BookingDAL {
      */
     public static List<Booking> getBookings(User user){
         List<Booking> bookings = new ArrayList<>();
-        if(connection == null) Connect();
+        if(connection == null) connect();
         try {
-            PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Booking WHERE OwnerLastName=? AND OwnerEmail=?");
-            stmt.setString(1, user.getLastName());
+            PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Booking WHERE OwnerName=? AND OwnerEmail=?");
+            stmt.setString(1, user.getName());
             stmt.setString(2, user.getEmail());
             ResultSet results = stmt.executeQuery();
             while(results.next()){
@@ -44,6 +56,8 @@ public class BookingDAL {
                 rmstmt.setInt(1,results.getInt(1));
                 ResultSet rmResults = rmstmt.executeQuery();
                 List<HotelRoom> rooms = new ArrayList<>();
+                String hotelName = rmResults.getString(1);
+                String hotelAddress = rmResults.getString(2);
                 while(rmResults.next()){
                     HotelRoom room = new HotelRoom(
                             rmResults.getInt(3),
@@ -56,14 +70,14 @@ public class BookingDAL {
                 }
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-d");
                 String arrival =  results.getString("Arrival");
-                String departure =  results.getString("Arrival");
+                String departure =  results.getString("Departure");
                 Booking newBooking = new Booking(
                         results.getInt(1),
                         LocalDate.parse(arrival, formatter),
                         LocalDate.parse(departure, formatter),
                         results.getInt(4),
                         rooms,
-                        HotelDAL.getHotel(rmResults.getString(1), rmResults.getString(3)),
+                        HotelDAL.getHotel(hotelName, hotelAddress),
                         user
                 );
                 bookings.add(newBooking);
@@ -87,10 +101,10 @@ public class BookingDAL {
      * @param booking - java class of a booking
      */
     public static void createBooking(Booking booking){
-        if(connection == null) Connect();
+        if(connection == null) connect();
         try {
-            PreparedStatement userExists = connection.prepareStatement("SELECT * FROM User Where (LastName, Email) = (?, ?)");
-            userExists.setString(1, booking.getOwner().getLastName());
+            PreparedStatement userExists = connection.prepareStatement("SELECT * FROM User Where (Name, Email) = (?, ?)");
+            userExists.setString(1, booking.getOwner().getName());
             userExists.setString(2, booking.getOwner().getEmail());
             ResultSet userFound = userExists.executeQuery();
             //If the user is not already in the DB, we create it.
@@ -99,11 +113,11 @@ public class BookingDAL {
                 createUser(booking.getOwner());
             }
             //Creates a new booking in the DB
-            PreparedStatement stmt = connection.prepareStatement("INSERT INTO Booking('Arrival', 'Departure', 'nrPerson', 'OwnerLastName', 'OwnerEmail') VALUES(?, ?, ?, ?, ?)");
+            PreparedStatement stmt = connection.prepareStatement("INSERT INTO Booking('Arrival', 'Departure', 'nrPerson', 'OwnerName', 'OwnerEmail') VALUES(?, ?, ?, ?, ?)");
             stmt.setString(1, booking.getCheckIn().toString());
             stmt.setString(2, booking.getCheckOut().toString());
             stmt.setInt(3, booking.getPersons());
-            stmt.setString(4, booking.getOwner().getLastName());
+            stmt.setString(4, booking.getOwner().getName());
             stmt.setString(5, booking.getOwner().getEmail());
             stmt.executeUpdate();
             ResultSet key = stmt.getGeneratedKeys();
@@ -114,11 +128,12 @@ public class BookingDAL {
                 rmStmt.setString(2, booking.getHotel().getName());
                 rmStmt.setString(3, booking.getHotel().getAddress());
                 rmStmt.setInt(4, room.getRoomNumber());
+                rmStmt.executeUpdate();
             }
-
         } catch (SQLException e) {
             System.err.println(e);
         }
+        close();
     }
 
     /**
@@ -130,7 +145,7 @@ public class BookingDAL {
             System.out.println("Invalid booking id.. Nothing deleted");
             return;
         }
-        if(connection == null) Connect();
+        connect();
         try {
             //Deletes  from booking table
             PreparedStatement deleteBook = connection.prepareStatement("DELETE FROM Booking WHERE BookingID = ?");
@@ -141,7 +156,6 @@ public class BookingDAL {
             PreparedStatement deleteBookRoom = connection.prepareStatement("DELETE FROM Booking_Room WHERE BookingID = ?");
             deleteBookRoom.setInt(1, booking.getBookingID());
             deleteBookRoom.executeUpdate();
-
         } catch (SQLException e) {
             System.err.println(e);
         }
@@ -154,12 +168,11 @@ public class BookingDAL {
      * @param user - java class of the USER that will be parsed into the DB
      */
     private static void createUser(User user){
-        if(connection == null) Connect();
+        if(connection == null) connect();
         try {
-            PreparedStatement stmt = connection.prepareStatement("INSERT INTO User VALUES(?, ?, ?)");
+            PreparedStatement stmt = connection.prepareStatement("INSERT INTO User VALUES(?, ?)");
             stmt.setString(1, user.getName());
-            stmt.setString(2, user.getLastName());
-            stmt.setString(3, user.getEmail());
+            stmt.setString(2, user.getEmail());
             stmt.executeUpdate();
         } catch (SQLException e) {
             System.err.println(e);

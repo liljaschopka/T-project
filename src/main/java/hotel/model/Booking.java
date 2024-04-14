@@ -1,8 +1,9 @@
 package hotel.model;
 
+import model.User;
+
 import java.time.LocalDate;
 import java.util.List;
-
 
 public class Booking {
 

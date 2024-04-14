@@ -1,6 +1,9 @@
 package hotel.controller;
 
-import hotel.model.*;
+import hotel.model.Hotel;
+import hotel.model.HotelRoom;
+import hotel.model.Booking;
+import model.User;
 import hotel.dal.*;
 import java.time.LocalDate;
 import java.util.List;

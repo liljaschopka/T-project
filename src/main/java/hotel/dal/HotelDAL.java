@@ -8,12 +8,12 @@ import java.util.List;
 
 public class HotelDAL {
     private static Connection connection;
-    private static final String DATABASE_URL = "jdbc:sqlite:hotel_database.db";
 
-    private static void Connect() {
+    private static void connect() {
         try {
             Class.forName("org.sqlite.JDBC");
-            connection = DriverManager.getConnection(DATABASE_URL);
+            connection = DriverManager.getConnection("jdbc:sqlite:hotel_database.db");
+            connection.setAutoCommit(true);
         } catch (SQLException e) {
             System.err.println(e);
         } catch (ClassNotFoundException e) {
@@ -21,9 +21,19 @@ public class HotelDAL {
         }
     }
 
+    private static void close(){
+        try {
+            if(!connection.getAutoCommit()) connection.commit();
+            connection.close();
+            connection = null;
+        } catch (SQLException e) {
+            System.err.println(e);
+        }
+    }
+
     public static List<Hotel> getHotelsFromLocation(String location){
         List<Hotel> hotels = new ArrayList<>();
-        if(connection == null) Connect();
+        if(connection == null) connect();
         try {
             PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Hotel WHERE Location=?");
             stmt.setString(1, location);
@@ -50,9 +60,9 @@ public class HotelDAL {
     }
 
     public static Hotel getHotel(String hotelName, String hotelAddress){
-        if(connection == null) Connect();
+        if(connection == null) connect();
         try {
-            PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Hotel WHERE HotelName=?, HotelAddress=?");
+            PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Hotel WHERE (HotelName, Address) = (?,?)");
             stmt.setString(1, hotelName);
             stmt.setString(2, hotelAddress);
             ResultSet results = stmt.executeQuery();
@@ -76,7 +86,7 @@ public class HotelDAL {
 
     public static List<HotelRoom> getHotelRooms(String name, String address){
         List<HotelRoom> rooms = new ArrayList<>();
-        if(connection == null) Connect();
+        if(connection == null) connect();
         try {
             PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Room WHERE HotelName=? AND HotelAddress=?");
             stmt.setString(1, name);
@@ -100,25 +110,25 @@ public class HotelDAL {
 
     public static List<HotelRoom> getAvailableRooms(Hotel hotel, LocalDate arrival, LocalDate departure){
         List<HotelRoom> rooms = new ArrayList<>();
-        if(connection == null) Connect();
+        connect();
         try {
             //Finds every room for given hotel that is not currently booked for a range of dates
-            PreparedStatement stmt = connection.prepareStatement("SELECT Number, NrPerson, Floor, Price_Isk, PictureUrl FROM Room JOIN hotel ON (Room.HotelName, Room.HotelAddress) = (hotel.HotelName, hotel.Address)\n" +
-                    "WHERE NOT EXISTS (" +
-                    "SELECT r.Number, r.NrPerson, r.Floor, r.Price_Isk, r.PictureUrl FROM Room AS r " +
+            PreparedStatement stmt = connection.prepareStatement("SELECT Number, NrPerson, Floor, Price_Isk, PictureUrl FROM Room WHERE (HotelName, HotelAddress, Number) NOT IN(" +
+                    "SELECT r.HotelName, r.HotelAddress, r.Number FROM Room AS r " +
                     "JOIN Hotel AS h ON ((r.HotelName, r.HotelAddress) = (h.HotelName, h.Address)) " +
                     "JOIN Booking_Room AS br ON ((br.HotelName, br.HotelAddress, br.RoomNumber) = (r.HotelName, r.HotelAddress, r.Number)) " +
                     "JOIN Booking AS b ON (b.BookingID = br.BookingID)" +
-                    "WHERE (b.arrival NOT BETWEEN ? AND ?) " +
-                    "AND (b.departure NOT BETWEEN ? AND ?)" +
-                    "AND NOT (b.arrival > ? AND b.departure < ?))" +
-                    "AND (hotel.HotelName, hotel.Address) = (?, ?)");
-            stmt.setDate(1, Date.valueOf(arrival));
-            stmt.setDate(2, Date.valueOf(departure));
-            stmt.setDate(3, Date.valueOf(arrival));
-            stmt.setDate(4, Date.valueOf(departure));
-            stmt.setDate(5, Date.valueOf(arrival));
-            stmt.setDate(6, Date.valueOf(departure));
+                    "WHERE (b.arrival BETWEEN date(?) AND date(?)) " +
+                    "OR (b.departure BETWEEN date(?) AND date(?)) " +
+                    "OR (b.arrival < date(?) AND b.departure > date(?))) " +
+                    "AND (HotelName, HotelAddress) = (?, ?)");
+
+            stmt.setString(1, arrival.toString());
+            stmt.setString(2, departure.toString());
+            stmt.setString(3,  arrival.toString());
+            stmt.setString(4, departure.toString());
+            stmt.setString(5,  arrival.toString());
+            stmt.setString(6, departure.toString());
             stmt.setString(7, hotel.getName());
             stmt.setString(8, hotel.getAddress());
             ResultSet results = stmt.executeQuery();
@@ -135,6 +145,7 @@ public class HotelDAL {
         } catch (SQLException e) {
             System.err.println(e);
         }
+        close();
         return rooms;
     }
 }

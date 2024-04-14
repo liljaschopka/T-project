@@ -25,10 +25,10 @@ CREATE TABLE Booking (
     Arrival DATE NOT NULL,
     Departure DATE NOT NULL,
     nrPerson INT NOT NULL,
-    OwnerLastName VARCHAR(255) NOT NULL,
+    OwnerName VARCHAR(255) NOT NULL,
     OwnerEmail VARCHAR(255) NOT NULL,
-    FOREIGN KEY (OwnerLastName, OwnerEmail)
-    REFERENCES User(LastName, Email)
+    FOREIGN KEY (OwnerName, OwnerEmail)
+    REFERENCES User(Name, Email)
 );
 
 CREATE TABLE Booking_Room (
@@ -44,10 +44,9 @@ CREATE TABLE Booking_Room (
 );
 
 CREATE TABLE User (
-    FirstName VARCHAR(255),
-    LastName VARCHAR(255),
+    Name VARCHAR(255),
     Email VARCHAR(255),
-    PRIMARY KEY(LastName, Email)
+    PRIMARY KEY(Name, Email)
 );
 
 
