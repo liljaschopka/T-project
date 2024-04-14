@@ -7,7 +7,10 @@
     <list default="true" id="f7df97bd-a9f0-419d-91ae-3e77b6e46efb" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tproject/CartView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tproject/CartView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Flight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Flight.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tproject/HotelsView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tproject/HotelsView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/BookingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/BookingController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hotel/model/Hotel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hotel/model/Hotel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Cart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Cart.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,10 +89,20 @@
       <recent name="$PROJECT_DIR$/src/main/resources/com/example/tproject/myndir" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.example.tproject" />
       <recent name="controllers" />
     </key>
   </component>
   <component name="RunManager">
+    <configuration default="true" type="TestNG">
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="Application" factoryName="Application">
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <method v="2">
@@ -99,15 +112,6 @@
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <option name="TEST_OBJECT" value="class" />
       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="TestNG">
-      <option name="TEST_OBJECT" value="CLASS" />
-      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <properties />
-      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>

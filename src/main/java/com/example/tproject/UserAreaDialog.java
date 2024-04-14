@@ -1,6 +1,5 @@
 package com.example.tproject;
 
-import controllers.UserAreaController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;

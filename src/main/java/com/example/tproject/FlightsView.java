@@ -2,6 +2,7 @@ package com.example.tproject;
 
 import controllers.FlightController;
 import controllers.PackageController;
+import flight.FlightInventory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -12,6 +13,8 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import model.Cart;
 import model.Flight;
+
+import java.io.IOException;
 
 
 public class FlightsView {
@@ -29,8 +32,10 @@ public class FlightsView {
     private PackageController packageController = DateSelectorView.getPackageController();
     private Cart cart = packageController.getCart();
 
-    public FlightsView() {
-        flightController = new FlightController();
+    public FlightsView() throws IOException {
+        String filePath = "Flights.txt";
+        FlightInventory flightInventory = new FlightInventory(filePath);
+        flightController = new FlightController(flightInventory);
     }
 
     @FXML

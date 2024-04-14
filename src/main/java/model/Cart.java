@@ -18,14 +18,15 @@ import java.util.List;
  *****************************************************************************/
 public class Cart {
 
-    private HotelRoom selectedRoom;
+    private hotel.model.Hotel selectedHotel;
+    private hotel.model.HotelRoom selectedRoom;
     private Flight selectedFlight;
     private Tour selectedTour;
     private int totalAmount;
     private List<Tour> selectedTours;
-    private List<HotelRoom> selectedHotelRooms;
+    private List<hotel.model.HotelRoom> selectedHotelRooms;
     private List<Flight> selectedFlights;
-    private ListView fxCart;
+    ListView<Object> fxCart;
 
     public Cart() {
         selectedTours = new ArrayList<>(); // Initialize the list of selected tours
@@ -37,7 +38,7 @@ public class Cart {
         return totalAmount;
 
     }
-
+    /*
     private void updateTotalAmount() {
         if (selectedRoom != null) {
             totalAmount += selectedRoom.getPrice();
@@ -50,24 +51,64 @@ public class Cart {
         }
     }
 
-    public void addHotelRoomToCart(HotelRoom room) {
+     */
+
+    public void addHotelRoomToCart(hotel.model.HotelRoom room, hotel.model.Hotel hotel) {
         selectedHotelRooms.add(room);
         selectedRoom = room;
-        totalAmount += room.getPrice();
+        selectedHotel = hotel;
+        //selectedHotel = hotel;
+        //totalAmount += room.getPrice();
+        updateTotalAmount();
     }
 
-    public List<HotelRoom> getSelectedHotelRooms() {
+    private void updateTotalAmount() {
+        if (selectedRoom != null) {
+            totalAmount += selectedRoom.getPrice();
+        }
+        if (selectedFlight != null) {
+            totalAmount += selectedFlight.getPrice();
+        }
+    }
+
+    public List<hotel.model.HotelRoom> getSelectedHotelRooms() {
         return selectedHotelRooms;
     }
 
-    public void setSelectedHotelRoom(HotelRoom room) {
-        selectedRoom = room;
+    public void setSelectedHotel(hotel.model.Hotel hotel) {
+        selectedHotel = hotel;
     }
 
-    public void removeSelectedHotelRoom(HotelRoom room) {
+    public hotel.model.HotelRoom getSelectedHotelRoom() {
+        return selectedRoom;
+    }
+
+    public void setSelectedHotelRoom(hotel.model.HotelRoom room) {
+        selectedRoom = room;
+        updateTotalAmount();
+    }
+
+    public void removeSelectedHotelRoom(hotel.model.HotelRoom room, hotel.model.Hotel hotel) {
         totalAmount -= room.getPrice();
         selectedHotelRooms.remove(room);
+
+        if (selectedHotelRooms.isEmpty()) {
+            selectedHotel = null;
+            selectedRoom = null;
+        } else {
+            selectedRoom = selectedHotelRooms.get(0);
+
+        }
     }
+
+    public hotel.model.Hotel getSelectedHotel() {
+        return selectedHotel;
+    }
+
+    // public void removeSelectedHotelRoom(HotelRoom room) {
+    //   totalAmount -= room.getPrice();
+    // selectedHotelRooms.remove(room);
+    // }
 
     public void addFlightToCart(Flight flight) {
         selectedFlights.add(flight);
@@ -105,8 +146,9 @@ public class Cart {
     }
 
     public void emptyCart() {
-        selectedRoom = null;
-        selectedFlight = null;
+        selectedHotel = null;
+        selectedHotelRooms.clear();
+        selectedFlights.clear();
         selectedTours.clear();
         totalAmount = 0;
     }
