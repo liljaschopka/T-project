@@ -30,6 +30,7 @@ public class HotelsView {
     private HotelControllerListMock hotelControllerListMock;
     private PackageController packageController;
     private Cart cart;
+    private CartView cartView;
 
     public HotelsView() {
         hotelController = new hotel.controller.HotelController();
@@ -40,6 +41,7 @@ public class HotelsView {
 
     @FXML
     public void initialize() {
+
         setupHotelListView();
         List<hotel.model.Hotel> hotels = packageController.findAvailableHotels(hotelController);
         // List<Hotel> hotels = packageController.findAvailableHotels(hotelControllerListMock);
@@ -92,12 +94,14 @@ public class HotelsView {
         });
     }
 
+
     @FXML
     private void fxAddToCartHandler(ActionEvent event) {
         hotel.model.HotelRoom selectedRoom = fxHotelRoomsList.getSelectionModel().getSelectedItem();
         hotel.model.Hotel selectedHotel = fxHotelsList.getSelectionModel().getSelectedItem();
         if (selectedRoom != null) {
             cart.addHotelRoomToCart(selectedRoom, selectedHotel);
+            //cart.addHotelRoomToCart(selectedRoom);
             cart.setSelectedHotel(selectedHotel);
         }
         Alert infoAlert = new Alert(Alert.AlertType.INFORMATION);

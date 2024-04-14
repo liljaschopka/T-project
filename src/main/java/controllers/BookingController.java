@@ -24,7 +24,7 @@ import java.util.Optional;
 public class BookingController {
 
     public void createHotelBooking(User user, Cart cart, LocalDate checkIn, LocalDate checkOut, int persons) {
-        hotel.controller.HotelController hotelController = new hotel.controller.HotelController();
+        //hotel.controller.HotelController hotelController = new hotel.controller.HotelController();
 
         List<hotel.model.HotelRoom> selectedHotelRooms = cart.getSelectedHotelRooms();
         hotel.model.Hotel selectedHotel = cart.getSelectedHotel();

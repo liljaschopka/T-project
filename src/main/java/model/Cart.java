@@ -1,6 +1,7 @@
 package model;
 
 import daytrip.model.Tour;
+import javafx.scene.control.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,12 +19,14 @@ import java.util.List;
 public class Cart {
 
     private hotel.model.Hotel selectedHotel;
+    private hotel.model.HotelRoom selectedRoom;
     private Flight selectedFlight;
     private Tour selectedTour;
     private int totalAmount;
     private List<Tour> selectedTours;
     private List<hotel.model.HotelRoom> selectedHotelRooms;
     private List<Flight> selectedFlights;
+    ListView<Object> fxCart;
 
     public Cart() {
         selectedTours = new ArrayList<>(); // Initialize the list of selected tours
@@ -52,8 +55,20 @@ public class Cart {
 
     public void addHotelRoomToCart(hotel.model.HotelRoom room, hotel.model.Hotel hotel) {
         selectedHotelRooms.add(room);
+        selectedRoom = room;
         selectedHotel = hotel;
-        totalAmount += room.getPrice();
+        //selectedHotel = hotel;
+        //totalAmount += room.getPrice();
+        updateTotalAmount();
+    }
+
+    private void updateTotalAmount() {
+        if (selectedRoom != null) {
+            totalAmount += selectedRoom.getPrice();
+        }
+        if (selectedFlight != null) {
+            totalAmount += selectedFlight.getPrice();
+        }
     }
 
     public List<hotel.model.HotelRoom> getSelectedHotelRooms() {
@@ -64,14 +79,36 @@ public class Cart {
         selectedHotel = hotel;
     }
 
+    public hotel.model.HotelRoom getSelectedHotelRoom() {
+        return selectedRoom;
+    }
+
+    public void setSelectedHotelRoom(hotel.model.HotelRoom room) {
+        selectedRoom = room;
+        updateTotalAmount();
+    }
+
+    public void removeSelectedHotelRoom(hotel.model.HotelRoom room, hotel.model.Hotel hotel) {
+        totalAmount -= room.getPrice();
+        selectedHotelRooms.remove(room);
+
+        if (selectedHotelRooms.isEmpty()) {
+            selectedHotel = null;
+            selectedRoom = null;
+        } else {
+            selectedRoom = selectedHotelRooms.get(0);
+
+        }
+    }
+
     public hotel.model.Hotel getSelectedHotel() {
         return selectedHotel;
     }
 
-    public void removeSelectedHotelRoom(HotelRoom room) {
-        totalAmount -= room.getPrice();
-        selectedHotelRooms.remove(room);
-    }
+    // public void removeSelectedHotelRoom(HotelRoom room) {
+    //   totalAmount -= room.getPrice();
+    // selectedHotelRooms.remove(room);
+    // }
 
     public void addFlightToCart(Flight flight) {
         selectedFlights.add(flight);

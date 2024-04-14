@@ -21,7 +21,7 @@ public class Hotel {
     private String description;
     private String picture;
 
-    public Hotel(String name, String location, String address, String picture, String description, List<HotelRoom> rooms){
+    public Hotel(String name, String location, String address, String picture, String description, List<HotelRoom> rooms) {
         this.rooms = rooms;
         this.address = address;
         this.location = location;
@@ -30,15 +30,15 @@ public class Hotel {
         this.picture = picture;
     }
 
-    public void setRooms(List<HotelRoom> rooms){
+    public void setRooms(List<HotelRoom> rooms) {
         this.rooms = rooms;
     }
 
-    public String getName(){
-        return this.name;
+    public String getName() {
+        return name;
     }
 
-    public String getAddress(){
+    public String getAddress() {
         return this.address;
     }
 
@@ -49,4 +49,5 @@ public class Hotel {
     public List<HotelRoom> getRooms() {
         return this.rooms;
     }
+
 }
