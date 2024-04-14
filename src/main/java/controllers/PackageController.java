@@ -2,7 +2,11 @@ package controllers;
 
 import daytrip.controller.TourController;
 import daytrip.model.Tour;
-import model.*;
+import hotel.controller.HotelController;
+import model.Cart;
+import model.Flight;
+import model.PaymentInfo;
+import model.User;
 
 import java.time.LocalDate;
 import java.util.Collections;
@@ -73,7 +77,7 @@ public class PackageController {
     }*/
 
     //þurfti að breyta findavailablehotels aðeins svo ég gæti keyrt með tóman lista af hotelum:
-    public List<Hotel> findAvailableHotels(HotelControllerInterface hotelController) {
+    public List<hotel.model.Hotel> findAvailableHotels(HotelController hotelController) {
         if (!validDates(checkIn, checkOut)) {
             System.out.println("Invalid dates provided");
             return Collections.emptyList();
@@ -84,7 +88,7 @@ public class PackageController {
             return Collections.emptyList();
         }
 
-        List<Hotel> hotels = hotelController.searchForHotels(destination, checkIn, checkOut, persons);
+        List<hotel.model.Hotel> hotels = hotelController.getHotels(destination);
 
         if (hotels == null || hotels.isEmpty()) {
             System.out.println("No hotels found for the specified criteria");
@@ -97,8 +101,8 @@ public class PackageController {
     }
 
 
-    public List<HotelRoom> getAvailableRooms(Hotel hotel, HotelControllerInterface hotelController) {
-        List<HotelRoom> availableRooms = hotelController.getAvailableRooms(hotel, persons);
+    public List<hotel.model.HotelRoom> getAvailableRooms(hotel.model.Hotel hotel, HotelController hotelController) {
+        List<hotel.model.HotelRoom> availableRooms = hotelController.getAvailableRooms(hotel, checkIn, checkOut);
 
         if (availableRooms.isEmpty()) {
             throw new IllegalArgumentException("No rooms found");
@@ -118,7 +122,7 @@ public class PackageController {
         }
 
         //það þarf að útfæra searchflight aðferðina
-        List<Flight> flights = flightController.searchFlight(origin, destination, checkIn, checkOut, persons);
+        List<Flight> flights = flightController.searchFlight(origin, destination, checkIn);
 
         if (flights.isEmpty()) {
             throw new IllegalArgumentException("No flights found");
@@ -152,7 +156,7 @@ public class PackageController {
 
     public void createBooking(BookingController bookingController) {
         if (user != null && !cart.isCartEmpty()) {
-            bookingController.createHotelBooking(user, cart);
+            bookingController.createHotelBooking(user, cart, checkIn, checkOut, persons);
             bookingController.createFlightBooking(user, cart);
             bookingController.createDayTripBooking(user, cart);
         } else

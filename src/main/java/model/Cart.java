@@ -1,7 +1,6 @@
 package model;
 
 import daytrip.model.Tour;
-import javafx.scene.control.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,14 +17,13 @@ import java.util.List;
  *****************************************************************************/
 public class Cart {
 
-    private HotelRoom selectedRoom;
+    private hotel.model.Hotel selectedHotel;
     private Flight selectedFlight;
     private Tour selectedTour;
     private int totalAmount;
     private List<Tour> selectedTours;
-    private List<HotelRoom> selectedHotelRooms;
+    private List<hotel.model.HotelRoom> selectedHotelRooms;
     private List<Flight> selectedFlights;
-    private ListView fxCart;
 
     public Cart() {
         selectedTours = new ArrayList<>(); // Initialize the list of selected tours
@@ -37,7 +35,7 @@ public class Cart {
         return totalAmount;
 
     }
-
+    /*
     private void updateTotalAmount() {
         if (selectedRoom != null) {
             totalAmount += selectedRoom.getPrice();
@@ -50,18 +48,24 @@ public class Cart {
         }
     }
 
-    public void addHotelRoomToCart(HotelRoom room) {
+     */
+
+    public void addHotelRoomToCart(hotel.model.HotelRoom room, hotel.model.Hotel hotel) {
         selectedHotelRooms.add(room);
-        selectedRoom = room;
+        selectedHotel = hotel;
         totalAmount += room.getPrice();
     }
 
-    public List<HotelRoom> getSelectedHotelRooms() {
+    public List<hotel.model.HotelRoom> getSelectedHotelRooms() {
         return selectedHotelRooms;
     }
 
-    public void setSelectedHotelRoom(HotelRoom room) {
-        selectedRoom = room;
+    public void setSelectedHotel(hotel.model.Hotel hotel) {
+        selectedHotel = hotel;
+    }
+
+    public hotel.model.Hotel getSelectedHotel() {
+        return selectedHotel;
     }
 
     public void removeSelectedHotelRoom(HotelRoom room) {
@@ -105,8 +109,9 @@ public class Cart {
     }
 
     public void emptyCart() {
-        selectedRoom = null;
-        selectedFlight = null;
+        selectedHotel = null;
+        selectedHotelRooms.clear();
+        selectedFlights.clear();
         selectedTours.clear();
         totalAmount = 0;
     }

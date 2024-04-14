@@ -6,7 +6,7 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox stylesheets="@stylesheets/lists.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.UserAreaController">
+<VBox stylesheets="@stylesheets/lists.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tproject.UserAreaController">
     <padding>
         <Insets bottom="20" left="20" right="20" top="20" />
     </padding>
