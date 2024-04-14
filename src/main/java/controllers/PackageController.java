@@ -2,6 +2,7 @@ package controllers;
 
 import daytrip.controller.TourController;
 import daytrip.model.Tour;
+import flight.FlightInventory;
 import hotel.controller.HotelController;
 import model.Cart;
 import model.Flight;
@@ -113,113 +114,118 @@ public class PackageController {
         return availableRooms;
     }
 
-    public List<Flight> findAvailableFlights(FlightController flightController) {
+    public List<Flight> findAvailableFlights(FlightInventory flightInventory) {
         if (!validDates(checkIn, checkOut)) {
             throw new IllegalArgumentException("Invalid dates");
         }
         if (!validODP(origin, destination, persons)) {
             throw new IllegalArgumentException("Invalid origin, destination or persons");
         }
+
+        List<Flight> departure = flightInventory.searchFlight(origin, destination, checkIn);
+        List<Flight> arrival = flightInventory.searchFlight(origin, destination, checkOut);
 
         //það þarf að útfæra searchflight aðferðina
-        List<Flight> flights = flightController.searchFlight(origin, destination, checkIn);
+        List<Flight> flights = flightInventory.searchFlight(origin, destination, checkIn);
 
         if (flights.isEmpty()) {
-            throw new IllegalArgumentException("No flights found");
+            if (departure.isEmpty() || arrival.isEmpty()) {
+                throw new IllegalArgumentException("No flights found");
+            }
+
+            departure.sort(Comparator.comparingInt(Flight::getPrice));
+            arrival.sort(Comparator.comparingInt(Flight::getPrice));
+
+            //Vantar að skila 2 listum?
+            return departure;
         }
 
-        flights.sort(Comparator.comparingInt(Flight::getPrice));
+        public List<Tour> findAvailableDayTrips (TourController tourController){
+            if (!validDates(checkIn, checkOut)) {
+                throw new IllegalArgumentException("Invalid dates");
+            }
+            if (!validODP(origin, destination, persons)) {
+                throw new IllegalArgumentException("Invalid origin, destination or persons");
+            }
 
-        return flights;
+            List<Tour> foundTours = tourController.searchTours(destination, checkIn, checkOut, persons);
 
-    }
+            if (foundTours.isEmpty()) {
+                throw new IllegalArgumentException("No daytrips found");
+            }
 
-    public List<Tour> findAvailableDayTrips(TourController tourController) {
-        if (!validDates(checkIn, checkOut)) {
-            throw new IllegalArgumentException("Invalid dates");
+            foundTours.sort(Comparator.comparingDouble(Tour::getPrice));
+
+            return foundTours;
+
         }
-        if (!validODP(origin, destination, persons)) {
-            throw new IllegalArgumentException("Invalid origin, destination or persons");
+
+        public void createBooking (BookingController bookingController){
+            if (user != null && !cart.isCartEmpty()) {
+                bookingController.createHotelBooking(user, cart, checkIn, checkOut, persons);
+                bookingController.createFlightBooking(user, cart);
+                bookingController.createDayTripBooking(user, cart);
+            } else
+                throw new IllegalArgumentException("You have to be logged in to make a booking");
+
         }
 
-        List<Tour> foundTours = tourController.searchTours(destination, checkIn, checkOut, persons);
-
-        if (foundTours.isEmpty()) {
-            throw new IllegalArgumentException("No daytrips found");
+        public void clearSelection () {
+            cart.emptyCart();
+            origin = null;
+            destination = null;
+            checkIn = null;
+            checkOut = null;
+            persons = 0;
+            // user = null; viljum við þetta?
         }
 
-        foundTours.sort(Comparator.comparingDouble(Tour::getPrice));
+        public int getPersons () {
+            return persons;
+        }
 
-        return foundTours;
+        public LocalDate getCheckIn () {
+            return checkIn;
+        }
 
+        public LocalDate getCheckOut () {
+            return checkOut;
+        }
+
+        public String getOrigin () {
+            return origin;
+        }
+
+        public String getDestination () {
+            return destination;
+        }
+
+        public Cart getCart () {
+            return cart;
+        }
+
+        public User getUser () {
+            return user;
+        }
+
+        public void setCheckIn (LocalDate checkIn){
+            this.checkIn = checkIn;
+        }
+
+        public void setCheckOut (LocalDate checkOut){
+            this.checkOut = checkOut;
+        }
+
+        public void setDestination (String destination){
+            this.destination = destination;
+        }
+
+        public void setOrigin (String origin){
+            this.origin = origin;
+        }
+
+        public void setPersons ( int persons){
+            this.persons = persons;
+        }
     }
-
-    public void createBooking(BookingController bookingController) {
-        if (user != null && !cart.isCartEmpty()) {
-            bookingController.createHotelBooking(user, cart, checkIn, checkOut, persons);
-            bookingController.createFlightBooking(user, cart);
-            bookingController.createDayTripBooking(user, cart);
-        } else
-            throw new IllegalArgumentException("You have to be logged in to make a booking");
-
-    }
-
-    public void clearSelection() {
-        cart.emptyCart();
-        origin = null;
-        destination = null;
-        checkIn = null;
-        checkOut = null;
-        persons = 0;
-        // user = null; viljum við þetta?
-    }
-
-    public int getPersons() {
-        return persons;
-    }
-
-    public LocalDate getCheckIn() {
-        return checkIn;
-    }
-
-    public LocalDate getCheckOut() {
-        return checkOut;
-    }
-
-    public String getOrigin() {
-        return origin;
-    }
-
-    public String getDestination() {
-        return destination;
-    }
-
-    public Cart getCart() {
-        return cart;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setCheckIn(LocalDate checkIn) {
-        this.checkIn = checkIn;
-    }
-
-    public void setCheckOut(LocalDate checkOut) {
-        this.checkOut = checkOut;
-    }
-
-    public void setDestination(String destination) {
-        this.destination = destination;
-    }
-
-    public void setOrigin(String origin) {
-        this.origin = origin;
-    }
-
-    public void setPersons(int persons) {
-        this.persons = persons;
-    }
-}
 
