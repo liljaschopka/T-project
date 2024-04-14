@@ -6,10 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="f7df97bd-a9f0-419d-91ae-3e77b6e46efb" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tproject/FlightsView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tproject/FlightsView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/FlightController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/FlightController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/flight/FlightController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/PackageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/PackageController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

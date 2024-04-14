@@ -2,6 +2,7 @@ package controllers;
 
 import daytrip.controller.TourController;
 import daytrip.model.Tour;
+import flight.FlightInventory;
 import model.*;
 
 import java.time.LocalDate;
@@ -109,25 +110,26 @@ public class PackageController {
         return availableRooms;
     }
 
-    public List<Flight> findAvailableFlights(FlightController flightController) {
+    public List<Flight> findAvailableFlights(FlightInventory flightInventory) {
         if (!validDates(checkIn, checkOut)) {
             throw new IllegalArgumentException("Invalid dates");
         }
         if (!validODP(origin, destination, persons)) {
             throw new IllegalArgumentException("Invalid origin, destination or persons");
         }
+        
+        List<Flight> departure = flightInventory.searchFlight(origin, destination, checkIn);
+        List<Flight> arrival = flightInventory.searchFlight(origin, destination, checkOut);
 
-        //það þarf að útfæra searchflight aðferðina
-        List<Flight> flights = flightController.searchFlight(origin, destination, checkIn, checkOut, persons);
-
-        if (flights.isEmpty()) {
+        if (departure.isEmpty() || arrival.isEmpty()) {
             throw new IllegalArgumentException("No flights found");
         }
 
-        flights.sort(Comparator.comparingInt(Flight::getPrice));
+        departure.sort(Comparator.comparingInt(Flight::getPrice));
+        arrival.sort(Comparator.comparingInt(Flight::getPrice));
 
-        return flights;
-
+        //Vantar að skila 2 listum?
+        return departure;
     }
 
     public List<Tour> findAvailableDayTrips(TourController tourController) {
