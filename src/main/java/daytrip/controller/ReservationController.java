@@ -5,8 +5,8 @@ import daytrip.model.Tour;
 import daytrip.repository.ReservationInterface;
 
 import java.time.LocalDate;
-import java.util.Optional;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Controls the reservation processes, interacting with both the reservation and tour data access layers.
@@ -29,19 +29,19 @@ public class ReservationController {
     /**
      * Attempts to make a new reservation.
      *
-     * @param tourID The ID of the tour to book.
-     * @param customerName The name of the customer making the reservation.
-     * @param customerEmail The email of the customer.
-     * @param date The date for the reservation.
+     * @param tourID               The ID of the tour to book.
+     * @param customerName         The name of the customer making the reservation.
+     * @param customerEmail        The email of the customer.
+     * @param date                 The date for the reservation.
      * @param numberOfParticipants The number of participants for the reservation.
-     * @param customerPhoneNumber An optional phone number of the customer.
+     * @param customerPhoneNumber  An optional phone number of the customer.
      * @return true if the reservation was successfully made, false otherwise.
      */
     public boolean makeReservation(Integer tourID, String customerName, String customerEmail, LocalDate date, int numberOfParticipants, Optional<String> customerPhoneNumber) {
         if (tourID == null || date == null || customerName == null || customerEmail == null || numberOfParticipants <= 0) {
             throw new IllegalArgumentException("Invalid booking information provided.");
         }
-        if (tourController.bookTour(tourID, date, numberOfParticipants, customerName, customerEmail, customerPhoneNumber)){
+        if (tourController.bookTour(tourID, date, numberOfParticipants, customerName, customerEmail, customerPhoneNumber)) {
             return reservationDAL.makeReservation(tourID, customerName, customerEmail, numberOfParticipants, date);
         }
         return false;
@@ -64,9 +64,9 @@ public class ReservationController {
     /**
      * Updates the details of an existing reservation.
      *
-     * @param reservationID The ID of the reservation to update.
+     * @param reservationID        The ID of the reservation to update.
      * @param numberOfParticipants The new number of participants.
-     * @param date The new date for the reservation.
+     * @param date                 The new date for the reservation.
      * @return true if the update was successful, false otherwise.
      */
     public boolean updateReservation(Integer reservationID, int numberOfParticipants, LocalDate date) {
@@ -117,7 +117,7 @@ public class ReservationController {
      *
      * @return A list of all reservations.
      */
-    public List<Reservation> getAllReservations(){
+    public List<Reservation> getAllReservations() {
         return reservationDAL.getAllReservations();
     }
 
@@ -144,7 +144,7 @@ public class ReservationController {
      */
     public List<Reservation> getReservationsByCustomerId(Integer customerId) {
         if (customerId == null) {
-            throw new NullPointerException("Customer ID cannot be null");
+            throw new NullPointerException("Customer ID cannot be null, customerID:" + customerId);
         }
         return reservationDAL.getReservationsByCustomerId(customerId);
     }

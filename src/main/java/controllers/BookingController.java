@@ -98,7 +98,7 @@ public class BookingController {
             if (success) {
                 System.out.println("Daytrip booking successful.");
                 // bæta bookingID við BookingIds hjá user
-                user.addBookingId(String.valueOf(daytripId));
+                // user.addBookingId(String.valueOf(daytripId));
             } else {
                 System.out.println("Daytrip booking failed. Please try again or check the tour availability.");
             }
@@ -110,10 +110,18 @@ public class BookingController {
     }
 
     public List<flight.Booking> findFlightBookings(User user) {
+        System.out.println("User ID: " + user.getId());
+        if (user.getId() == null) {
+            return null;
+        }
         return flightBookingController.searchBookingsByUserID(user.getId());
     }
 
     public List<Reservation> findDaytripBookings(User user) {
+        System.out.println("User ID: " + user.getId());
+        if (user.getId() == null) {
+            return null;
+        }
         return reservationController.getReservationsByCustomerId(user.getId());
     }
 
@@ -125,7 +133,7 @@ public class BookingController {
 
     }
 
-    public void cancelDaytripBooking(String bookingID) {
-
+    public void cancelDaytripBooking(Reservation reservation) {
+        reservationController.cancelReservation(reservation.getReservationID());
     }
 }
