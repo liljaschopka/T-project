@@ -177,13 +177,13 @@ public class CartView {
         //selectedHotel = null;
         // }
         for (Flight flight : cart.getSelectedFlights()) {
-            fxCart.getItems().add("Flight: " + flight.getFlightDetails() + " Price: $" + flight.getPrice());
+            fxCart.getItems().add("Flight: " + flight.getFlightDetails() + " Price: " + flight.getPrice() + " ISK");
         }
         for (Tour tour : cart.getSelectedTours()) {
-            fxCart.getItems().add("Tour: " + tour.getName() + " Price: $" + tour.getPrice());
+            fxCart.getItems().add("Tour: " + tour.getName() + " Price: " + tour.getPrice() + " ISK");
         }
 
-        fxTotalPrice.setText("Total: $" + cart.getTotalAmount()); // Update total price
+        fxTotalPrice.setText("Total: " + cart.getTotalAmount() + " ISK"); // Update total price
     }
 
 }
