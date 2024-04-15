@@ -138,7 +138,6 @@ public class CartView {
         } else if (selected.startsWith("Flight:")) {
             String idStr = selected.substring(selected.indexOf("FlightID: ") + "FlightID: ".length(), selected.indexOf(",", selected.indexOf("FlightID: ")));
             int flightID = Integer.parseInt(idStr.trim());
-            System.out.println(flightID);
 
             Flight flightToRemove = null;
             for (Flight flight : cart.getSelectedFlights()) {
@@ -148,7 +147,9 @@ public class CartView {
                 }
             }
 
-            cart.removeSelectedFlight(flightToRemove);
+            if (flightToRemove != null) {
+                cart.removeSelectedFlight(flightToRemove);
+            }
         } else if (selected.startsWith("Tour:")) {
             // Identify the tour to remove
             String tourDescription = selected.substring(selected.indexOf(":") + 2, selected.indexOf("Price") - 1);
@@ -201,7 +202,7 @@ public class CartView {
             fxCart.getItems().add("Tour: " + tour.getName() + " Price: " + tour.getPrice() + " ISK");
         }
 
-        fxTotalPrice.setText("Total: " + cart.getTotalAmount() + " ISK"); // Update total price
+        fxTotalPrice.setText("Total: " + packageController.calculateTotalPrice() + " ISK"); // Update total price
     }
 
 }
