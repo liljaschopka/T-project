@@ -107,9 +107,11 @@ public class FlightsView {
     @FXML
     private void fxAddToCartHandler(ActionEvent event) {
         //Placeholder
-        Flight selectedFlight = fxDepartureList.getSelectionModel().getSelectedItem();
-        if (selectedFlight != null) {
-            cart.addFlightToCart(selectedFlight);
+        Flight selectedDeparture = fxDepartureList.getSelectionModel().getSelectedItem();
+        Flight selectedArrival = fxArrivalList.getSelectionModel().getSelectedItem();
+        if (selectedDeparture != null || selectedArrival != null) {
+            cart.addFlightToCart(selectedDeparture);
+            cart.addFlightToCart(selectedArrival);
         }
     }
 
