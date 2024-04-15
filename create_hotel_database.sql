@@ -55,10 +55,9 @@ INSERT INTO Hotel VALUES(
     'AK-HOTEL',
     'Akureyri',
     'Borgarbraut 3',
-    'vantar/upplýsingar/um/url',
+    'src/main/resources/com/example/tproject/myndir/AK-Hotel.png',
     'Frábært hótel á flottum stað'
     );
-
 INSERT INTO Room VALUES(
     'AK-HOTEL',
     'Borgarbraut 3',
@@ -66,7 +65,7 @@ INSERT INTO Room VALUES(
     2,
     1,
     6000,
-    'vantar/upplýsingar/um/url'
+    'src/main/resources/com/example/tproject/myndir/Akureyriherb.png'
 );
 INSERT INTO Room VALUES(
     'AK-HOTEL',
@@ -75,7 +74,7 @@ INSERT INTO Room VALUES(
     3,
     1,
     8000,
-    'vantar/upplýsingar/um/url'
+    'src/main/resources/com/example/tproject/myndir/Akureyriherb.png'
 );
 INSERT INTO Room VALUES(
     'AK-HOTEL',
@@ -84,7 +83,7 @@ INSERT INTO Room VALUES(
     3,
     1,
     8500,
-    'vantar/upplýsingar/um/url'
+    'src/main/resources/com/example/tproject/myndir/Akureyriherb.png'
 );
 
 
@@ -92,7 +91,7 @@ INSERT INTO Hotel VALUES(
     'Klett-Hotel',
     'Akureyri',
     'Klettaborg 28',
-    'vantar/upplýsingar/um/url',
+    'src/main/resources/com/example/tproject/myndir/AK-Klett-Hotel.png',
     'Frábært hótel á flottum stað'
     );
 
@@ -103,7 +102,7 @@ INSERT INTO Room VALUES(
     3,
     1,
     9500,
-    'vantar/upplýsingar/um/url'
+    'src/main/resources/com/example/tproject/myndir/Akureyriherb.png'
 );
 INSERT INTO Room VALUES(
     'Klett-Hotel',
@@ -112,7 +111,7 @@ INSERT INTO Room VALUES(
     3,
     2,
     8500,
-    'vantar/upplýsingar/um/url'
+    'src/main/resources/com/example/tproject/myndir/Akureyriherb.png'
 );
 INSERT INTO Room VALUES(
     'Klett-Hotel',
@@ -121,7 +120,7 @@ INSERT INTO Room VALUES(
     2,
     2,
     7500,
-    'vantar/upplýsingar/um/url'
+    'src/main/resources/com/example/tproject/myndir/Akureyriherb.png'
 );
 
 
@@ -129,7 +128,7 @@ INSERT INTO Hotel VALUES(
     'Gull Borgir',
     'Akureyri',
     'Norðurslóð 17',
-    'vantar/upplýsingar/um/url',
+    'src/main/resources/com/example/tproject/myndir/AK-Gullborgir-Hotel.png',
     'Frábært hótel á flottum stað'
     );
 INSERT INTO Room VALUES(
@@ -139,7 +138,7 @@ INSERT INTO Room VALUES(
     2,
     2,
     7500,
-    'vantar/upplýsingar/um/url'
+    'src/main/resources/com/example/tproject/myndir/Akureyriherb.png'
 );
 INSERT INTO Room VALUES(
     'Gull Borgir',
@@ -148,7 +147,7 @@ INSERT INTO Room VALUES(
     2,
     2,
     7500,
-    'vantar/upplýsingar/um/url'
+    'src/main/resources/com/example/tproject/myndir/Akureyriherb.png'
 );
 INSERT INTO Room VALUES(
     'Gull Borgir',
@@ -157,7 +156,7 @@ INSERT INTO Room VALUES(
     1,
     3,
     5000,
-    'vantar/upplýsingar/um/url'
+    'src/main/resources/com/example/tproject/myndir/Akureyriherb.png'
 );
 
 --Reykjavík
@@ -165,7 +164,7 @@ INSERT INTO Hotel VALUES(
     'Klett-Hotel',
     'Reykjavík',
     'Laugavegur 103',
-    'vantar/upplýsingar/um/url',
+    'src/main/resources/com/example/tproject/myndir/RVK-Klett-Hotel.png',
     'Frábært hótel á flottum stað'
     );
 INSERT INTO Room VALUES(
@@ -175,7 +174,7 @@ INSERT INTO Room VALUES(
     2,
     5,
     8000,
-    'vantar/upplýsingar/um/url'
+    'src/main/resources/com/example/tproject/myndir/RVK-herbergi.png'
 );
 INSERT INTO Room VALUES(
     'Klett-Hotel',
@@ -184,7 +183,7 @@ INSERT INTO Room VALUES(
     2,
     5,
     8000,
-    'vantar/upplýsingar/um/url'
+    'src/main/resources/com/example/tproject/myndir/RVK-herbergi.png'
 );
 INSERT INTO Room VALUES(
     'Klett-Hotel',
@@ -193,14 +192,14 @@ INSERT INTO Room VALUES(
     2,
     6,
     8000,
-    'vantar/upplýsingar/um/url'
+    'src/main/resources/com/example/tproject/myndir/RVK-herbergi.png'
 );
 
 INSERT INTO Hotel VALUES(
     'Royal Hotel',
     'Reykjavík',
     'Síðumúli 33',
-    'vantar/upplýsingar/um/url',
+    'src/main/resources/com/example/tproject/myndir/RVK-Royal-Hotel.png',
     'Frábært hótel á flottum stað'
     );
 INSERT INTO Room VALUES(
@@ -210,7 +209,7 @@ INSERT INTO Room VALUES(
     2,
     3,
     10000,
-    'vantar/upplýsingar/um/url'
+    'src/main/resources/com/example/tproject/myndir/RVK-herbergi.png'
 );
 INSERT INTO Room VALUES(
     'Royal Hotel',
@@ -219,7 +218,7 @@ INSERT INTO Room VALUES(
     2,
     3,
     10000,
-    'vantar/upplýsingar/um/url'
+    'src/main/resources/com/example/tproject/myndir/RVK-herbergi.png'
 );
 INSERT INTO Room VALUES(
     'Royal Hotel',
@@ -228,7 +227,7 @@ INSERT INTO Room VALUES(
     2,
     3,
     10000,
-    'vantar/upplýsingar/um/url'
+    'src/main/resources/com/example/tproject/myndir/RVK-herbergi.png'
 );
 INSERT INTO Room VALUES(
     'Royal Hotel',
@@ -237,7 +236,7 @@ INSERT INTO Room VALUES(
     2,
     2,
     11000,
-    'vantar/upplýsingar/um/url'
+    'src/main/resources/com/example/tproject/myndir/RVK-herbergi.png'
 );
 INSERT INTO Room VALUES(
     'Royal Hotel',
@@ -246,14 +245,14 @@ INSERT INTO Room VALUES(
     2,
     2,
     11000,
-    'vantar/upplýsingar/um/url'
+    'src/main/resources/com/example/tproject/myndir/RVK-herbergi.png'
 );
 
 INSERT INTO Hotel VALUES(
     'Rvk Living',
     'Reykjavík',
     'Baldursgata 3',
-    'vantar/upplýsingar/um/url',
+    'src/main/resources/com/example/tproject/myndir/RVK-Rvkliving-Hotel.png',
     'Frábært hótel á flottum stað'
     );
 
@@ -264,7 +263,7 @@ INSERT INTO Room VALUES(
     2,
     1,
     7000,
-    'vantar/upplýsingar/um/url'
+    'src/main/resources/com/example/tproject/myndir/RVK-herbergi.png'
 );
 INSERT INTO Room VALUES(
     'Rvk Living',
@@ -273,7 +272,7 @@ INSERT INTO Room VALUES(
     1,
     1,
     5000,
-    'vantar/upplýsingar/um/url'
+    'src/main/resources/com/example/tproject/myndir/RVK-herbergi.png'
 );
 INSERT INTO Room VALUES(
     'Rvk Living',
@@ -282,7 +281,7 @@ INSERT INTO Room VALUES(
     3,
     1,
     9000,
-    'vantar/upplýsingar/um/url'
+    'src/main/resources/com/example/tproject/myndir/RVK-herbergi.png'
 );
 
 --Ísafjörður
@@ -290,7 +289,7 @@ INSERT INTO Hotel VALUES(
     'Nature-Hotel',
     'Ísafjörður',
     'Tungubraut 12',
-    'vantar/upplýsingar/um/url',
+    'src/main/resources/com/example/tproject/myndir/ISA-Nature-Hotel.png',
     'Frábært hótel á flottum stað'
     );
 
@@ -301,7 +300,7 @@ INSERT INTO Room VALUES(
     2,
     1,
     8000,
-    'vantar/upplýsingar/um/url'
+    'src/main/resources/com/example/tproject/myndir/ISA-herbergi.png'
 );
 INSERT INTO Room VALUES(
     'Nature-Hotel',
@@ -310,7 +309,7 @@ INSERT INTO Room VALUES(
     2,
     1,
     8000,
-    'vantar/upplýsingar/um/url'
+    'src/main/resources/com/example/tproject/myndir/ISA-herbergi.png'
 );
 INSERT INTO Room VALUES(
     'Nature-Hotel',
@@ -319,14 +318,14 @@ INSERT INTO Room VALUES(
     3,
     1,
     10000,
-    'vantar/upplýsingar/um/url'
+    'src/main/resources/com/example/tproject/myndir/ISA-herbergi.png'
 );
 
 INSERT INTO Hotel VALUES(
     'Fjörður Sleephouse',
     'Ísafjörður',
     'Seljaland 1',
-    'vantar/upplýsingar/um/url',
+    'src/main/resources/com/example/tproject/myndir/ISA-FjordurSleephouse-Hotel.png',
     'Frábært hótel á flottum stað'
     );
 
@@ -337,7 +336,7 @@ INSERT INTO Room VALUES(
     1,
     1,
     3000,
-    'vantar/upplýsingar/um/url'
+    'src/main/resources/com/example/tproject/myndir/ISA-herbergi.png'
 );
 INSERT INTO Room VALUES(
     'Fjörður Sleephouse',
@@ -346,7 +345,7 @@ INSERT INTO Room VALUES(
     1,
     1,
     3000,
-    'vantar/upplýsingar/um/url'
+    'src/main/resources/com/example/tproject/myndir/ISA-herbergi.png'
 );
 INSERT INTO Room VALUES(
     'Fjörður Sleephouse',
@@ -355,7 +354,7 @@ INSERT INTO Room VALUES(
     1,
     1,
     3000,
-    'vantar/upplýsingar/um/url'
+    'src/main/resources/com/example/tproject/myndir/ISA-herbergi.png'
 );
 INSERT INTO Room VALUES(
     'Fjörður Sleephouse',
@@ -364,14 +363,14 @@ INSERT INTO Room VALUES(
     1,
     1,
     3000,
-    'vantar/upplýsingar/um/url'
+    'src/main/resources/com/example/tproject/myndir/ISA-herbergi.png'
 );
 
 INSERT INTO Hotel VALUES(
     'Iceland Experience',
     'Ísafjörður',
     'Holtabraut 5',
-    'vantar/upplýsingar/um/url',
+    'src/main/resources/com/example/tproject/myndir/ISA-IcelandExperience-Hotel.png',
     'Frábært hótel á flottum stað'
     );
 
@@ -382,7 +381,7 @@ INSERT INTO Room VALUES(
     3,
     1,
     8000,
-    'vantar/upplýsingar/um/url'
+    'src/main/resources/com/example/tproject/myndir/ISA-herbergi.png'
 );
 INSERT INTO Room VALUES(
     'Iceland Experience',
@@ -391,7 +390,7 @@ INSERT INTO Room VALUES(
     3,
     2,
     8000,
-    'vantar/upplýsingar/um/url'
+    'src/main/resources/com/example/tproject/myndir/ISA-herbergi.png'
 );
 INSERT INTO Room VALUES(
     'Iceland Experience',
@@ -400,7 +399,7 @@ INSERT INTO Room VALUES(
     3,
     2,
     8000,
-    'vantar/upplýsingar/um/url'
+    'src/main/resources/com/example/tproject/myndir/ISA-herbergi.png'
 );
 
 --Egilsstaðir
@@ -408,7 +407,7 @@ INSERT INTO Hotel VALUES(
     'Klett-Hotel',
     'Egilsstaðir',
     'Selás 9',
-    'vantar/upplýsingar/um/url',
+    'src/main/resources/com/example/tproject/myndir/EGI-Klett-Hotel.png',
     'Frábært hótel á flottum stað'
     );
 
@@ -419,7 +418,7 @@ INSERT INTO Room VALUES(
     4,
     1,
     10000,
-    'vantar/upplýsingar/um/url'
+    'src/main/resources/com/example/tproject/myndir/EGI-herbergi.png'
 );
 INSERT INTO Room VALUES(
     'Klett-Hotel',
@@ -428,7 +427,7 @@ INSERT INTO Room VALUES(
     4,
     1,
     10000,
-    'vantar/upplýsingar/um/url'
+    'src/main/resources/com/example/tproject/myndir/EGI-herbergi.png'
 );
 INSERT INTO Room VALUES(
     'Klett-Hotel',
@@ -437,7 +436,7 @@ INSERT INTO Room VALUES(
     4,
     2,
     10000,
-    'vantar/upplýsingar/um/url'
+    'src/main/resources/com/example/tproject/myndir/EGI-herbergi.png'
 );
 INSERT INTO Room VALUES(
     'Klett-Hotel',
@@ -446,14 +445,14 @@ INSERT INTO Room VALUES(
     4,
     2,
     10000,
-    'vantar/upplýsingar/um/url'
+    'src/main/resources/com/example/tproject/myndir/EGI-herbergi.png'
 );
 
 INSERT INTO Hotel VALUES(
     'Jötun Guesthouse',
     'Egilsstaðir',
     'Tjarnarbraut 15',
-    'vantar/upplýsingar/um/url',
+    'src/main/resources/com/example/tproject/myndir/EGI-JotunGuesthouse-Hotel.png',
     'Frábært hótel á flottum stað'
     );
 INSERT INTO Room VALUES(
@@ -463,7 +462,7 @@ INSERT INTO Room VALUES(
     3,
     1,
     7000,
-    'vantar/upplýsingar/um/url'
+    'src/main/resources/com/example/tproject/myndir/EGI-herbergi.png'
 );
 INSERT INTO Room VALUES(
     'Jötun Guesthouse',
@@ -472,7 +471,7 @@ INSERT INTO Room VALUES(
     3,
     1,
     7000,
-    'vantar/upplýsingar/um/url'
+    'src/main/resources/com/example/tproject/myndir/EGI-herbergi.png'
 );
 INSERT INTO Room VALUES(
     'Jötun Guesthouse',
@@ -481,14 +480,14 @@ INSERT INTO Room VALUES(
     2,
     2,
     6000,
-    'vantar/upplýsingar/um/url'
+    'src/main/resources/com/example/tproject/myndir/EGI-herbergi.png'
 );
 
 INSERT INTO Hotel VALUES(
     'Ice Cabins',
     'Egilsstaðir',
     'Kaupvangur 10',
-    'vantar/upplýsingar/um/url',
+    'src/main/resources/com/example/tproject/myndir/EGI-IceCabins-Hotel.png',
     'Frábært hótel á flottum stað'
     );
 
@@ -499,7 +498,7 @@ INSERT INTO Room VALUES(
     2,
     1,
     8000,
-    'vantar/upplýsingar/um/url'
+    'src/main/resources/com/example/tproject/myndir/EGI-herbergi.png'
 );
 INSERT INTO Room VALUES(
     'Ice Cabins',
@@ -508,7 +507,7 @@ INSERT INTO Room VALUES(
     1,
     1,
     5000,
-    'vantar/upplýsingar/um/url'
+    'src/main/resources/com/example/tproject/myndir/EGI-herbergi.png'
 );
 INSERT INTO Room VALUES(
     'Ice Cabins',
@@ -517,5 +516,5 @@ INSERT INTO Room VALUES(
     3,
     1,
     10000,
-    'vantar/upplýsingar/um/url'
+    'src/main/resources/com/example/tproject/myndir/EGI-herbergi.png'
 );
