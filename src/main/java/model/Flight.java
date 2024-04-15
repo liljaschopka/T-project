@@ -55,6 +55,16 @@ public class Flight {
         return false;
     }
 
+    public String getDepartureTime() {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+        return departureTime.format(dateTimeFormatter);
+    }
+
+    public String getArrivalTime() {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+        return arrivalTime.format(dateTimeFormatter);
+    }
+
     public LocalDate getDate() {
         return date;
     }

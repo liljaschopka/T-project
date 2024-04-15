@@ -1,15 +1,19 @@
 package controllers;
 
 import daytrip.controller.TourController;
+import daytrip.model.Reservation;
 import daytrip.model.Tour;
+import flight.Booking;
 import flight.FlightInventory;
 import hotel.controller.HotelController;
+import hotel.model.HotelRoom;
 import model.Cart;
 import model.Flight;
 import model.PaymentInfo;
 import model.User;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -31,6 +35,7 @@ public class PackageController {
     private LocalDate checkIn;
     private LocalDate checkOut;
     private int persons;
+    private int duration;
     private Cart cart = new Cart();
 
     public PackageController(User user, String origin, String destination,
@@ -41,6 +46,7 @@ public class PackageController {
         this.checkIn = checkIn;
         this.checkOut = checkOut;
         this.persons = persons;
+        this.duration = (int) ChronoUnit.DAYS.between(checkIn, checkOut);
     }
 
     private boolean validDates(LocalDate checkIn, LocalDate checkOut) {
@@ -114,7 +120,7 @@ public class PackageController {
         return availableRooms;
     }
 
-    public List<Flight> findAvailableFlights(FlightInventory flightInventory) {
+    public List<Flight> findAvailableDepartures(FlightInventory flightInventory) {
         if (!validDates(checkIn, checkOut)) {
             throw new IllegalArgumentException("Invalid dates");
         }
@@ -123,23 +129,36 @@ public class PackageController {
         }
 
         List<Flight> departure = flightInventory.searchFlight(origin, destination, checkIn);
-        List<Flight> arrival = flightInventory.searchFlight(origin, destination, checkOut);
 
-        //það þarf að útfæra searchflight aðferðina
-        List<Flight> flights = flightInventory.searchFlight(origin, destination, checkIn);
 
-        if (flights.isEmpty()) {
-            if (departure.isEmpty() || arrival.isEmpty()) {
-                throw new IllegalArgumentException("No flights found");
-            }
+        if (departure.isEmpty()) {
+            throw new IllegalArgumentException("No flights found");
         }
 
         departure.sort(Comparator.comparingInt(Flight::getPrice));
-        arrival.sort(Comparator.comparingInt(Flight::getPrice));
 
-        //Vantar að skila 2 listum?
         return departure;
     }
+
+    public List<Flight> findAvailableArrivals(FlightInventory flightInventory) {
+        if (!validDates(checkIn, checkOut)) {
+            throw new IllegalArgumentException("Invalid dates");
+        }
+        if (!validODP(origin, destination, persons)) {
+            throw new IllegalArgumentException("Invalid origin, destination or persons");
+        }
+
+        List<Flight> arrival = flightInventory.searchFlight(destination, origin, checkOut);
+
+        if (arrival.isEmpty()) {
+            throw new IllegalArgumentException("No flights found");
+        }
+
+        arrival.sort(Comparator.comparingInt(Flight::getPrice));
+
+        return arrival;
+    }
+
 
     public List<Tour> findAvailableDayTrips(TourController tourController) {
         if (!validDates(checkIn, checkOut)) {
@@ -169,6 +188,46 @@ public class PackageController {
         } else
             throw new IllegalArgumentException("You have to be logged in to make a booking");
 
+    }
+
+    public void addBookingIDsToUser(BookingController bookingController) {
+
+    }
+
+    public List<Reservation> findTourReservations(BookingController bookingController) {
+        return bookingController.findDaytripBookings(user);
+    }
+
+    public List<hotel.model.Booking> findHotelBookings(BookingController bookingController) {
+        return bookingController.findHotelBookings(user);
+    }
+
+    public List<Booking> findFlightBookings(BookingController bookingController) {
+        if (user != null) {
+            return bookingController.findFlightBookings(user);
+        } else
+            throw new IllegalArgumentException("You have to be logged in to see your reservations");
+    }
+
+    public int calculateTotalPrice() {
+        int result = 0;
+
+        List<Flight> flights = cart.getSelectedFlights();
+        for (Flight flight : flights) {
+            result += flight.getPrice() * persons;
+        }
+
+        List<Tour> tours = cart.getSelectedTours();
+        for (Tour tour : tours) {
+            result += tour.getPrice() * persons;
+        }
+
+        List<HotelRoom> rooms = cart.getSelectedHotelRooms();
+        for (HotelRoom room : rooms) {
+            result += room.getPrice() * duration;
+        }
+
+        return result;
     }
 
     public void clearSelection() {

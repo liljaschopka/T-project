@@ -39,6 +39,10 @@ public class HotelsView {
         hotelControllerListMock = new HotelControllerListMock();
     }
 
+    public hotel.controller.HotelController getHotelController() {
+        return hotelController;
+    }
+
     @FXML
     public void initialize() {
 

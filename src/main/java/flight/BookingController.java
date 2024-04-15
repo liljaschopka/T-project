@@ -59,12 +59,13 @@ public class BookingController {
         }
     }
 
-    public void searchBookingsByUserID(int userID) {
+    public List<Booking> searchBookingsByUserID(int userID) {
         List<Booking> userBookings = bookingInventory.getBookingsByUserID(userID);
         if (userBookings.isEmpty()) {
             System.out.println("Engar bókanir fundust fyrir notanda með ID: " + userID);
+            return null;
         } else {
-            userBookings.forEach(System.out::println);
+            return userBookings;
         }
     }
 

@@ -41,12 +41,15 @@ public class CartView {
     private DateSelectorView date;
 
 
-    private BookingController bookingController = new BookingController();
+    private static BookingController bookingController = new BookingController();
     private PackageController packageController = DateSelectorView.getPackageController();
     private Cart cart = packageController.getCart();
     private User user = packageController.getUser();
     private UserAreaController userAreaController;
 
+    public static BookingController getBookingController() {
+        return bookingController;
+    }
 
     public CartView() {
         // Initialize the date object
@@ -101,8 +104,10 @@ public class CartView {
 
     }
 
-    public void borga() {
+    private void borga() {
         User loggedInUser = packageController.getUser();
+        packageController.createBooking(bookingController);
+        packageController.clearSelection();
         Alert infoAlert = new Alert(Alert.AlertType.INFORMATION);
         infoAlert.setTitle(loggedInUser.getName());
         infoAlert.setHeaderText("Booking completed!");
@@ -127,10 +132,24 @@ public class CartView {
             cart.removeSelectedHotelRoom(room, hotel);
             //cart.setSelectedHotelRoom(null);
             //cart.setSelectedHotel(null);
+
+            List<hotel.model.HotelRoom> rooms = cart.getSelectedHotelRooms();
+
         } else if (selected.startsWith("Flight:")) {
-            List<Flight> flights = cart.getSelectedFlights();
-            // cart.removeSelectedFlight(flight);
-            cart.setSelectedFlight(null);
+            String idStr = selected.substring(selected.indexOf("FlightID: ") + "FlightID: ".length(), selected.indexOf(",", selected.indexOf("FlightID: ")));
+            int flightID = Integer.parseInt(idStr.trim());
+
+            Flight flightToRemove = null;
+            for (Flight flight : cart.getSelectedFlights()) {
+                if (flight.getFlightID() == flightID) {
+                    flightToRemove = flight;
+                    break;
+                }
+            }
+
+            if (flightToRemove != null) {
+                cart.removeSelectedFlight(flightToRemove);
+            }
         } else if (selected.startsWith("Tour:")) {
             // Identify the tour to remove
             String tourDescription = selected.substring(selected.indexOf(":") + 2, selected.indexOf("Price") - 1);
@@ -171,19 +190,19 @@ public class CartView {
         // if (selectedHotel != null) {
         for (hotel.model.HotelRoom hotelRoom : cart.getSelectedHotelRooms()) {
             hotel.model.Hotel selectedHotel = cart.getSelectedHotel();
-            fxCart.getItems().add("Room number: " + hotelRoom.getRoomNumber() + " in " + selectedHotel.getName() + ", price: " + hotelRoom.getPrice() + "$ per night");
+            fxCart.getItems().add("Room number: " + hotelRoom.getRoomNumber() + " in " + selectedHotel.getName() + ", price: " + hotelRoom.getPrice() + "$ISK per night");
             //selectedHotel = null;
         }
         //selectedHotel = null;
         // }
         for (Flight flight : cart.getSelectedFlights()) {
-            fxCart.getItems().add("Flight: " + flight.getFlightDetails() + " Price: $" + flight.getPrice());
+            fxCart.getItems().add("Flight: " + flight.getFlightDetails() + " Price: " + flight.getPrice() + " ISK");
         }
         for (Tour tour : cart.getSelectedTours()) {
-            fxCart.getItems().add("Tour: " + tour.getName() + " Price: $" + tour.getPrice());
+            fxCart.getItems().add("Tour: " + tour.getName() + " Price: " + tour.getPrice() + " ISK");
         }
 
-        fxTotalPrice.setText("Total: $" + cart.getTotalAmount()); // Update total price
+        fxTotalPrice.setText("Total: " + packageController.calculateTotalPrice() + " ISK"); // Update total price
     }
 
 }
