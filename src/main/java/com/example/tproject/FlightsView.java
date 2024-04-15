@@ -79,7 +79,7 @@ public class FlightsView {
             protected void updateItem(Flight flight, boolean empty) {
                 super.updateItem(flight, empty);
                 setText(empty || flight == null ? null : (flight.getOrigin() + "-" +
-                        flight.getDestination() + ", " + flight.getPrice() + " ISK"));
+                        flight.getDestination() + ", " + flight.getDepartureTime() + ", " + flight.getPrice() + " ISK"));
             }
         });
 
@@ -94,7 +94,7 @@ public class FlightsView {
             protected void updateItem(Flight flight, boolean empty) {
                 super.updateItem(flight, empty);
                 setText(empty || flight == null ? null : (flight.getOrigin() + "-" +
-                        flight.getDestination() + ", " + flight.getPrice() + " ISK"));
+                        flight.getDestination() + ", " + flight.getDepartureTime() + ", " + flight.getPrice() + " ISK"));
             }
         });
 
