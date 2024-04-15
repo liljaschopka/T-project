@@ -6,12 +6,14 @@ import daytrip.model.Tour;
 import flight.Booking;
 import flight.FlightInventory;
 import hotel.controller.HotelController;
+import hotel.model.HotelRoom;
 import model.Cart;
 import model.Flight;
 import model.PaymentInfo;
 import model.User;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -33,6 +35,7 @@ public class PackageController {
     private LocalDate checkIn;
     private LocalDate checkOut;
     private int persons;
+    private int duration;
     private Cart cart = new Cart();
 
     public PackageController(User user, String origin, String destination,
@@ -43,6 +46,7 @@ public class PackageController {
         this.checkIn = checkIn;
         this.checkOut = checkOut;
         this.persons = persons;
+        this.duration = (int) ChronoUnit.DAYS.between(checkIn, checkOut);
     }
 
     private boolean validDates(LocalDate checkIn, LocalDate checkOut) {
@@ -217,7 +221,11 @@ public class PackageController {
         for (Tour tour : tours) {
             result += tour.getPrice() * persons;
         }
-        
+
+        List<HotelRoom> rooms = cart.getSelectedHotelRooms();
+        for (HotelRoom room : rooms) {
+            result += room.getPrice() * duration;
+        }
 
         return result;
     }
