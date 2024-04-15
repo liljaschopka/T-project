@@ -1,7 +1,9 @@
 package controllers;
 
 import daytrip.controller.TourController;
+import daytrip.model.Reservation;
 import daytrip.model.Tour;
+import flight.Booking;
 import flight.FlightInventory;
 import hotel.controller.HotelController;
 import model.Cart;
@@ -183,6 +185,25 @@ public class PackageController {
         } else
             throw new IllegalArgumentException("You have to be logged in to make a booking");
 
+    }
+
+    public void addBookingIDsToUser(BookingController bookingController) {
+
+    }
+
+    public List<Reservation> findTourReservations(BookingController bookingController) {
+        return bookingController.findDaytripBookings(user);
+    }
+
+    public List<hotel.model.Booking> findHotelBookings(BookingController bookingController) {
+        return bookingController.findHotelBookings(user);
+    }
+
+    public List<Booking> findFlightBookings(BookingController bookingController) {
+        if (user != null) {
+            return bookingController.findFlightBookings(user);
+        } else
+            throw new IllegalArgumentException("You have to be logged in to see your reservations");
     }
 
     public void clearSelection() {

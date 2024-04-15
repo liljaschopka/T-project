@@ -101,8 +101,10 @@ public class CartView {
 
     }
 
-    public void borga() {
+    private void borga() {
         User loggedInUser = packageController.getUser();
+        packageController.createBooking(bookingController);
+        packageController.clearSelection();
         Alert infoAlert = new Alert(Alert.AlertType.INFORMATION);
         infoAlert.setTitle(loggedInUser.getName());
         infoAlert.setHeaderText("Booking completed!");
@@ -127,6 +129,9 @@ public class CartView {
             cart.removeSelectedHotelRoom(room, hotel);
             //cart.setSelectedHotelRoom(null);
             //cart.setSelectedHotel(null);
+
+            List<hotel.model.HotelRoom> rooms = cart.getSelectedHotelRooms();
+
         } else if (selected.startsWith("Flight:")) {
             List<Flight> flights = cart.getSelectedFlights();
             // cart.removeSelectedFlight(flight);

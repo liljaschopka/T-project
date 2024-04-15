@@ -31,6 +31,10 @@ public class DaytripsView {
         this.tourController = tourController;
     }
 
+    public TourController getTourController() {
+        return tourController;
+    }
+
     public void setPackageController(PackageController packageController) {
         this.packageController = packageController;
         this.cart = packageController.getCart(); // cart initiliazied in package controller
