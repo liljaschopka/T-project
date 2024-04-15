@@ -1,32 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-
-<VBox stylesheets="@stylesheets/lists.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tproject.FlightsView">
-   <HBox prefHeight="100.0" prefWidth="200.0">
-      <children>
-          <ListView fx:id="fxDepartureList" prefHeight="200" prefWidth="300" />
-         <ListView fx:id="fxArrivalList" prefHeight="200" prefWidth="300" />
-      </children>
-   </HBox>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<VBox prefHeight="400.0" prefWidth="600.0" stylesheets="@stylesheets/lists.css" xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tproject.FlightsView">
+    <HBox prefHeight="250.0" prefWidth="200.0">
+        <children>
+            <ListView fx:id="fxDepartureList" prefHeight="181.0" prefWidth="297.0"/>
+            <ListView fx:id="fxArrivalList" prefHeight="200" prefWidth="300"/>
+        </children>
+    </HBox>
     <Label fx:id="fxFlightDescription" maxWidth="300" text="Select a flight to see details" wrapText="true">
         <VBox.margin>
-            <Insets bottom="10" left="10" right="10" top="10" />
+            <Insets bottom="10" left="10" right="10" top="10"/>
         </VBox.margin>
     </Label>
     <Button fx:id="fxAddToCart" onAction="#fxAddToCartHandler" text="Add to Cart">
         <VBox.margin>
-            <Insets bottom="10" left="10" right="10" />
+            <Insets bottom="10" left="10" right="10"/>
         </VBox.margin>
     </Button>
     <Button fx:id="fxGoBack" onAction="#fxGoBackHandler" text="Go Back">
         <VBox.margin>
-            <Insets bottom="10" left="10" right="10" />
+            <Insets bottom="10" left="10" right="10"/>
         </VBox.margin>
     </Button>
 </VBox>
