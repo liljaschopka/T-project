@@ -8,6 +8,7 @@ import javafx.scene.control.Alert.AlertType;
 import model.User;
 
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.Optional;
 
 public class DateSelectorView {
@@ -32,7 +33,7 @@ public class DateSelectorView {
     public static PackageController getPackageController() {
         if (packageController == null) {
             packageController = new PackageController(null, "Default Origin", "Default Destination",
-                    LocalDate.now(), LocalDate.now().plusDays(1), 0);
+                    LocalDate.of(2024, Month.MAY,1), LocalDate.of(2024, Month.MAY,2), 0);
         }
         return packageController;
     }
