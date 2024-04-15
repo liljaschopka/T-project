@@ -1,6 +1,5 @@
 package com.example.tproject;
 
-import controllers.PackageController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
@@ -16,7 +15,6 @@ public class UserDialog extends Dialog<User> {
 
     private ButtonType okButton;
     private ButtonType cancelButton;
-    private PackageController packageController = DateSelectorView.getPackageController();
 
     public UserDialog() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/tproject/User-view.fxml"));
@@ -60,12 +58,11 @@ public class UserDialog extends Dialog<User> {
                                 fxSecurityCode.getText()
                         ), new ArrayList<>());  // bookingIDs
 
-                if (packageController != null) {
-                    packageController.setUser(newUser.getName(), newUser.getEmail(), newUser.getPaymentInfo(), newUser.getBookingIds());
-                }
+                DataManager.getInstance().setCurrentUser(newUser);  // Store user in DataManager
                 return newUser;  // Return the newly created user
             }
             return null; // when cancel is pressed
         });
     }
 }
+

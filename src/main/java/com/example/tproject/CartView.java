@@ -126,19 +126,28 @@ public class CartView {
     @FXML
     public void fxRemoveHandler(ActionEvent ActionEvent) {
         String selected = fxCart.getSelectionModel().getSelectedItem().toString();
+        //List<hotel.model.HotelRoom> rooms = cart.getSelectedHotelRooms();
         if (selected.startsWith("Room number:")) {
-            HotelRoom room = cart.getSelectedHotelRoom();
+            String roomNumberString = selected.substring("Room number:".length()).trim();
+            int roomNumber = Integer.parseInt(roomNumberString.split(" ")[0]);
             Hotel hotel = cart.getSelectedHotel();
-            cart.removeSelectedHotelRoom(room, hotel);
-            //cart.setSelectedHotelRoom(null);
-            //cart.setSelectedHotel(null);
-
             List<hotel.model.HotelRoom> rooms = cart.getSelectedHotelRooms();
 
+            HotelRoom roomToRemove = null;
+            for (HotelRoom room : rooms) {
+                if (room.getRoomNumber() == roomNumber) {
+                    roomToRemove = room;
+                    break;
+                }
+            }
+
+            if (roomToRemove != null) {
+                cart.removeSelectedHotelRoom(roomToRemove, hotel);
+                // Update your UI or perform any other necessary actions
+            }
         } else if (selected.startsWith("Flight:")) {
             String idStr = selected.substring(selected.indexOf("FlightID: ") + "FlightID: ".length(), selected.indexOf(",", selected.indexOf("FlightID: ")));
             int flightID = Integer.parseInt(idStr.trim());
-            System.out.println(flightID);
 
             Flight flightToRemove = null;
             for (Flight flight : cart.getSelectedFlights()) {
@@ -148,7 +157,9 @@ public class CartView {
                 }
             }
 
-            cart.removeSelectedFlight(flightToRemove);
+            if (flightToRemove != null) {
+                cart.removeSelectedFlight(flightToRemove);
+            }
         } else if (selected.startsWith("Tour:")) {
             // Identify the tour to remove
             String tourDescription = selected.substring(selected.indexOf(":") + 2, selected.indexOf("Price") - 1);
@@ -173,11 +184,21 @@ public class CartView {
         updateCartDisplay();
     }
 
-    private void newUser() {
+    /*private void newUser() {
         UserDialog dialog = new UserDialog();
         Optional<User> result = dialog.showAndWait();
         result.ifPresent(user -> {
             packageController.setUser(user.getName(), user.getEmail(), user.getPaymentInfo(), user.getBookingIds());
+            System.out.println("New user created: " + user.getName());
+        });
+    }*/
+
+    private void newUser() {
+        UserDialog dialog = new UserDialog();
+        Optional<User> result = dialog.showAndWait();
+        result.ifPresent(user -> {
+            DataManager.getInstance().setCurrentUser(user);  // Update DataManager with the new user
+            packageController.setUser(user);  // Update the package controller with the new user
             System.out.println("New user created: " + user.getName());
         });
     }
@@ -201,7 +222,7 @@ public class CartView {
             fxCart.getItems().add("Tour: " + tour.getName() + " Price: " + tour.getPrice() + " ISK");
         }
 
-        fxTotalPrice.setText("Total: " + cart.getTotalAmount() + " ISK"); // Update total price
+        fxTotalPrice.setText("Total: " + packageController.calculateTotalPrice() + " ISK"); // Update total price
     }
 
 }

@@ -6,12 +6,13 @@ import daytrip.model.Tour;
 import flight.Booking;
 import flight.FlightInventory;
 import hotel.controller.HotelController;
+import hotel.model.HotelRoom;
 import model.Cart;
 import model.Flight;
-import model.PaymentInfo;
 import model.User;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -33,6 +34,7 @@ public class PackageController {
     private LocalDate checkIn;
     private LocalDate checkOut;
     private int persons;
+    private int duration;
     private Cart cart = new Cart();
 
     public PackageController(User user, String origin, String destination,
@@ -43,6 +45,7 @@ public class PackageController {
         this.checkIn = checkIn;
         this.checkOut = checkOut;
         this.persons = persons;
+        this.duration = (int) ChronoUnit.DAYS.between(checkIn, checkOut);
     }
 
     private boolean validDates(LocalDate checkIn, LocalDate checkOut) {
@@ -53,8 +56,8 @@ public class PackageController {
         return origin != null && destination != null && persons != 0;
     }
 
-    public void setUser(String name, String email, PaymentInfo paymentInfo, List<String> bookingIDs) {
-        this.user = new User(null, name, email, paymentInfo, bookingIDs);
+    public void setUser(User user) {
+        this.user = user;
     }
 
 
@@ -146,7 +149,6 @@ public class PackageController {
 
         List<Flight> arrival = flightInventory.searchFlight(destination, origin, checkOut);
 
-
         if (arrival.isEmpty()) {
             throw new IllegalArgumentException("No flights found");
         }
@@ -204,6 +206,27 @@ public class PackageController {
             return bookingController.findFlightBookings(user);
         } else
             throw new IllegalArgumentException("You have to be logged in to see your reservations");
+    }
+
+    public int calculateTotalPrice() {
+        int result = 0;
+
+        List<Flight> flights = cart.getSelectedFlights();
+        for (Flight flight : flights) {
+            result += flight.getPrice() * persons;
+        }
+
+        List<Tour> tours = cart.getSelectedTours();
+        for (Tour tour : tours) {
+            result += tour.getPrice() * persons;
+        }
+
+        List<HotelRoom> rooms = cart.getSelectedHotelRooms();
+        for (HotelRoom room : rooms) {
+            result += room.getPrice() * duration;
+        }
+
+        return result;
     }
 
     public void clearSelection() {
