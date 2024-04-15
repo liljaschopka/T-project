@@ -21,7 +21,9 @@ public class DaytripsView {
     @FXML
     private ListView<Tour> fxToursList;
     @FXML
-    private Label fxTourDescription;
+    private Label fxIntroLabel;
+    @FXML
+    private Label fxTourDetails;
 
     private TourController tourController = new TourController(new TourDAL());
     private PackageController packageController = DateSelectorView.getPackageController();
@@ -57,7 +59,7 @@ public class DaytripsView {
             fxToursList.setItems(FXCollections.observableArrayList(availableTours));
         } catch (Exception e) {
             System.out.println("Error loading tours: " + e.getMessage());
-            fxTourDescription.setText("Error loading tours. Please try again.");
+            fxIntroLabel.setText("Error loading tours. Please try again.");
             // Clears the list view in case of an error
             fxToursList.setItems(FXCollections.observableArrayList());
         }
@@ -76,7 +78,13 @@ public class DaytripsView {
         });
 
         fxToursList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            fxTourDescription.setText(newValue != null ? newValue.getDescription() : "Select a tour to see details");
+            if (newValue != null) {
+                fxTourDetails.setText(newValue.getDescription());  // Show description in the new label
+                fxTourDetails.setVisible(true);  // Make sure the label is visible when an item is selected
+            } else {
+                fxTourDetails.setText("Select a tour to see details");
+                fxTourDetails.setVisible(false);  // Optionally hide the label when there is no selection
+            }
         });
     }
 

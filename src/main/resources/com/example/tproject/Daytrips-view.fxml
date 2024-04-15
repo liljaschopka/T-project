@@ -1,28 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.geometry.*?>
 
-<VBox fx:id="mainVBox" stylesheets="@stylesheets/lists.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tproject.DaytripsView">
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox fx:id="mainVBox" prefHeight="400.0" prefWidth="600.0" stylesheets="@stylesheets/lists.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tproject.DaytripsView">
     <ScrollPane fitToWidth="true">
         <VBox.margin>
             <Insets bottom="10" left="10" right="10" top="10" />
         </VBox.margin>
-        <ListView fx:id="fxToursList" prefHeight="200" prefWidth="300" />
+        <ListView fx:id="fxToursList" prefHeight="250.0" prefWidth="200.0" />
     </ScrollPane>
-    <Label fx:id="fxTourDescription" maxWidth="300" text="Select a tour to see details" wrapText="true">
+    <Label fx:id="fxIntroLabel" maxWidth="550" text="Select a tour to see details" wrapText="true">
         <VBox.margin>
             <Insets bottom="10" left="10" right="10" top="10" />
         </VBox.margin>
     </Label>
-    <Button fx:id="fxAddToCart" onAction="#fxAddTourToCartHandler" text="Add to Cart">
-        <VBox.margin>
-            <Insets bottom="10" left="10" right="10" />
-        </VBox.margin>
-    </Button>
-    <Button fx:id="fxGoBack" onAction="#fxGoBackHandler" text="Go Back">
-        <VBox.margin>
-            <Insets bottom="10" left="10" right="10" />
-        </VBox.margin>
-    </Button>
+    <HBox alignment="CENTER_LEFT" spacing="10">
+        <Button fx:id="fxAddToCart" onAction="#fxAddTourToCartHandler" text="Add to Cart" />
+        <Button fx:id="fxGoBack" onAction="#fxGoBackHandler" text="Go Back" />
+        <Label fx:id="fxTourDetails" alignment="TOP_LEFT" prefHeight="64.0" prefWidth="358.0" visible="false" wrapText="true">
+            <HBox.margin>
+                <Insets bottom="0" left="10" right="0" top="0" />
+            </HBox.margin>
+        </Label>
+    </HBox>
 </VBox>

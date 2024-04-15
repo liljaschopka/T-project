@@ -136,9 +136,19 @@ public class CartView {
             List<hotel.model.HotelRoom> rooms = cart.getSelectedHotelRooms();
 
         } else if (selected.startsWith("Flight:")) {
-            List<Flight> flights = cart.getSelectedFlights();
-            // cart.removeSelectedFlight(flight);
-            cart.setSelectedFlight(null);
+            String idStr = selected.substring(selected.indexOf("FlightID: ") + "FlightID: ".length(), selected.indexOf(",", selected.indexOf("FlightID: ")));
+            int flightID = Integer.parseInt(idStr.trim());
+            System.out.println(flightID);
+
+            Flight flightToRemove = null;
+            for (Flight flight : cart.getSelectedFlights()) {
+                if (flight.getFlightID() == flightID) {
+                    flightToRemove = flight;
+                    break;
+                }
+            }
+
+            cart.removeSelectedFlight(flightToRemove);
         } else if (selected.startsWith("Tour:")) {
             // Identify the tour to remove
             String tourDescription = selected.substring(selected.indexOf(":") + 2, selected.indexOf("Price") - 1);
