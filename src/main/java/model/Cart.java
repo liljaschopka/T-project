@@ -97,7 +97,6 @@ public class Cart {
             selectedRoom = null;
         } else {
             selectedRoom = selectedHotelRooms.get(0);
-
         }
     }
 
