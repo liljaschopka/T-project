@@ -53,3 +53,20 @@
     -fx-padding: 5 10; /* Uniform padding */
     -fx-text-fill: white;
 }
+
+
+.user-cart-button {
+    -fx-background-color: #005A69;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 5;
+    -fx-border-color: #88a2ac;
+    -fx-border-width: 0.5;
+    -fx-padding: 2px 5px;
+    -fx-effect: dropshadow(one-pass-box, black, 5, 0.5, 1, 1);
+}
+
+.user-cart-button:hover {
+    -fx-background-color: #3B6978;
+}
+
