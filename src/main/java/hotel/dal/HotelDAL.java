@@ -1,39 +1,39 @@
 package hotel.dal;
 
-import hotel.model.*;
+import hotel.model.Hotel;
+import hotel.model.HotelRoom;
+
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HotelDAL {
-    private static Connection connection;
+public class HotelDAL extends BaseDAL{
 
-    private static void connect() {
+    private void connect() {
         try {
             Class.forName("org.sqlite.JDBC");
-            connection = DriverManager.getConnection("jdbc:sqlite:hotel_database.db");
+            connection = DriverManager.getConnection(DATABASE_URL);
             connection.setAutoCommit(true);
         } catch (SQLException e) {
-            System.err.println(e);
+            e.printStackTrace();
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private static void close(){
+    private void close(){
         try {
-            if(!connection.getAutoCommit()) connection.commit();
             connection.close();
             connection = null;
         } catch (SQLException e) {
-            System.err.println(e);
+            e.printStackTrace();
         }
     }
 
-    public static List<Hotel> getHotelsFromLocation(String location){
+    public List<Hotel> getHotelsFromLocation(String location){
         List<Hotel> hotels = new ArrayList<>();
-        if(connection == null) connect();
+        connect();
         try {
             PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Hotel WHERE Location=?");
             stmt.setString(1, location);
@@ -50,65 +50,20 @@ public class HotelDAL {
                 hotels.add(hotel);
             }
         } catch (SQLException e) {
-            System.err.println(e);
+            e.printStackTrace();
         }
+        close();
         return hotels;
     }
 
-    public static List<HotelRoom> getHotelRooms(Hotel hotel){
-        return getHotelRooms(hotel.getName(), hotel.getAddress());
-    }
-
-    public static Hotel getHotel(String hotelName, String hotelAddress){
-        if(connection == null) connect();
-        try {
-            PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Hotel WHERE (HotelName, Address) = (?,?)");
-            stmt.setString(1, hotelName);
-            stmt.setString(2, hotelAddress);
-            ResultSet results = stmt.executeQuery();
-            if(results.next()){
-                List<HotelRoom> rooms = getHotelRooms(results.getString(1), results.getString(3));
-                Hotel hotel = new Hotel(
-                        results.getString(1),
-                        results.getString(2),
-                        results.getString(3),
-                        results.getString(4),
-                        results.getString(5),
-                        rooms);
-                return hotel;
-            }
-        } catch (SQLException e) {
-            System.err.println(e);
-        }
-        System.out.println("Hotel not found.");
-        return null;
-    }
-
-    public static List<HotelRoom> getHotelRooms(String name, String address){
-        List<HotelRoom> rooms = new ArrayList<>();
-        if(connection == null) connect();
-        try {
-            PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Room WHERE HotelName=? AND HotelAddress=?");
-            stmt.setString(1, name);
-            stmt.setString(2, address);
-            ResultSet results = stmt.executeQuery();
-            while(results.next()){
-                HotelRoom room = new HotelRoom(
-                        results.getInt(3),
-                        results.getInt(4),
-                        results.getInt(5),
-                        results.getInt(6),
-                        results.getString(7)
-                );
-                rooms.add(room);
-            }
-        } catch (SQLException e) {
-            System.err.println(e);
-        }
-        return rooms;
-    }
-
-    public static List<HotelRoom> getAvailableRooms(Hotel hotel, LocalDate arrival, LocalDate departure){
+    /**
+     * Returns a list of rooms available for a range of date in a given hotel
+     * @param hotel Hotel to check available rooms
+     * @param arrival the arrival date
+     * @param departure the departure date
+     * @return list of available rooms for that time period
+     */
+    public List<HotelRoom> getAvailableRooms(Hotel hotel, LocalDate arrival, LocalDate departure){
         List<HotelRoom> rooms = new ArrayList<>();
         connect();
         try {
@@ -143,7 +98,7 @@ public class HotelDAL {
                 rooms.add(room);
             }
         } catch (SQLException e) {
-            System.err.println(e);
+            e.printStackTrace();
         }
         close();
         return rooms;

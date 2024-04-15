@@ -10,28 +10,25 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BookingDAL {
+public class BookingDAL extends BaseDAL{
 
-    private static Connection connection;
-
-    private static void connect() {
+    private void connect() {
         try {
             Class.forName("org.sqlite.JDBC");
-            connection = DriverManager.getConnection("jdbc:sqlite:hotel_database.db");
+            connection = DriverManager.getConnection(DATABASE_URL);
             connection.setAutoCommit(true);
         } catch (SQLException e) {
-            System.err.println(e);
+            e.printStackTrace();
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
-    private static void close(){
+    private void close(){
         try {
-            if(!connection.getAutoCommit()) connection.commit();
             connection.close();
             connection = null;
         } catch (SQLException e) {
-            System.err.println(e);
+            e.printStackTrace();
         }
     }
 
@@ -39,11 +36,11 @@ public class BookingDAL {
     /**
      * Gets a list of bookings the user currently has booked
      * @param user - java class of a user
-     * @return
+     * @return A list of bookings that user has
      */
-    public static List<Booking> getBookings(User user){
+    public List<Booking> getBookings(User user){
         List<Booking> bookings = new ArrayList<>();
-        if(connection == null) connect();
+        connect();
         try {
             PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Booking WHERE OwnerName=? AND OwnerEmail=?");
             stmt.setString(1, user.getName());
@@ -77,31 +74,24 @@ public class BookingDAL {
                         LocalDate.parse(departure, formatter),
                         results.getInt(4),
                         rooms,
-                        HotelDAL.getHotel(hotelName, hotelAddress),
+                        getHotel(hotelName, hotelAddress),
                         user
                 );
                 bookings.add(newBooking);
             }
         } catch (SQLException e) {
-            System.err.println(e);
+            e.printStackTrace();
         }
+        close();
         return bookings;
     }
-
-    /**
-     * Returns a list of rooms available for a range of date in a given hotel
-     * @param hotel Hotel to check available rooms
-     * @param arrival the arrival date
-     * @param departure the departure date
-     * @return
-     */
 
     /**
      * Creates a new booking in the DB
      * @param booking - java class of a booking
      */
-    public static void createBooking(Booking booking){
-        if(connection == null) connect();
+    public void createBooking(Booking booking){
+        connect();
         try {
             PreparedStatement userExists = connection.prepareStatement("SELECT * FROM User Where (Name, Email) = (?, ?)");
             userExists.setString(1, booking.getOwner().getName());
@@ -131,7 +121,7 @@ public class BookingDAL {
                 rmStmt.executeUpdate();
             }
         } catch (SQLException e) {
-            System.err.println(e);
+            e.printStackTrace();
         }
         close();
     }
@@ -140,7 +130,9 @@ public class BookingDAL {
      * Deletes a booking from the DB
      * @param booking - java class of a booking
      */
-    public static void deleteBooking(Booking booking){
+    public void deleteBooking(Booking booking){
+        connect();
+        // If it's a booking that's not from the database we ignore it
         if(booking.getBookingID() == -1){
             System.out.println("Invalid booking id.. Nothing deleted");
             return;
@@ -157,25 +149,25 @@ public class BookingDAL {
             deleteBookRoom.setInt(1, booking.getBookingID());
             deleteBookRoom.executeUpdate();
         } catch (SQLException e) {
-            System.err.println(e);
+            e.printStackTrace();
         }
+        close();
     }
 
     /**
      * Creates a user in the DB
-     * Note:    only supposed to be called by createBooking if the user is not already
-     *          in the system, this will create that user.
-     * @param user - java class of the USER that will be parsed into the DB
+     * Note:    Helper function called by createBooking if the user is not already
+     *          in the system, this will create that user in the system to match bookings.
+     * @param user - java class of the USER that will be created into the DB
      */
-    private static void createUser(User user){
-        if(connection == null) connect();
+    private void createUser(User user){
         try {
             PreparedStatement stmt = connection.prepareStatement("INSERT INTO User VALUES(?, ?)");
             stmt.setString(1, user.getName());
             stmt.setString(2, user.getEmail());
             stmt.executeUpdate();
         } catch (SQLException e) {
-            System.err.println(e);
+            e.printStackTrace();
         }
     }
 }
