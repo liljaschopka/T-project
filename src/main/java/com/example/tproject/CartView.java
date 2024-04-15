@@ -41,12 +41,15 @@ public class CartView {
     private DateSelectorView date;
 
 
-    private BookingController bookingController = new BookingController();
+    private static BookingController bookingController = new BookingController();
     private PackageController packageController = DateSelectorView.getPackageController();
     private Cart cart = packageController.getCart();
     private User user = packageController.getUser();
     private UserAreaController userAreaController;
 
+    public static BookingController getBookingController() {
+        return bookingController;
+    }
 
     public CartView() {
         // Initialize the date object
@@ -133,9 +136,19 @@ public class CartView {
             List<hotel.model.HotelRoom> rooms = cart.getSelectedHotelRooms();
 
         } else if (selected.startsWith("Flight:")) {
-            List<Flight> flights = cart.getSelectedFlights();
-            // cart.removeSelectedFlight(flight);
-            cart.setSelectedFlight(null);
+            String idStr = selected.substring(selected.indexOf("FlightID: ") + "FlightID: ".length(), selected.indexOf(",", selected.indexOf("FlightID: ")));
+            int flightID = Integer.parseInt(idStr.trim());
+            System.out.println(flightID);
+
+            Flight flightToRemove = null;
+            for (Flight flight : cart.getSelectedFlights()) {
+                if (flight.getFlightID() == flightID) {
+                    flightToRemove = flight;
+                    break;
+                }
+            }
+
+            cart.removeSelectedFlight(flightToRemove);
         } else if (selected.startsWith("Tour:")) {
             // Identify the tour to remove
             String tourDescription = selected.substring(selected.indexOf(":") + 2, selected.indexOf("Price") - 1);
@@ -176,7 +189,7 @@ public class CartView {
         // if (selectedHotel != null) {
         for (hotel.model.HotelRoom hotelRoom : cart.getSelectedHotelRooms()) {
             hotel.model.Hotel selectedHotel = cart.getSelectedHotel();
-            fxCart.getItems().add("Room number: " + hotelRoom.getRoomNumber() + " in " + selectedHotel.getName() + ", price: " + hotelRoom.getPrice() + "$ per night");
+            fxCart.getItems().add("Room number: " + hotelRoom.getRoomNumber() + " in " + selectedHotel.getName() + ", price: " + hotelRoom.getPrice() + "$ISK per night");
             //selectedHotel = null;
         }
         //selectedHotel = null;
