@@ -126,15 +126,25 @@ public class CartView {
     @FXML
     public void fxRemoveHandler(ActionEvent ActionEvent) {
         String selected = fxCart.getSelectionModel().getSelectedItem().toString();
+        //List<hotel.model.HotelRoom> rooms = cart.getSelectedHotelRooms();
         if (selected.startsWith("Room number:")) {
-            HotelRoom room = cart.getSelectedHotelRoom();
+            String roomNumberString = selected.substring("Room number:".length()).trim();
+            int roomNumber = Integer.parseInt(roomNumberString.split(" ")[0]);
             Hotel hotel = cart.getSelectedHotel();
-            cart.removeSelectedHotelRoom(room, hotel);
-            //cart.setSelectedHotelRoom(null);
-            //cart.setSelectedHotel(null);
-
             List<hotel.model.HotelRoom> rooms = cart.getSelectedHotelRooms();
 
+            HotelRoom roomToRemove = null;
+            for (HotelRoom room : rooms) {
+                if (room.getRoomNumber() == roomNumber) {
+                    roomToRemove = room;
+                    break;
+                }
+            }
+
+            if (roomToRemove != null) {
+                cart.removeSelectedHotelRoom(roomToRemove, hotel);
+                // Update your UI or perform any other necessary actions
+            }
         } else if (selected.startsWith("Flight:")) {
             String idStr = selected.substring(selected.indexOf("FlightID: ") + "FlightID: ".length(), selected.indexOf(",", selected.indexOf("FlightID: ")));
             int flightID = Integer.parseInt(idStr.trim());
