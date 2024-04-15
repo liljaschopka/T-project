@@ -10,13 +10,20 @@ import java.util.List;
 
 public class HotelController {
 
+    private final HotelDAL hotelDAL;
+    private final BookingDAL bookingDAL;
+    public HotelController(){
+        hotelDAL = new HotelDAL();
+        bookingDAL = new BookingDAL();
+    }
+
     /**
      * Gets a list of hotels given a location.
      * @param location - the location of the hotels
      * @return list of hotels
      */
-    public static List<Hotel> getHotels(String location){
-        return HotelDAL.getHotelsFromLocation(location);
+    public List<Hotel> getHotels(String location){
+        return hotelDAL.getHotelsFromLocation(location);
     }
 
     /**
@@ -26,27 +33,24 @@ public class HotelController {
      * @param departure - End date
      * @return - List of available HotelRoom s
      */
-    public static List<HotelRoom> getAvailableRooms(Hotel hotel, LocalDate arrival, LocalDate departure){
-        /*
-        GEFUR ÖLL HERBERGI SAMA HVERSU MARGIR ERU Í BÓKUNINNI - kemur annað fall sem skilar list<HotelRoom[]> sem gefur tillögur að herbergjum fyrir fjöldann
-         */
-        return HotelDAL.getAvailableRooms(hotel, arrival, departure);
+    public List<HotelRoom> getAvailableRooms(Hotel hotel, LocalDate arrival, LocalDate departure){
+        return hotelDAL.getAvailableRooms(hotel, arrival, departure);
     }
 
     /**
      * Creates a new booking in the database.
      * @param booking
      */
-    public static void createBooking(Booking booking){
-        BookingDAL.createBooking(booking);
+    public void createBooking(Booking booking){
+        bookingDAL.createBooking(booking);
     }
 
     /**
      * Deletes a booking from the database.
      * @param booking
      */
-    public static void deleteBooking(Booking booking){
-        BookingDAL.deleteBooking(booking);
+    public void deleteBooking(Booking booking){
+        bookingDAL.deleteBooking(booking);
     }
 
     /**
@@ -54,7 +58,7 @@ public class HotelController {
      * @param user
      * @return - List of bookings
      */
-    public static List<Booking> getBookings(User user){
-        return BookingDAL.getBookings(user);
+    public List<Booking> getBookings(User user){
+        return bookingDAL.getBookings(user);
     }
 }
