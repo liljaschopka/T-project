@@ -114,7 +114,7 @@ public class PackageController {
         return availableRooms;
     }
 
-    public List<Flight> findAvailableFlights(FlightInventory flightInventory) {
+    public List<Flight> findAvailableDepartures(FlightInventory flightInventory) {
         if (!validDates(checkIn, checkOut)) {
             throw new IllegalArgumentException("Invalid dates");
         }
@@ -123,23 +123,37 @@ public class PackageController {
         }
 
         List<Flight> departure = flightInventory.searchFlight(origin, destination, checkIn);
-        List<Flight> arrival = flightInventory.searchFlight(origin, destination, checkOut);
 
-        //það þarf að útfæra searchflight aðferðina
-        List<Flight> flights = flightInventory.searchFlight(origin, destination, checkIn);
 
-        if (flights.isEmpty()) {
-            if (departure.isEmpty() || arrival.isEmpty()) {
-                throw new IllegalArgumentException("No flights found");
-            }
+        if (departure.isEmpty()) {
+            throw new IllegalArgumentException("No flights found");
         }
 
         departure.sort(Comparator.comparingInt(Flight::getPrice));
-        arrival.sort(Comparator.comparingInt(Flight::getPrice));
 
-        //Vantar að skila 2 listum?
         return departure;
     }
+
+    public List<Flight> findAvailableArrivals(FlightInventory flightInventory) {
+        if (!validDates(checkIn, checkOut)) {
+            throw new IllegalArgumentException("Invalid dates");
+        }
+        if (!validODP(origin, destination, persons)) {
+            throw new IllegalArgumentException("Invalid origin, destination or persons");
+        }
+
+        List<Flight> arrival = flightInventory.searchFlight(destination, origin, checkOut);
+
+
+        if (arrival.isEmpty()) {
+            throw new IllegalArgumentException("No flights found");
+        }
+
+        arrival.sort(Comparator.comparingInt(Flight::getPrice));
+
+        return arrival;
+    }
+
 
     public List<Tour> findAvailableDayTrips(TourController tourController) {
         if (!validDates(checkIn, checkOut)) {

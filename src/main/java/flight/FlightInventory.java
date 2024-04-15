@@ -2,9 +2,7 @@ package flight;
 
 import model.Flight;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -30,7 +28,7 @@ public class FlightInventory implements FlightInventoryInterface {
     public boolean removeFlight(int flightID) {
         return flights.removeIf(flight -> flight.getFlightID() == flightID);
     }
-    
+
     public List<Flight> searchFlight(String origin, String destination, LocalDate date) {
         return flights.stream()
                 .filter(flight -> flight.getOrigin().equalsIgnoreCase(origin) &&
@@ -45,8 +43,14 @@ public class FlightInventory implements FlightInventoryInterface {
     }
 
     private void loadFlights(String filePath) throws IOException {
-        List<String> lines = Files.readAllLines(Paths.get(filePath));
+        InputStream is = getClass().getClassLoader().getResourceAsStream(filePath);
+        if (is == null) {
+            throw new FileNotFoundException("Resource not found: " + filePath);
+        }
+
+        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+        List<String> lines = reader.lines().collect(Collectors.toList());
 
         for (String line : lines) {
             String[] data = line.split(",");
