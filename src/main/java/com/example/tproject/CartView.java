@@ -41,12 +41,15 @@ public class CartView {
     private DateSelectorView date;
 
 
-    private BookingController bookingController = new BookingController();
+    private static BookingController bookingController = new BookingController();
     private PackageController packageController = DateSelectorView.getPackageController();
     private Cart cart = packageController.getCart();
     private User user = packageController.getUser();
     private UserAreaController userAreaController;
 
+    public static BookingController getBookingController() {
+        return bookingController;
+    }
 
     public CartView() {
         // Initialize the date object
@@ -176,7 +179,7 @@ public class CartView {
         // if (selectedHotel != null) {
         for (hotel.model.HotelRoom hotelRoom : cart.getSelectedHotelRooms()) {
             hotel.model.Hotel selectedHotel = cart.getSelectedHotel();
-            fxCart.getItems().add("Room number: " + hotelRoom.getRoomNumber() + " in " + selectedHotel.getName() + ", price: " + hotelRoom.getPrice() + "$ per night");
+            fxCart.getItems().add("Room number: " + hotelRoom.getRoomNumber() + " in " + selectedHotel.getName() + ", price: " + hotelRoom.getPrice() + "$ISK per night");
             //selectedHotel = null;
         }
         //selectedHotel = null;
