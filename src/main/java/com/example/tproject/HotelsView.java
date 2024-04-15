@@ -93,7 +93,7 @@ public class HotelsView {
             @Override
             protected void updateItem(hotel.model.HotelRoom hotelRoom, boolean empty) {
                 super.updateItem(hotelRoom, empty);
-                setText(empty || hotelRoom == null ? null : ("Number of guests: " + hotelRoom.getPersons() + ", price: " + hotelRoom.getPrice() + "€"));
+                setText(empty || hotelRoom == null ? null : ("Number of guests: " + hotelRoom.getPersons() + ", price: " + hotelRoom.getPrice() + " ISK"));
             }
         });
     }

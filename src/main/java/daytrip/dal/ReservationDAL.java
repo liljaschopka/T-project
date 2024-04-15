@@ -5,7 +5,9 @@ import daytrip.model.Tour;
 import daytrip.repository.ReservationInterface;
 
 import java.sql.*;
+import java.time.Instant;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -142,13 +144,12 @@ public class ReservationDAL implements ReservationInterface {
     }
 
 
-
     /**
      * Updates the details of an existing reservation.
      *
-     * @param reservationID The ID of the reservation to update.
+     * @param reservationID           The ID of the reservation to update.
      * @param newNumberOfParticipants The new number of participants.
-     * @param newDate The new date for the reservation.
+     * @param newDate                 The new date for the reservation.
      * @return true if the update was successful, false otherwise.
      */
     @Override
@@ -172,7 +173,7 @@ public class ReservationDAL implements ReservationInterface {
      * If a customer with the given email does not exist in the database, a new customer
      * record is created with the provided name and email.
      *
-     * @param customerName The name of the customer.
+     * @param customerName  The name of the customer.
      * @param customerEmail The email address of the customer.
      * @return The customer ID of the existing or newly created customer.
      */
@@ -210,7 +211,7 @@ public class ReservationDAL implements ReservationInterface {
      * Inserts a new customer into the database with the specified name and email address.
      * This method is called if no existing customer matches the provided email.
      *
-     * @param name The name of the new customer.
+     * @param name  The name of the new customer.
      * @param email The email address of the new customer.
      * @return The customer ID of the newly inserted customer, or null if the insertion fails.
      */
@@ -237,11 +238,11 @@ public class ReservationDAL implements ReservationInterface {
     /**
      * Creates a new reservation with the specified details.
      *
-     * @param tourID The ID of the tour to reserve.
-     * @param customerName The name of the customer making the reservation.
-     * @param customerEmail The email address of the customer.
+     * @param tourID               The ID of the tour to reserve.
+     * @param customerName         The name of the customer making the reservation.
+     * @param customerEmail        The email address of the customer.
      * @param numberOfParticipants The number of participants for the reservation.
-     * @param date The date of the reservation.
+     * @param date                 The date of the reservation.
      * @return true if the reservation was successfully made, false otherwise.
      */
     @Override
@@ -375,12 +376,16 @@ public class ReservationDAL implements ReservationInterface {
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
+                long milliseconds = rs.getLong("DateBooked"); // Assuming DateBooked is a long representing milliseconds
+                Instant instant = Instant.ofEpochMilli(milliseconds);
+                LocalDate date = instant.atZone(ZoneId.systemDefault()).toLocalDate();
+
                 reservations.add(new Reservation(
                         rs.getInt("ReservationID"),
                         customerId,
                         rs.getInt("TourID"),
                         rs.getInt("NumberOfParticipants"),
-                        LocalDate.parse(rs.getString("DateBooked"))
+                        date
                 ));
             }
         } catch (SQLException e) {

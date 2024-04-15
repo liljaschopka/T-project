@@ -210,7 +210,7 @@ public class CartView {
         // if (selectedHotel != null) {
         for (hotel.model.HotelRoom hotelRoom : cart.getSelectedHotelRooms()) {
             hotel.model.Hotel selectedHotel = cart.getSelectedHotel();
-            fxCart.getItems().add("Room number: " + hotelRoom.getRoomNumber() + " in " + selectedHotel.getName() + ", price: " + hotelRoom.getPrice() + "$ISK per night");
+            fxCart.getItems().add("Room number: " + hotelRoom.getRoomNumber() + " in " + selectedHotel.getName() + ", price: " + hotelRoom.getPrice() + " ISK per night");
             //selectedHotel = null;
         }
         //selectedHotel = null;

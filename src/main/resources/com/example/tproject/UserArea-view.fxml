@@ -2,7 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.VBox?>
 <VBox stylesheets="@stylesheets/lists.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.example.tproject.UserAreaController">
     <padding>
@@ -15,9 +15,7 @@
             <Separator orientation="HORIZONTAL" VBox.vgrow="NEVER"/>
 
             <Label style="-fx-font-size: 14pt;" text="Your Bookings:"/>
-            <ListView fx:id="tourBookingsListView" prefHeight="200.0" VBox.vgrow="ALWAYS"/>
-            <ListView fx:id="flightBookingsListView" prefHeight="200.0" VBox.vgrow="ALWAYS"/>
-            <ListView fx:id="hotelBookingsListView" prefHeight="200.0" VBox.vgrow="ALWAYS"/>
+            <ListView fx:id="bookingsListView" prefHeight="200.0" VBox.vgrow="ALWAYS"/>
         </children>
     </VBox>
 </VBox>

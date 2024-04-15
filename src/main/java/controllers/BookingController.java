@@ -1,9 +1,12 @@
 package controllers;
 
+import daytrip.controller.CustomerController;
 import daytrip.controller.ReservationController;
 import daytrip.controller.TourController;
+import daytrip.dal.CustomerDAL;
 import daytrip.dal.ReservationDAL;
 import daytrip.dal.TourDAL;
+import daytrip.model.Customer;
 import daytrip.model.Reservation;
 import daytrip.model.Tour;
 import flight.BookingInventory;
@@ -29,10 +32,9 @@ import java.util.Optional;
 public class BookingController {
 
     // controllers for Tour:
-    private TourDAL tourDal;
-    private ReservationDAL reservationDal;
     private TourController tourController;
     private ReservationController reservationController;
+    private CustomerController customerController;
 
     // controllers for Hotel:
     private hotel.controller.HotelController hotelController;
@@ -43,11 +45,13 @@ public class BookingController {
     private flight.BookingController flightBookingController;
 
     public BookingController() {
-        tourDal = new TourDAL();
-        reservationDal = new ReservationDAL();
+        TourDAL tourDal = new TourDAL();
+        ReservationDAL reservationDal = new ReservationDAL();
         tourController = new TourController(tourDal);
         reservationController = new ReservationController(reservationDal, tourController);
         hotelController = new hotel.controller.HotelController();
+        CustomerDAL customerDAL = new CustomerDAL();
+        customerController = new CustomerController(customerDAL, reservationDal);
         // bookingInventory = new BookingInventory();
         // flightInventory = new FlightInventory("Flights.txt");
         // flightBookingController = new flight.BookingController(bookingInventory, flightInventory);
@@ -118,11 +122,18 @@ public class BookingController {
     }
 
     public List<Reservation> findDaytripBookings(User user) {
-        System.out.println("User ID: " + user.getId());
-        if (user.getId() == null) {
-            return null;
+        List<Customer> allUsers = customerController.getAllCustomers();
+        for (Customer customer : allUsers) {
+            if (customer.getName().equals(user.getName()) && customer.getEmail().equals(user.getEmail())) {
+                user.setId(customer.getId());
+                System.out.println("New User ID: " + user.getId());
+            }
         }
         return reservationController.getReservationsByCustomerId(user.getId());
+    }
+
+    public Tour getTourDetails(Integer tourID) {
+        return tourController.getTourDetails(tourID);
     }
 
     public void cancelHotelBooking(hotel.model.Booking booking) {

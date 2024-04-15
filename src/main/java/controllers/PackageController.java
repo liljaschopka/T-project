@@ -1,6 +1,9 @@
 package controllers;
 
+import daytrip.controller.CustomerController;
 import daytrip.controller.TourController;
+import daytrip.dal.CustomerDAL;
+import daytrip.dal.ReservationDAL;
 import daytrip.model.Reservation;
 import daytrip.model.Tour;
 import flight.Booking;
@@ -58,29 +61,14 @@ public class PackageController {
 
     public void setUser(User user) {
         this.user = user;
+
+        CustomerDAL customerDAL = new CustomerDAL();
+        ReservationDAL reservationDAL = new ReservationDAL();
+        CustomerController customerController = new CustomerController(customerDAL, reservationDAL);
+
+        customerController.addNewCustomer(user.getName(), user.getEmail(), user.getPaymentInfo());
     }
 
-
-   /* public List<Hotel> findAvailableHotels(HotelControllerInterface hotelController) {
-
-        if (!validDates(checkIn, checkOut)) {
-            throw new IllegalArgumentException("Invalid dates");
-        }
-
-        if (!validODP(origin, destination, persons)) {
-            throw new IllegalArgumentException("Invalid origin, destination or persons");
-        }
-
-        List<Hotel> hotels = hotelController.searchForHotels(destination, checkIn, checkOut, persons);
-
-        if (hotels.isEmpty()) {
-            throw new IllegalArgumentException("No hotels found");
-        }
-
-        //hotels.sort(Comparator.comparingInt(Hotel::getPrice));
-
-        return hotels;
-    }*/
 
     //þurfti að breyta findavailablehotels aðeins svo ég gæti keyrt með tóman lista af hotelum:
     public List<hotel.model.Hotel> findAvailableHotels(HotelController hotelController) {
@@ -189,9 +177,6 @@ public class PackageController {
 
     }
 
-    public void addBookingIDsToUser(BookingController bookingController) {
-
-    }
 
     public List<Reservation> findTourReservations(BookingController bookingController) {
         return bookingController.findDaytripBookings(user);
@@ -206,6 +191,10 @@ public class PackageController {
             return bookingController.findFlightBookings(user);
         } else
             throw new IllegalArgumentException("You have to be logged in to see your reservations");
+    }
+
+    public Tour getTourDetails(BookingController bookingController, Integer tourID) {
+        return bookingController.getTourDetails(tourID);
     }
 
     public int calculateTotalPrice() {
