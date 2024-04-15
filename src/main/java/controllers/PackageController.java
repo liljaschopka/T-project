@@ -146,7 +146,6 @@ public class PackageController {
 
         List<Flight> arrival = flightInventory.searchFlight(destination, origin, checkOut);
 
-
         if (arrival.isEmpty()) {
             throw new IllegalArgumentException("No flights found");
         }
@@ -204,6 +203,23 @@ public class PackageController {
             return bookingController.findFlightBookings(user);
         } else
             throw new IllegalArgumentException("You have to be logged in to see your reservations");
+    }
+
+    public int calculateTotalPrice() {
+        int result = 0;
+
+        List<Flight> flights = cart.getSelectedFlights();
+        for (Flight flight : flights) {
+            result += flight.getPrice() * persons;
+        }
+
+        List<Tour> tours = cart.getSelectedTours();
+        for (Tour tour : tours) {
+            result += tour.getPrice() * persons;
+        }
+        
+
+        return result;
     }
 
     public void clearSelection() {
