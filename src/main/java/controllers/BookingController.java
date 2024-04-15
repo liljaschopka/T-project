@@ -15,6 +15,7 @@ import model.Cart;
 import model.Flight;
 import model.User;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -40,8 +41,6 @@ public class BookingController {
     private hotel.controller.HotelController hotelController;
 
     // controllers for Flight:
-    private BookingInventory bookingInventory;
-    private FlightInventory flightInventory;
     private flight.BookingController flightBookingController;
 
     public BookingController() {
@@ -52,9 +51,14 @@ public class BookingController {
         hotelController = new hotel.controller.HotelController();
         CustomerDAL customerDAL = new CustomerDAL();
         customerController = new CustomerController(customerDAL, reservationDal);
-        // bookingInventory = new BookingInventory();
-        // flightInventory = new FlightInventory("Flights.txt");
-        // flightBookingController = new flight.BookingController(bookingInventory, flightInventory);
+        BookingInventory bookingInventory = new BookingInventory();
+        FlightInventory flightInventory = null;
+        try {
+            flightInventory = new FlightInventory("Flights.txt");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        flightBookingController = new flight.BookingController(bookingInventory, flightInventory);
     }
 
     /**
@@ -68,16 +72,25 @@ public class BookingController {
      */
     public void createHotelBooking(User user, Cart cart, LocalDate checkIn, LocalDate checkOut, int persons) {
 
-        // User þarf að vera eins hjá okkur og hjá Hotel hópnum svo þetta virki
+        System.out.println("Creating a hotel booking for user: " + user.getName());
+        System.out.println("The selected hotel: " + cart.getSelectedHotel().getName());
         hotel.model.Booking hotelRoomBooking = new hotel.model.Booking(checkIn, checkOut, persons, user, cart.getSelectedHotel(), cart.getSelectedHotelRooms());
         hotelController.createBooking(hotelRoomBooking);
+        System.out.println("The hotel in the new booking: " + hotelRoomBooking.getHotel().getName());
 
     }
 
     public void createFlightBooking(User user, Cart cart) {
         List<Flight> selectedFlights = cart.getSelectedFlights();
+        int userId = user.getId();
 
-        // TODO: create booking by using the BookingController from the F-team
+        List<Integer> flightIds = List.of();
+        for (Flight flight : selectedFlights) {
+            Integer flightId = flight.getFlightID();
+            flightIds.add(flightId);
+        }
+        flightBookingController.createBooking(userId, flightIds);
+        System.out.println("Flight booking created successfully.");
     }
 
     /**
@@ -114,10 +127,6 @@ public class BookingController {
     }
 
     public List<flight.Booking> findFlightBookings(User user) {
-        System.out.println("User ID: " + user.getId());
-        if (user.getId() == null) {
-            return null;
-        }
         return flightBookingController.searchBookingsByUserID(user.getId());
     }
 
@@ -140,8 +149,8 @@ public class BookingController {
         hotelController.deleteBooking(booking);
     }
 
-    public void cancelFlightBooking(String bookingID) {
-
+    public void cancelFlightBooking(int bookingID) {
+        flightBookingController.cancelBooking(bookingID);
     }
 
     public void cancelDaytripBooking(Reservation reservation) {

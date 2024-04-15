@@ -49,7 +49,7 @@ public class UserDialog extends Dialog<User> {
     private void setupResultConverter() {
         setResultConverter(dialogButton -> {
             if (dialogButton == okButton) {
-                User newUser = new User(null, fxName.getText(),
+                User newUser = new User(1, fxName.getText(),
                         fxEmail.getText(),
                         new PaymentInfo(
                                 fxCardNumber.getText(),

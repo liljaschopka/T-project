@@ -106,7 +106,9 @@ public class CartView {
 
     private void borga() {
         User loggedInUser = packageController.getUser();
-        packageController.createBooking(bookingController);
+        packageController.createHotelBooking(bookingController);
+        packageController.createFlightBooking(bookingController);
+        packageController.createDayTripBooking(bookingController);
         packageController.clearSelection();
         Alert infoAlert = new Alert(Alert.AlertType.INFORMATION);
         infoAlert.setTitle(loggedInUser.getName());

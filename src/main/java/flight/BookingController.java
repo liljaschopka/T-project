@@ -63,7 +63,7 @@ public class BookingController {
         List<Booking> userBookings = bookingInventory.getBookingsByUserID(userID);
         if (userBookings.isEmpty()) {
             System.out.println("Engar bókanir fundust fyrir notanda með ID: " + userID);
-            return null;
+            return userBookings;
         } else {
             return userBookings;
         }
