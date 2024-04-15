@@ -9,7 +9,6 @@ import hotel.controller.HotelController;
 import hotel.model.HotelRoom;
 import model.Cart;
 import model.Flight;
-import model.PaymentInfo;
 import model.User;
 
 import java.time.LocalDate;
@@ -57,8 +56,8 @@ public class PackageController {
         return origin != null && destination != null && persons != 0;
     }
 
-    public void setUser(String name, String email, PaymentInfo paymentInfo, List<String> bookingIDs) {
-        this.user = new User(null, name, email, paymentInfo, bookingIDs);
+    public void setUser(User user) {
+        this.user = user;
     }
 
 

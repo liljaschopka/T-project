@@ -30,9 +30,10 @@ public class DateSelectorView {
 
     private static PackageController packageController;
 
+
     public static PackageController getPackageController() {
         if (packageController == null) {
-            packageController = new PackageController(null, "Default Origin", "Default Destination",
+            packageController = new PackageController(DataManager.getInstance().getCurrentUser(), "Default Origin", "Default Destination",
                     LocalDate.of(2024, Month.MAY,1), LocalDate.of(2024, Month.MAY,2), 0);
         }
         return packageController;
@@ -65,8 +66,16 @@ public class DateSelectorView {
                     return;
                 }
 
-                packageController = new PackageController(null, origin, destination,
-                        fxCheckIn.getValue(), fxCheckOut.getValue(), persons); // Update global state
+                // Retrieve the current user from DataManager
+                User currentUser = DataManager.getInstance().getCurrentUser();
+                if (currentUser == null) {
+                    showAlert(AlertType.ERROR, "No user data available. Please complete user registration.");
+                    return;
+                }
+
+                // Initialize the package controller with user data and trip details
+                packageController = new PackageController(currentUser, origin, destination,
+                        fxCheckIn.getValue(), fxCheckOut.getValue(), persons);
 
                 /*packageController.setOrigin(origin);
                 packageController.setDestination(destination);
@@ -94,9 +103,10 @@ public class DateSelectorView {
 
     @FXML
     public void initialize() {
-        if (packageController == null) {
-            getPackageController(); // Ensure the controller is initialized
-        }
+       // if (packageController == null) {
+        //    getPackageController(); // Ensure the controller is initialized
+       // }
+        packageController = getPackageController();
         setupMenuButton(fxOrigin, "Select Location", packageController.getOrigin());
         setupMenuButton(fxDestination, "Select Destination", packageController.getDestination());
         setupMenuButton(fxPeople, "Select Number", Integer.toString(packageController.getPersons()));
@@ -115,7 +125,7 @@ public class DateSelectorView {
         ViewSwitcher.switchTo(View.CART);
     }
 
-    @FXML
+   /* @FXML
     public void fxUserHandler(ActionEvent actionEvent) {
         if (getPackageController() == null) {
             showAlert(AlertType.ERROR, "Operation cannot be completed at this time.");
@@ -131,6 +141,23 @@ public class DateSelectorView {
                 getPackageController().setUser(user.getName(), user.getEmail(), user.getPaymentInfo(), user.getBookingIds());
                 System.out.println("New user created: " + user.getName());
                 showUserInfo(user);  // Optionally show immediate confirmation
+            });
+        }
+    }*/
+
+    @FXML
+    public void fxUserHandler(ActionEvent actionEvent) {
+        User currentUser = DataManager.getInstance().getCurrentUser();
+        if (currentUser != null) {
+            showUserArea(currentUser);
+        } else {
+            // No user registered, open the registration dialog
+            UserDialog dialog = new UserDialog();
+            Optional<User> result = dialog.showAndWait();
+            result.ifPresent(user -> {
+                DataManager.getInstance().setCurrentUser(user);  // Update DataManager with the new user
+                packageController.setUser(user);  // Also update the package controller with the new user
+                showUserArea(user);  // Display user area with new user info
             });
         }
     }

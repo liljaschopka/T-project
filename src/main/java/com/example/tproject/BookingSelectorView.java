@@ -84,6 +84,8 @@ public class BookingSelectorView {
             getPackageController(); // Ensure the controller is initialized
         }
     }
+
+    /*
     @FXML
     public void fxUserHandler(ActionEvent actionEvent) {
         if (getPackageController() == null) {
@@ -103,7 +105,24 @@ public class BookingSelectorView {
             });
         }
     }
+*/
 
+    @FXML
+    public void fxUserHandler(ActionEvent actionEvent) {
+        User currentUser = DataManager.getInstance().getCurrentUser();
+        if (currentUser != null) {
+            showUserArea(currentUser);
+        } else {
+            // No user registered, open the registration dialog
+            UserDialog dialog = new UserDialog();
+            Optional<User> result = dialog.showAndWait();
+            result.ifPresent(user -> {
+                DataManager.getInstance().setCurrentUser(user);  // Update DataManager with the new user
+                packageController.setUser(user);  // Update the package controller with the new user
+                showUserArea(user);  // Display user area with new user info
+            });
+        }
+    }
     public void showUserInfo(User user) {
         Alert infoAlert = new Alert(Alert.AlertType.INFORMATION);
         infoAlert.setTitle("User Information");

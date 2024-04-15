@@ -174,11 +174,21 @@ public class CartView {
         updateCartDisplay();
     }
 
-    private void newUser() {
+    /*private void newUser() {
         UserDialog dialog = new UserDialog();
         Optional<User> result = dialog.showAndWait();
         result.ifPresent(user -> {
             packageController.setUser(user.getName(), user.getEmail(), user.getPaymentInfo(), user.getBookingIds());
+            System.out.println("New user created: " + user.getName());
+        });
+    }*/
+
+    private void newUser() {
+        UserDialog dialog = new UserDialog();
+        Optional<User> result = dialog.showAndWait();
+        result.ifPresent(user -> {
+            DataManager.getInstance().setCurrentUser(user);  // Update DataManager with the new user
+            packageController.setUser(user);  // Update the package controller with the new user
             System.out.println("New user created: " + user.getName());
         });
     }
