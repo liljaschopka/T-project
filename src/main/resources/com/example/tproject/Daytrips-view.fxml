@@ -28,9 +28,9 @@
               <Button fx:id="fxAddToCart" layoutX="5.0" onAction="#fxAddTourToCartHandler" text="Add to Cart" />
          </children>
       </AnchorPane>
-        <Label fx:id="fxTourDetails" alignment="TOP_LEFT" prefHeight="64.0" prefWidth="358.0" visible="false" wrapText="true">
+        <Label fx:id="fxTourDetails" alignment="TOP_LEFT" prefHeight="64.0" prefWidth="358.0" visible="false" wrapText="true" styleClass="details-label">
             <HBox.margin>
-                <Insets bottom="0" left="10" right="0" top="0" />
+                <Insets bottom="0" left="0" right="0" top="0" />
             </HBox.margin>
         </Label>
     </HBox>
