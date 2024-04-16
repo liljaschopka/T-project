@@ -3,10 +3,12 @@ package com.example.tproject;
 import Mock_objects.HotelControllerListMock;
 import controllers.PackageController;
 import hotel.model.Hotel;
+import hotel.model.HotelRoom;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import model.Cart;
@@ -69,6 +71,20 @@ public class HotelsView {
     }
 
     @FXML
+    public void handleHotelRoomSelection(MouseEvent event) {
+        HotelRoom selectedHotelRoom = fxHotelRoomsList.getSelectionModel().getSelectedItem();
+        if (selectedHotelRoom != null) {
+            //HotelRoom selectedHotelRoom = fxHotelRoomsList.getSelectionModel().getSelectedItem();
+            //if (selectedHotelRoom != null) {
+            String hotelRoomImageName = selectedHotelRoom.getPictureURL();
+            hotelRoomImageName = hotelRoomImageName.replaceFirst("src/main/resources", "");
+            //System.out.print(hotelRoomImageName);
+            Image hotelRoomImage = new Image(getClass().getResourceAsStream(hotelRoomImageName));
+            fxHotelImageView.setImage(hotelRoomImage);
+        }
+    }
+
+    @FXML
     public void handleHotelSelection(MouseEvent event) {
         Hotel selectedHotel = fxHotelsList.getSelectionModel().getSelectedItem();
         if (selectedHotel != null) {
@@ -92,10 +108,16 @@ public class HotelsView {
                 System.out.println("Error: " + e.getMessage());
             }
 
+
             // Setja mynd (vantar URL frá Hotel)
-            /*String imageName = selectedHotel.getPicture();
-            Image hotelImage = new Image(imageName);
-            fxHotelImageView.setImage(hotelImage);*/
+            String imageName = selectedHotel.getPicture();
+            imageName = imageName.replaceFirst("src/main/resources", "");
+            //System.out.println(selectedHotel.getPicture());
+            Image hotelImage = new Image(getClass().getResourceAsStream(imageName));
+            //hotelImage = new Image(getClass().getResourceAsStream("/com/example/tproject/myndir/AK-Hotel.png"));
+            fxHotelImageView.setImage(hotelImage);
+
+
             //System.out.println(selectedHotel.getPicture());
         } else {
             fxHotelRoomsList.setVisible(false);
