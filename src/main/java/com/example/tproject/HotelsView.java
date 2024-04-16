@@ -85,16 +85,12 @@ public class HotelsView {
                 fxHotelRoomsList.setVisible(true);
                 fxAddToCart.setVisible(true);
             } catch (IllegalArgumentException e) {
-                fxHotelRoomsList.setItems(FXCollections.observableArrayList());  // Ensure the list is empty
-                fxHotelRoomsList.setPlaceholder(new Label("No available rooms"));  // Set placeholder text
+                fxHotelRoomsList.setItems(FXCollections.observableArrayList());
+                fxHotelRoomsList.setPlaceholder(new Label("No available rooms"));
                 fxHotelRoomsList.setVisible(true);
-                fxAddToCart.setVisible(false);  // Optionally, hide the Add to Cart button as there are no rooms to add
-                System.out.println("Error: " + e.getMessage());  // Optionally log the error
+                fxAddToCart.setVisible(false);
+                System.out.println("Error: " + e.getMessage());
             }
-
-            //fxHotelRoomsList.setItems(FXCollections.observableArrayList(availableRooms));
-            //fxHotelRoomsList.setVisible(true);
-            //fxAddToCart.setVisible(true);
 
             // Setja mynd (vantar URL frá Hotel)
             /*String imageName = selectedHotel.getPicture();
