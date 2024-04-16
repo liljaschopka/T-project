@@ -114,7 +114,7 @@ public class FlightsView {
         infoAlert.setTitle("User Information");
         infoAlert.setHeaderText("Added to cart!");
         infoAlert.setContentText("Departure " + selectedDeparture.getDestination()
-                + " and arrival " + selectedArrival.getDestination() + " has been added to your cart.");
+                + " and return " + selectedArrival.getDestination() + " has been added to your cart.");
         infoAlert.showAndWait();
     }
 
