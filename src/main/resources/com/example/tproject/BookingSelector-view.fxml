@@ -1,38 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
 
-<AnchorPane fx:id="mainAnchorPane" prefHeight="400.0" prefWidth="600.0" stylesheets="@stylesheets/booking.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tproject.BookingSelectorView">
-    <children>
-        <Label fx:id="description" layoutX="151.0" layoutY="24.0" prefHeight="48.0" prefWidth="299.0" styleClass="title" text="Search available..." />
-        <HBox alignment="CENTER" layoutX="77.0" layoutY="62.0" spacing="10.0" />
-        <HBox alignment="CENTER" layoutX="77.0" layoutY="106.0" spacing="10.0" />
-         <Button fx:id="fxGoBack" layoutX="251.0" layoutY="309.0" onAction="#fxGoBackHandler" styleClass="function-button" text="Go Back" />
-         <Button fx:id="fxDaytrips" layoutX="386.0" layoutY="147.0" onAction="#fxDaytripsHandler" styleClass="function-button" text="Day Trips" />
-         <Button fx:id="fxHotels" layoutX="257.0" layoutY="147.0" onAction="#fxHotelsHandler" styleClass="function-button" text="Hotels" />
-         <Button fx:id="fxFlights" layoutX="111.0" layoutY="147.0" onAction="#fxFlightsHandler" styleClass="function-button" text="Flights" />
-      <ImageView fitHeight="87.0" fitWidth="70.0" layoutX="119.0" layoutY="196.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@myndir/flugvel2.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="79.0" fitWidth="86.0" layoutX="258.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@myndir/bygging1.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="87.0" fitWidth="70.0" layoutX="404.0" layoutY="199.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@myndir/lest2.png" />
-         </image>
-      </ImageView>
-      <Label layoutX="153.0" layoutY="98.0" text="Click what you are looking for to see what's available!" />
-        <Button fx:id="fxCartButton" layoutX="514.0" layoutY="19.0" mnemonicParsing="false" onAction="#goToCart" prefHeight="22.0" prefWidth="49.0" text="Cart" styleClass="user-cart-button"/>
-        <Button layoutX="463.0" layoutY="19.0" mnemonicParsing="false" onAction="#fxUserHandler" text="User" styleClass="user-cart-button"/>
-    </children>
-</AnchorPane>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.tproject.BookingSelectorView" stylesheets="@stylesheets/booking.css">
+    <center>
+        <AnchorPane fx:id="mainAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                    minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@stylesheets/booking.css">
+            <children>
+                <Label fx:id="description" layoutX="151.0" layoutY="24.0" prefHeight="48.0" prefWidth="299.0"
+                       styleClass="title" text="Search available..."/>
+                <HBox alignment="CENTER" layoutX="77.0" layoutY="62.0" spacing="10.0"/>
+                <HBox alignment="CENTER" layoutX="77.0" layoutY="106.0" spacing="10.0"/>
+                <Button fx:id="fxGoBack" layoutX="251.0" layoutY="309.0" onAction="#fxGoBackHandler"
+                        styleClass="function-button" text="Go Back"/>
+                <Button fx:id="fxDaytrips" layoutX="386.0" layoutY="147.0" onAction="#fxDaytripsHandler"
+                        styleClass="function-button" text="Day Trips"/>
+                <Button fx:id="fxHotels" layoutX="257.0" layoutY="147.0" onAction="#fxHotelsHandler"
+                        styleClass="function-button" text="Hotels"/>
+                <Button fx:id="fxFlights" layoutX="111.0" layoutY="147.0" onAction="#fxFlightsHandler"
+                        styleClass="function-button" text="Flights"/>
+                <ImageView fitHeight="87.0" fitWidth="70.0" layoutX="119.0" layoutY="196.0" pickOnBounds="true"
+                           preserveRatio="true">
+                    <image>
+                        <Image url="@myndir/flugvel2.png"/>
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="79.0" fitWidth="86.0" layoutX="258.0" layoutY="200.0" pickOnBounds="true"
+                           preserveRatio="true">
+                    <image>
+                        <Image url="@myndir/bygging1.png"/>
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="87.0" fitWidth="70.0" layoutX="404.0" layoutY="199.0" pickOnBounds="true"
+                           preserveRatio="true">
+                    <image>
+                        <Image url="@myndir/lest2.png"/>
+                    </image>
+                </ImageView>
+                <Label layoutX="153.0" layoutY="98.0" text="Click what you are looking for to see what's available!"/>
+                <Button fx:id="fxCartButton" layoutX="514.0" layoutY="19.0" mnemonicParsing="false" onAction="#goToCart"
+                        prefHeight="22.0" prefWidth="49.0" styleClass="user-cart-button" text="Cart"/>
+                <Button layoutX="463.0" layoutY="19.0" mnemonicParsing="false" onAction="#fxUserHandler"
+                        styleClass="user-cart-button" text="User"/>
+            </children>
+        </AnchorPane>
+    </center>
+</BorderPane>
