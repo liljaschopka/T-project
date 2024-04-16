@@ -138,4 +138,26 @@ public class CustomerDAL implements CustomerInterface {
         }
     }
 
+    @Override
+    public Customer getCustomerByEmail(String email) {
+        String sql = "SELECT * FROM Customers WHERE Email = ?";
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, email);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                return new Customer(
+                        rs.getInt("CustomerID"),
+                        rs.getString("Name"),
+                        rs.getString("Email"),
+                        null // Replace null with actual payment info retrieval
+                );
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+
 }

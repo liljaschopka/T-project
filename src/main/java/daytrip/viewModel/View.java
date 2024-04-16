@@ -62,7 +62,8 @@ public class View {
             System.out.println("11. Cancel reservation");
             System.out.println("12. Add new customer");
             System.out.println("13. Show all reservations made by specific customer");
-            System.out.println("14. Exit");
+            System.out.println("14. Get customer information by email");
+            System.out.println("15. Exit");
             int choice = scanner.nextInt();
             scanner.nextLine();
 
@@ -107,6 +108,9 @@ public class View {
                     viewCustomerReservations();
                     break;
                 case 14:
+                    getCustomerByEmail();
+                    break;
+                case 15:
                     exit = true;
                     System.out.println("Exiting...");
                     break;
@@ -402,6 +406,27 @@ public class View {
             }
         }
     }
+
+    /**
+     * Retrieves customer information based on email address and displays it.
+     */
+    private void getCustomerByEmail() {
+        System.out.println("Enter customer email:");
+        String email = scanner.nextLine();
+
+        Customer customer = customerController.getCustomerByEmail(email);
+
+        if (customer != null) {
+            System.out.println("Customer Information:");
+            System.out.println("Customer ID: " + customer.getId());
+            System.out.println("Name: " + customer.getName());
+            System.out.println("Email: " + customer.getEmail());
+            // Print additional customer information as needed
+        } else {
+            System.out.println("No customer found with the provided email address.");
+        }
+    }
+
 
 
 

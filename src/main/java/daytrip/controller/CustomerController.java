@@ -63,4 +63,9 @@ public class CustomerController {
         Customer newCustomer = new Customer(null, name, email, paymentInfo);
         return customerDAL.addNewCustomer(newCustomer);
     }
+
+    public Customer getCustomerByEmail(String email) {
+        return customerDAL.getCustomerByEmail(email);
+    }
+
 }
