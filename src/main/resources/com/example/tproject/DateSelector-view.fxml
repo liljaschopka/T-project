@@ -1,85 +1,90 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="mainPanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@stylesheets/date.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tproject.DateSelectorView">
-   <children>
-      <VBox alignment="CENTER" layoutX="100.0" layoutY="30.0" prefWidth="400.0" spacing="20.0">
-         <Label styleClass="title" text="Plan Your Journey" />
-         <HBox alignment="CENTER" spacing="15.0">
-            <VBox spacing="10.0">
-               <Label styleClass="form-label" text="Check-in date" />
-               <DatePicker fx:id="fxCheckIn" styleClass="date-picker" />
-            </VBox>
-            <VBox spacing="10.0">
-               <Label styleClass="form-label" text="Check-out date" />
-               <DatePicker fx:id="fxCheckOut" styleClass="date-picker" />
-            </VBox>
-         </HBox>
-         <HBox alignment="CENTER" prefHeight="188.0" prefWidth="400.0" spacing="15.0">
-            <VBox spacing="10.0">
-               <Label styleClass="form-label" text="From" />
-               <MenuButton fx:id="fxOrigin" styleClass="menu-button" text="Select Location">
-                  <items>
-                     <MenuItem text="Reykjavík" />
-                     <MenuItem text="Akureyri" />
-                     <MenuItem text="Egilsstaðir" />
-                     <MenuItem text="Ísafjörður" />
-                  </items>
-               </MenuButton>
-            </VBox>
-            <VBox spacing="10.0">
-               <Label styleClass="form-label" text="To" />
-               <MenuButton fx:id="fxDestination" styleClass="menu-button" text="Select Destination">
-                  <items>
-                     <MenuItem text="Reykjavík" />
-                     <MenuItem text="Akureyri" />
-                     <MenuItem text="Egilsstaðir" />
-                     <MenuItem text="Ísafjörður" />
-                  </items>
-               </MenuButton>
-            </VBox>
-            <VBox spacing="10.0">
-               <Label prefHeight="20.0" prefWidth="170.0" styleClass="form-label" text="Amount of People" />
-               <MenuButton fx:id="fxPeople" styleClass="menu-button" text="Select Number">
-                  <items>
-                     <MenuItem text="1" />
-                     <MenuItem text="2" />
-                     <MenuItem text="3" />
-                     <MenuItem text="4" />
-                     <MenuItem text="5" />
-                     <MenuItem text="6" />
-                  </items>
-               </MenuButton>
-            </VBox>
-         </HBox>
-      </VBox>
-      <Button fx:id="fxConfirm" layoutX="253.0" layoutY="272.0" onAction="#fxConfirmHandler" prefHeight="37.0" prefWidth="94.0" styleClass="confirm-button" text="Confirm" />
-      <Button fx:id="fxCartButton" layoutX="514.0" layoutY="19.0" mnemonicParsing="false" onAction="#goToCart" prefHeight="22.0" prefWidth="49.0" text="Cart" styleClass="user-cart-button"/>
-      <Button layoutX="463.0" layoutY="19.0" mnemonicParsing="false" onAction="#fxUserHandler" text="User" styleClass="user-cart-button"/>
-      <ImageView fitHeight="148.0" fitWidth="180.0" layoutX="356.0" layoutY="252.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@myndir/flugvel3.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="80.0" fitWidth="94.0" layoutX="260.0" layoutY="309.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@myndir/lest.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="148.0" fitWidth="180.0" layoutX="100.0" layoutY="252.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@myndir/flugvel3.png" />
-         </image>
-      </ImageView>
-   </children>
-</AnchorPane>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.tproject.DateSelectorView" stylesheets="@stylesheets/date.css">
+    <center>
+        <AnchorPane id="mainPanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                    prefHeight="400.0" prefWidth="600.0" stylesheets="@stylesheets/date.css">
+            <children>
+                <VBox alignment="CENTER" layoutX="100.0" layoutY="30.0" prefWidth="400.0" spacing="20.0">
+                    <Label styleClass="title" text="Plan Your Journey"/>
+                    <HBox alignment="CENTER" spacing="15.0">
+                        <VBox spacing="10.0">
+                            <Label styleClass="form-label" text="Check-in date"/>
+                            <DatePicker fx:id="fxCheckIn" styleClass="date-picker"/>
+                        </VBox>
+                        <VBox spacing="10.0">
+                            <Label styleClass="form-label" text="Check-out date"/>
+                            <DatePicker fx:id="fxCheckOut" styleClass="date-picker"/>
+                        </VBox>
+                    </HBox>
+                    <HBox alignment="CENTER" prefHeight="188.0" prefWidth="400.0" spacing="15.0">
+                        <VBox spacing="10.0">
+                            <Label styleClass="form-label" text="From"/>
+                            <MenuButton fx:id="fxOrigin" styleClass="menu-button" text="Select Location">
+                                <items>
+                                    <MenuItem text="Reykjavík"/>
+                                    <MenuItem text="Akureyri"/>
+                                    <MenuItem text="Egilsstaðir"/>
+                                    <MenuItem text="Ísafjörður"/>
+                                </items>
+                            </MenuButton>
+                        </VBox>
+                        <VBox spacing="10.0">
+                            <Label styleClass="form-label" text="To"/>
+                            <MenuButton fx:id="fxDestination" styleClass="menu-button" text="Select Destination">
+                                <items>
+                                    <MenuItem text="Reykjavík"/>
+                                    <MenuItem text="Akureyri"/>
+                                    <MenuItem text="Egilsstaðir"/>
+                                    <MenuItem text="Ísafjörður"/>
+                                </items>
+                            </MenuButton>
+                        </VBox>
+                        <VBox spacing="10.0">
+                            <Label prefHeight="20.0" prefWidth="170.0" styleClass="form-label" text="Amount of People"/>
+                            <MenuButton fx:id="fxPeople" styleClass="menu-button" text="Select Number">
+                                <items>
+                                    <MenuItem text="1"/>
+                                    <MenuItem text="2"/>
+                                    <MenuItem text="3"/>
+                                    <MenuItem text="4"/>
+                                    <MenuItem text="5"/>
+                                    <MenuItem text="6"/>
+                                </items>
+                            </MenuButton>
+                        </VBox>
+                    </HBox>
+                </VBox>
+                <Button fx:id="fxConfirm" layoutX="253.0" layoutY="272.0" onAction="#fxConfirmHandler" prefHeight="37.0"
+                        prefWidth="94.0" styleClass="confirm-button" text="Confirm"/>
+                <Button fx:id="fxCartButton" layoutX="514.0" layoutY="19.0" mnemonicParsing="false" onAction="#goToCart"
+                        prefHeight="22.0" prefWidth="49.0" styleClass="user-cart-button" text="Cart"/>
+                <Button layoutX="463.0" layoutY="19.0" mnemonicParsing="false" onAction="#fxUserHandler"
+                        styleClass="user-cart-button" text="User"/>
+                <ImageView fitHeight="148.0" fitWidth="180.0" layoutX="356.0" layoutY="252.0" pickOnBounds="true"
+                           preserveRatio="true">
+                    <image>
+                        <Image url="@myndir/flugvel3.png"/>
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="80.0" fitWidth="94.0" layoutX="260.0" layoutY="309.0" pickOnBounds="true"
+                           preserveRatio="true">
+                    <image>
+                        <Image url="@myndir/lest.png"/>
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="148.0" fitWidth="180.0" layoutX="100.0" layoutY="252.0" pickOnBounds="true"
+                           preserveRatio="true">
+                    <image>
+                        <Image url="@myndir/flugvel3.png"/>
+                    </image>
+                </ImageView>
+            </children>
+        </AnchorPane>
+    </center>
+</BorderPane>
