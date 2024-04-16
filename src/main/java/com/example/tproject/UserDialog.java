@@ -85,7 +85,7 @@ public class UserDialog extends Dialog<User> {
         );
     }
 
-    private void setupResultConverter() {
+   /* private void setupResultConverter() {
         setResultConverter(dialogButton -> {
             if (dialogButton == okButton) {
                 try {
@@ -141,8 +141,64 @@ public class UserDialog extends Dialog<User> {
             }
             return null;
         });
-    }
+    }*/
 
+    private void setupResultConverter() {
+        setResultConverter(dialogButton -> {
+            if (dialogButton == okButton) {
+                try {
+                    // Attempt to parse the text in fxCardNumber as an integer
+                    Integer.parseInt(fxCardNumber.getText());
+                    //Integer.parseInt(fxExpirationDate.getText());
+                    String[] parts = fxExpirationDate.getText().split("/");
+                    Integer.parseInt(parts[0]);
+                    Integer.parseInt(parts[1]);
+                    Integer.parseInt(fxSecurityCode.getText());
+                    User newUser = new User(1, fxName.getText(),
+                            fxEmail.getText(),
+                            new PaymentInfo(
+                                    fxCardNumber.getText(),
+                                    fxCardHolder.getText(),
+                                    fxExpirationDate.getText(),
+                                    fxSecurityCode.getText()
+                            ));
+
+                    DataManager.getInstance().setCurrentUser(newUser);  // Store user in DataManager
+                    return newUser;  // Return the newly created user
+                } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+                    try {
+                        Integer.parseInt(fxCardNumber.getText());
+
+                    } catch (NumberFormatException i) {
+                        showWarningDialog("Card Number must be a number");
+                        return null;
+                    }
+                    try {
+                        String[] parts = fxExpirationDate.getText().split("/");
+                        Integer.parseInt(parts[0]);
+                        Integer.parseInt(parts[1]);
+                        // Integer.parseInt(fxExpirationDate.getText());
+
+                    } catch (NumberFormatException | ArrayIndexOutOfBoundsException i) {
+                        // Handle the exceptions
+                        showWarningDialog("Expiration Date must be a day/month");
+                        return null;
+                    }
+                    try {
+                        Integer.parseInt(fxSecurityCode.getText());
+
+                    } catch (NumberFormatException i) {
+                        showWarningDialog("Security Code must be a number");
+                        return null;
+                    }
+                }
+
+                // If parsing fails, show an error message
+                return null;
+            }
+            return null;
+        });
+    }
 
     private void showWarningDialog(String s) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
