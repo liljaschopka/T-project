@@ -55,6 +55,15 @@ public class Flight {
         return false;
     }
 
+    public boolean unbookSeat() {
+    if (this.availableSeats < this.totalSeats) {
+        this.availableSeats++;
+        return true;
+    } else {
+        return false;
+        }
+    }
+
     public String getDepartureTime() {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm");
         return departureTime.format(dateTimeFormatter);
