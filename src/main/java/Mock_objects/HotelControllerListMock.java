@@ -1,7 +1,4 @@
-package controllers;
-
-import model.Hotel;
-import model.HotelRoom;
+package Mock_objects;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

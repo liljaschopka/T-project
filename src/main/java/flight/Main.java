@@ -1,7 +1,5 @@
 package flight;
 
-import model.Flight;
-
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -26,7 +24,7 @@ public class Main {
             System.out.println("Invalid date format. Please use 'YYYY-MM-DD'.");
             return;
         }
-        
+
         List<Flight> foundFlights = flightInventory.searchFlight(origin, destination, date);
 
         if (foundFlights.isEmpty()) {

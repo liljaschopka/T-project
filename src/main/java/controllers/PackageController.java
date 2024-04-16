@@ -7,11 +7,11 @@ import daytrip.dal.ReservationDAL;
 import daytrip.model.Reservation;
 import daytrip.model.Tour;
 import flight.Booking;
+import flight.Flight;
 import flight.FlightInventory;
 import hotel.controller.HotelController;
 import hotel.model.HotelRoom;
 import model.Cart;
-import model.Flight;
 import model.User;
 
 import java.time.LocalDate;

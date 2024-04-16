@@ -11,4 +11,7 @@ module com.example.tproject {
     exports flight;
     exports controllers;
     opens controllers to javafx.fxml;
+    opens flight to javafx.fxml;
+    exports Mock_objects;
+    opens Mock_objects to javafx.fxml;
 }

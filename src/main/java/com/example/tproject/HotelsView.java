@@ -1,6 +1,6 @@
 package com.example.tproject;
 
-import controllers.HotelControllerListMock;
+import Mock_objects.HotelControllerListMock;
 import controllers.PackageController;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;

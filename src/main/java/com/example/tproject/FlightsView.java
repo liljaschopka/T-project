@@ -1,14 +1,14 @@
 package com.example.tproject;
 
-import controllers.FlightController;
 import controllers.PackageController;
+import flight.Flight;
+import flight.FlightController;
 import flight.FlightInventory;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import model.Cart;
-import model.Flight;
 
 import java.io.IOException;
 import java.util.List;

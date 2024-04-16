@@ -3,6 +3,7 @@ package com.example.tproject;
 import controllers.BookingController;
 import controllers.PackageController;
 import daytrip.model.Tour;
+import flight.Flight;
 import hotel.model.Hotel;
 import hotel.model.HotelRoom;
 import javafx.event.ActionEvent;
@@ -12,7 +13,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import model.Cart;
-import model.Flight;
 import model.User;
 
 import java.util.List;
@@ -119,7 +119,7 @@ public class CartView {
     @FXML
     public void fxRemoveHandler(ActionEvent ActionEvent) {
         String selected = fxCart.getSelectionModel().getSelectedItem().toString();
-        //List<hotel.model.HotelRoom> rooms = cart.getSelectedHotelRooms();
+        //List<hotel.Mock_objects.HotelRoom> rooms = cart.getSelectedHotelRooms();
         if (selected.startsWith("Room number:")) {
             String roomNumberString = selected.substring("Room number:".length()).trim();
             int roomNumber = Integer.parseInt(roomNumberString.split(" ")[0]);
@@ -198,7 +198,7 @@ public class CartView {
 
     public void updateCartDisplay() {
         fxCart.getItems().clear(); // Clear existing items
-        //hotel.model.Hotel selectedHotel = cart.getSelectedHotel();
+        //hotel.Mock_objects.Hotel selectedHotel = cart.getSelectedHotel();
         hotel.model.HotelRoom selectedRoom = cart.getSelectedHotelRoom();
         // if (selectedHotel != null) {
         for (hotel.model.HotelRoom hotelRoom : cart.getSelectedHotelRooms()) {

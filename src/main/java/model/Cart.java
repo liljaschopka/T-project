@@ -1,6 +1,7 @@
 package model;
 
 import daytrip.model.Tour;
+import flight.Flight;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -153,5 +154,5 @@ public class Cart {
         return totalAmount == 0;
     }
 
-    
+
 }

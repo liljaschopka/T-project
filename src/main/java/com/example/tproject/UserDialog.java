@@ -7,7 +7,6 @@ import model.PaymentInfo;
 import model.User;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class UserDialog extends Dialog<User> {
     @FXML
@@ -56,7 +55,7 @@ public class UserDialog extends Dialog<User> {
                                 fxCardHolder.getText(),
                                 fxExpirationDate.getText(),
                                 fxSecurityCode.getText()
-                        ), new ArrayList<>());  // bookingIDs
+                        ));
 
                 DataManager.getInstance().setCurrentUser(newUser);  // Store user in DataManager
                 return newUser;  // Return the newly created user

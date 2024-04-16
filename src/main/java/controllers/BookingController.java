@@ -10,9 +10,9 @@ import daytrip.model.Customer;
 import daytrip.model.Reservation;
 import daytrip.model.Tour;
 import flight.BookingInventory;
+import flight.Flight;
 import flight.FlightInventory;
 import model.Cart;
-import model.Flight;
 import model.User;
 
 import java.io.IOException;

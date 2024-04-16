@@ -1,7 +1,5 @@
 package flight;
 
-import model.Flight;
-
 import java.io.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;

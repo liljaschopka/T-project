@@ -1,6 +1,9 @@
 package controllers;
 
-import model.Hotel;
+import Mock_objects.Hotel;
+import Mock_objects.HotelControllerEmptyMock;
+import Mock_objects.HotelControllerInterface;
+import Mock_objects.HotelControllerListMock;
 import model.PaymentInfo;
 import model.User;
 import org.junit.jupiter.api.Test;

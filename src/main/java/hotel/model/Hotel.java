@@ -50,4 +50,8 @@ public class Hotel {
         return this.rooms;
     }
 
+    public String getPicture() {
+        return this.picture;
+    }
+
 }

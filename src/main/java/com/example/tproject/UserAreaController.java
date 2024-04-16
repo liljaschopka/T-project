@@ -4,10 +4,10 @@ import controllers.BookingController;
 import controllers.PackageController;
 import daytrip.model.Reservation;
 import daytrip.model.Tour;
+import flight.Flight;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import model.Flight;
 import model.User;
 
 import java.util.List;

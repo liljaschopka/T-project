@@ -1,8 +1,4 @@
-package controllers;
-
-import flight.FlightInventoryInterface;
-import flight.User;
-import model.Flight;
+package flight;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

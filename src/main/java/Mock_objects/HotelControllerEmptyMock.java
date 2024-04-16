@@ -1,7 +1,4 @@
-package controllers;
-
-import model.Hotel;
-import model.HotelRoom;
+package Mock_objects;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -16,14 +13,16 @@ import java.util.List;
  *
  *
  *****************************************************************************/
-public class HotelController implements HotelControllerInterface {
+public class HotelControllerEmptyMock implements HotelControllerInterface {
 
+    // the method returns an empty list of hotels
     public List<Hotel> searchForHotels(String location, LocalDate checkIn, LocalDate checkOut, int capacity) {
-        return null;
+        List<Hotel> hotels = List.of();
+        return hotels;
     }
 
     public List<HotelRoom> getAvailableRooms(Hotel hotel, int persons) {
-        return null;
+        List<HotelRoom> rooms = List.of();
+        return rooms;
     }
-
 }

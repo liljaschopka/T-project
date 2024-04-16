@@ -1,9 +1,5 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
 /******************************************************************************
  *  Nafn    : Lilja Kolbrún Schopka
  *  T-póstur: lks17@hi.is
@@ -20,14 +16,13 @@ public class User {
     private String name;
     private String email;
     private PaymentInfo paymentInfo;
-    private List<String> bookingIds;
 
-    public User(Integer id, String name, String email, PaymentInfo paymentInfo, List<String> bookingIds) {
+
+    public User(Integer id, String name, String email, PaymentInfo paymentInfo) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.paymentInfo = paymentInfo;
-        this.bookingIds = bookingIds;
     }
 
     public Integer getId() {
@@ -67,23 +62,5 @@ public class User {
             this.paymentInfo = paymentInfo;
         }
     }
-
-    public List<String> getBookingIds() {
-        return bookingIds;
-    }
-
-    public void addBookingId(String bookingId) {
-        this.bookingIds.add(bookingId);
-    }
-
-    public List<String> getBookingDetails() {
-        //TODO ná í booking úr eh dataset eða eh hm idk á eftir að figure it out
-        if (bookingIds == null || bookingIds.isEmpty()) {
-            return new ArrayList<>();
-        }
-        return bookingIds.stream()
-                .map(id -> "Booking ID: " + id + " - Details of booking here.")
-                .collect(Collectors.toList());
-        
-    }
+    
 }
