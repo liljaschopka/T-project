@@ -28,10 +28,17 @@ public class Main {
         List<Flight> foundFlights = flightInventory.searchFlight(origin, destination, date);
 
         if (foundFlights.isEmpty()) {
-            System.out.println("Engin flug fundust.");
+            System.out.println("No flights found.");
         } else {
             for (Flight flight : foundFlights) {
                 System.out.println(flight);
+                // Assume booking the first found flight for simplicity
+                if (flightInventory.bookFlight(flight.getFlightID())) {
+                    System.out.println("Flight booked successfully. Remaining seats: " + flight.getAvailableSeats());
+                } else {
+                    System.out.println("Failed to book flight. No seats available.");
+                }
+                break; // Break after attempting to book the first flight
             }
         }
     }
