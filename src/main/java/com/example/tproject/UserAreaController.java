@@ -85,30 +85,55 @@ public class UserAreaController {
         // Clear the existing items in the list view
         bookingsListView.getItems().clear();
 
+        // Retrieve bookings
         List<hotel.model.Booking> hotelBookings = bookingController.findHotelBookings(user);
         List<flight.Booking> flightBookings = bookingController.findFlightBookings(user);
         List<Reservation> tourReservations = bookingController.findDaytripBookings(user);
 
+        // Check if all lists are empty
         if (hotelBookings.isEmpty() && flightBookings.isEmpty() && tourReservations.isEmpty()) {
             bookingsListView.getItems().add("No bookings found.");
         } else {
-            hotelBookings.forEach(booking -> bookingsListView.getItems().add(booking));
-            flightBookings.forEach(booking -> booking.getFlights().forEach(flight -> bookingsListView.getItems().add(flight)));
-            tourReservations.forEach(reservation -> bookingsListView.getItems().add(reservation));
+            // Format and add hotel bookings
+            hotelBookings.forEach(booking -> {
+                String bookingInfo = String.format("Hotel Booking ID: %d, Dates: %s - %s at %s, number of guests: %d",
+                        booking.getBookingID(), booking.getCheckIn(), booking.getCheckOut(),
+                        booking.getHotel().getName(), booking.getPersons());
+                bookingsListView.getItems().add(bookingInfo);
+            });
+
+            // Format and add flight bookings
+            flightBookings.forEach(booking -> {
+                booking.getFlights().forEach(flight -> {
+                    String flightInfo = String.format("Flight ID: %d, details: %s",
+                            flight.getFlightID(), flight.getFlightDetails());
+                    bookingsListView.getItems().add(flightInfo);
+                });
+            });
+
+            // Format and add tour reservations
+            tourReservations.forEach(reservation -> {
+                Tour tour = bookingController.getTourDetails(reservation.getTourID());
+                String reservationInfo = String.format("Tour Reservation ID: %d, Date: %s, Name: %s",
+                        tour.getTourID(), reservation.getDateBooked(), tour.getName());
+                bookingsListView.getItems().add(reservationInfo);
+            });
         }
     }
 
     private boolean processCancellation(String selected) {
         try {
+            String[] parts = selected.split(",");
+            String idPart = parts[0]; // "Hotel Booking ID: 123"
+            String idStr = idPart.split(":")[1].trim(); // "123"
+            int bookingID = Integer.parseInt(idStr);
+
             if (selected.startsWith("Hotel Booking ID: ")) {
-                int bookingID = Integer.parseInt(selected.substring(selected.indexOf(':') + 1, selected.indexOf(',')).trim());
                 return bookingController.cancelHotelBooking(bookingID);
             } else if (selected.startsWith("Tour Reservation ID: ")) {
-                int reservationID = Integer.parseInt(selected.substring(selected.indexOf(':') + 1, selected.indexOf(',')).trim());
-                return bookingController.cancelTourBooking(reservationID);
+                return bookingController.cancelTourBooking(bookingID);
             } else if (selected.startsWith("Flight ID: ")) {
-                int flightID = Integer.parseInt(selected.substring(selected.indexOf(':') + 1, selected.indexOf(',')).trim());
-                return bookingController.cancelFlightBooking(flightID);
+                return bookingController.cancelFlightBooking(bookingID);
             } else {
                 return false;
             }
