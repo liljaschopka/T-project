@@ -170,21 +170,28 @@ public class PackageController {
     public void createHotelBooking(BookingController bookingController) {
         if (user != null && !cart.getSelectedHotelRooms().isEmpty()) {
             bookingController.createHotelBooking(user, cart, checkIn, checkOut, persons);
-        } else
+            System.out.println("Attempting to create a hotel booking");
+        } else if (user == null)
             throw new IllegalArgumentException("You have to be logged in to make a booking");
+        else
+            System.out.println("No hotel rooms selected");
 
     }
 
     public void createDayTripBooking(BookingController bookingController) {
         if (user != null && !cart.getSelectedTours().isEmpty()) {
-            bookingController.createDayTripBooking(user, cart);
-        } else
+            bookingController.createDayTripBooking(user, cart, persons);
+            System.out.println("Attempting to create a daytrip booking");
+        } else if (user == null)
             throw new IllegalArgumentException("You have to be logged in to make a booking");
+        else
+            System.out.println("No daytrips selected");
     }
 
     public void createFlightBooking(BookingController bookingController) {
         if (user != null && !cart.getSelectedFlights().isEmpty()) {
             bookingController.createFlightBooking(user, cart);
+            System.out.println("Attempting to create a flight booking");
         } else
             throw new IllegalArgumentException("You have to be logged in to make a booking");
     }

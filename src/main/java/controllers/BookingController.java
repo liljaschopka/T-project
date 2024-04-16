@@ -99,7 +99,7 @@ public class BookingController {
      * @param user the user making the booking
      * @param cart the cart containing the tours to be booked
      */
-    public void createDayTripBooking(User user, Cart cart) {
+    public void createDayTripBooking(User user, Cart cart, int persons) {
         List<Tour> selectedTours = cart.getSelectedTours();
 
         // TODO: create booking by using the ReservationController from the D-team
@@ -109,9 +109,8 @@ public class BookingController {
             String userName = user.getName();
             String userEmail = user.getEmail();
             LocalDate date = tour.getDate();
-            int participants = tour.getMaxParticipants();
 
-            boolean success = reservationController.makeReservation(daytripId, userName, userEmail, date, participants, Optional.empty());
+            boolean success = reservationController.makeReservation(daytripId, userName, userEmail, date, persons, Optional.empty());
             if (success) {
                 System.out.println("Daytrip booking successful.");
                 // bæta bookingID við BookingIds hjá user

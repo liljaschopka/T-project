@@ -74,14 +74,6 @@ public class CartView {
      */
     @FXML
     public void fxPayHandler(ActionEvent ActionEvent) {
-        //if (user == null) {
-        //  newUser();
-        //} else {
-        //  packageController.createBooking(bookingController);
-        //packageController.clearSelection();
-        //ViewSwitcher.switchTo(View.DATESELECTOR);
-        // cart.emptyCart();
-        //    }
         User loggedInUser = packageController.getUser();
         if (loggedInUser != null) {
             // this.date.showUserArea(loggedInUser);
@@ -95,7 +87,6 @@ public class CartView {
             UserDialog dialog = new UserDialog();
             Optional<User> result = dialog.showAndWait();
             result.ifPresent(user -> {
-                //packageController.setUser(user.getName(), user.getEmail(), user.getPaymentInfo(), user.getBookingIds());
                 this.user = user;
                 System.out.println("New user created: " + user.getName());
                 this.date.showUserInfo(user);  // Optionally show immediate confirmation
@@ -107,7 +98,7 @@ public class CartView {
     private void borga() {
         User loggedInUser = packageController.getUser();
         packageController.createHotelBooking(bookingController);
-        packageController.createFlightBooking(bookingController);
+        // packageController.createFlightBooking(bookingController);
         packageController.createDayTripBooking(bookingController);
         packageController.clearSelection();
         Alert infoAlert = new Alert(Alert.AlertType.INFORMATION);
