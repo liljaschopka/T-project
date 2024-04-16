@@ -15,6 +15,7 @@ public class TprojectApplication extends Application {
         ViewSwitcher.setScene(scene);
         ViewSwitcher.pushToHistory(View.DATESELECTOR);   //bætt við
         stage.setScene(scene);
+        stage.setMaximized(true);
         stage.show();
     }
 
