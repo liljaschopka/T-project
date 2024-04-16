@@ -69,13 +69,19 @@ public class BookingController {
     }
 
     public void cancelBooking(int bookingID) {
-        boolean wasCancelled = bookingInventory.removeBooking(bookingID);
-        if (wasCancelled) {
+    Booking booking = bookingInventory.getBookingByID(bookingID);
+    if (booking != null) {
+        booking.getFlights().forEach(flight -> flight.unbookSeat());
+        if (bookingInventory.removeBooking(bookingID)) {
             System.out.println("Bókun með ID " + bookingID + " var aflýst.");
         } else {
-            System.out.println("Engin bókun fannst með ID " + bookingID);
+            System.out.println("Villa við aflýsingu bókunar.");
+        }
+    } else {
+        System.out.println("Engin bókun fannst með ID " + bookingID);
         }
     }
+
 
     public void showBookingDetails(int bookingID) {
         Booking booking = bookingInventory.getBookingByID(bookingID);
