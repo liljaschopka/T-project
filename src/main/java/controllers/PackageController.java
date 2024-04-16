@@ -1,10 +1,21 @@
 package controllers;
 
+import daytrip.controller.CustomerController;
 import daytrip.controller.TourController;
+import daytrip.dal.CustomerDAL;
+import daytrip.dal.ReservationDAL;
+import daytrip.model.Reservation;
 import daytrip.model.Tour;
-import model.*;
+import flight.Booking;
+import flight.FlightInventory;
+import hotel.controller.HotelController;
+import hotel.model.HotelRoom;
+import model.Cart;
+import model.Flight;
+import model.User;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -26,6 +37,7 @@ public class PackageController {
     private LocalDate checkIn;
     private LocalDate checkOut;
     private int persons;
+    private int duration;
     private Cart cart = new Cart();
 
     public PackageController(User user, String origin, String destination,
@@ -36,6 +48,7 @@ public class PackageController {
         this.checkIn = checkIn;
         this.checkOut = checkOut;
         this.persons = persons;
+        this.duration = (int) ChronoUnit.DAYS.between(checkIn, checkOut);
     }
 
     private boolean validDates(LocalDate checkIn, LocalDate checkOut) {
@@ -46,34 +59,19 @@ public class PackageController {
         return origin != null && destination != null && persons != 0;
     }
 
-    public void setUser(String name, String email, PaymentInfo paymentInfo, List<String> bookingIDs) {
-        this.user = new User(null, name, email, paymentInfo, bookingIDs);
+    public void setUser(User user) {
+        this.user = user;
+
+        CustomerDAL customerDAL = new CustomerDAL();
+        ReservationDAL reservationDAL = new ReservationDAL();
+        CustomerController customerController = new CustomerController(customerDAL, reservationDAL);
+
+        customerController.addNewCustomer(user.getName(), user.getEmail(), user.getPaymentInfo());
     }
 
 
-   /* public List<Hotel> findAvailableHotels(HotelControllerInterface hotelController) {
-
-        if (!validDates(checkIn, checkOut)) {
-            throw new IllegalArgumentException("Invalid dates");
-        }
-
-        if (!validODP(origin, destination, persons)) {
-            throw new IllegalArgumentException("Invalid origin, destination or persons");
-        }
-
-        List<Hotel> hotels = hotelController.searchForHotels(destination, checkIn, checkOut, persons);
-
-        if (hotels.isEmpty()) {
-            throw new IllegalArgumentException("No hotels found");
-        }
-
-        //hotels.sort(Comparator.comparingInt(Hotel::getPrice));
-
-        return hotels;
-    }*/
-
     //þurfti að breyta findavailablehotels aðeins svo ég gæti keyrt með tóman lista af hotelum:
-    public List<Hotel> findAvailableHotels(HotelControllerInterface hotelController) {
+    public List<hotel.model.Hotel> findAvailableHotels(HotelController hotelController) {
         if (!validDates(checkIn, checkOut)) {
             System.out.println("Invalid dates provided");
             return Collections.emptyList();
@@ -84,7 +82,7 @@ public class PackageController {
             return Collections.emptyList();
         }
 
-        List<Hotel> hotels = hotelController.searchForHotels(destination, checkIn, checkOut, persons);
+        List<hotel.model.Hotel> hotels = hotelController.getHotels(destination);
 
         if (hotels == null || hotels.isEmpty()) {
             System.out.println("No hotels found for the specified criteria");
@@ -97,19 +95,19 @@ public class PackageController {
     }
 
 
-    public List<HotelRoom> getAvailableRooms(Hotel hotel, HotelControllerInterface hotelController) {
-        List<HotelRoom> availabeRooms = hotelController.getAvailableRooms(hotel, persons);
+    public List<hotel.model.HotelRoom> getAvailableRooms(hotel.model.Hotel hotel, HotelController hotelController) {
+        List<hotel.model.HotelRoom> availableRooms = hotelController.getAvailableRooms(hotel, checkIn, checkOut);
 
-        if (availabeRooms.isEmpty()) {
+        if (availableRooms.isEmpty()) {
             throw new IllegalArgumentException("No rooms found");
         }
 
-        availabeRooms.sort(Comparator.comparingInt(HotelRoom::getPrice));
+        // availabeRooms.sort(Comparator.comparingInt(HotelRoom::getPrice));
 
-        return availabeRooms;
+        return availableRooms;
     }
 
-    public List<Flight> findAvailableFlights(FlightController flightController) {
+    public List<Flight> findAvailableDepartures(FlightInventory flightInventory) {
         if (!validDates(checkIn, checkOut)) {
             throw new IllegalArgumentException("Invalid dates");
         }
@@ -117,17 +115,37 @@ public class PackageController {
             throw new IllegalArgumentException("Invalid origin, destination or persons");
         }
 
-        List<Flight> flights = flightController.searchForFlights(destination, origin, checkIn, checkOut, persons);
+        List<Flight> departure = flightInventory.searchFlight(origin, destination, checkIn);
 
-        if (flights.isEmpty()) {
+
+        if (departure.isEmpty()) {
             throw new IllegalArgumentException("No flights found");
         }
 
-        flights.sort(Comparator.comparingInt(Flight::getPrice));
+        departure.sort(Comparator.comparingInt(Flight::getPrice));
 
-        return flights;
-
+        return departure;
     }
+
+    public List<Flight> findAvailableArrivals(FlightInventory flightInventory) {
+        if (!validDates(checkIn, checkOut)) {
+            throw new IllegalArgumentException("Invalid dates");
+        }
+        if (!validODP(origin, destination, persons)) {
+            throw new IllegalArgumentException("Invalid origin, destination or persons");
+        }
+
+        List<Flight> arrival = flightInventory.searchFlight(destination, origin, checkOut);
+
+        if (arrival.isEmpty()) {
+            throw new IllegalArgumentException("No flights found");
+        }
+
+        arrival.sort(Comparator.comparingInt(Flight::getPrice));
+
+        return arrival;
+    }
+
 
     public List<Tour> findAvailableDayTrips(TourController tourController) {
         if (!validDates(checkIn, checkOut)) {
@@ -149,14 +167,67 @@ public class PackageController {
 
     }
 
-    public void createBooking(BookingController bookingController) {
-        if (user != null && !cart.isCartEmpty()) {
-            bookingController.createHotelBooking(user, cart);
-            bookingController.createFlightBooking(user, cart);
-            bookingController.createDayTripBooking(user, cart);
+    public void createHotelBooking(BookingController bookingController) {
+        if (user != null && !cart.getSelectedHotelRooms().isEmpty()) {
+            bookingController.createHotelBooking(user, cart, checkIn, checkOut, persons);
         } else
             throw new IllegalArgumentException("You have to be logged in to make a booking");
 
+    }
+
+    public void createDayTripBooking(BookingController bookingController) {
+        if (user != null && !cart.getSelectedTours().isEmpty()) {
+            bookingController.createDayTripBooking(user, cart);
+        } else
+            throw new IllegalArgumentException("You have to be logged in to make a booking");
+    }
+
+    public void createFlightBooking(BookingController bookingController) {
+        if (user != null && !cart.getSelectedFlights().isEmpty()) {
+            bookingController.createFlightBooking(user, cart);
+        } else
+            throw new IllegalArgumentException("You have to be logged in to make a booking");
+    }
+
+
+    public List<Reservation> findTourReservations(BookingController bookingController) {
+        return bookingController.findDaytripBookings(user);
+    }
+
+    public List<hotel.model.Booking> findHotelBookings(BookingController bookingController) {
+        return bookingController.findHotelBookings(user);
+    }
+
+    public List<Booking> findFlightBookings(BookingController bookingController) {
+        if (user != null) {
+            return bookingController.findFlightBookings(user);
+        } else
+            throw new IllegalArgumentException("You have to be logged in to see your reservations");
+    }
+
+    public Tour getTourDetails(BookingController bookingController, Integer tourID) {
+        return bookingController.getTourDetails(tourID);
+    }
+
+    public int calculateTotalPrice() {
+        int result = 0;
+
+        List<Flight> flights = cart.getSelectedFlights();
+        for (Flight flight : flights) {
+            result += flight.getPrice() * persons;
+        }
+
+        List<Tour> tours = cart.getSelectedTours();
+        for (Tour tour : tours) {
+            result += tour.getPrice() * persons;
+        }
+
+        List<HotelRoom> rooms = cart.getSelectedHotelRooms();
+        for (HotelRoom room : rooms) {
+            result += room.getPrice() * duration;
+        }
+
+        return result;
     }
 
     public void clearSelection() {
@@ -197,5 +268,24 @@ public class PackageController {
         return user;
     }
 
+    public void setCheckIn(LocalDate checkIn) {
+        this.checkIn = checkIn;
+    }
+
+    public void setCheckOut(LocalDate checkOut) {
+        this.checkOut = checkOut;
+    }
+
+    public void setDestination(String destination) {
+        this.destination = destination;
+    }
+
+    public void setOrigin(String origin) {
+        this.origin = origin;
+    }
+
+    public void setPersons(int persons) {
+        this.persons = persons;
+    }
 }
 

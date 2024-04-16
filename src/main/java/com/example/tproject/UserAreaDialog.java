@@ -1,6 +1,5 @@
 package com.example.tproject;
 
-import controllers.UserAreaController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -16,7 +15,7 @@ public class UserAreaDialog extends Stage {
             UserAreaController controller = loader.getController();
             controller.initData(user);
 
-            Scene scene = new Scene(root);
+            Scene scene = new Scene(root, 400,400);
             this.setScene(scene);
             this.setTitle("User Area");
         } catch (Exception e) {

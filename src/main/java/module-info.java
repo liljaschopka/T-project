@@ -7,6 +7,8 @@ module com.example.tproject {
 
     opens com.example.tproject to javafx.fxml;
     exports com.example.tproject;
+    exports model;
+    exports flight;
     exports controllers;
     opens controllers to javafx.fxml;
 }

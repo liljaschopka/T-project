@@ -8,6 +8,7 @@ import javafx.scene.control.Alert.AlertType;
 import model.User;
 
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.Optional;
 
 public class DateSelectorView {
@@ -29,7 +30,12 @@ public class DateSelectorView {
 
     private static PackageController packageController;
 
+
     public static PackageController getPackageController() {
+        if (packageController == null) {
+            packageController = new PackageController(DataManager.getInstance().getCurrentUser(), "Default Origin", "Default Destination",
+                    LocalDate.of(2024, Month.MAY,1), LocalDate.of(2024, Month.MAY,2), 0);
+        }
         return packageController;
     }
 
@@ -39,41 +45,52 @@ public class DateSelectorView {
             String origin = fxOrigin.getText().replace("Select Location: ", "");
             String destination = fxDestination.getText().replace("Select Destination: ", "");
             String personsText = fxPeople.getText().replace("Select Number: ", "");
-            if (personsText.matches("\\d+")) {  // passa það sé tala
+
+            if (personsText.matches("\\d+")) {  // Ensure it is a number
                 int persons = Integer.parseInt(personsText);
 
+                // Check if all necessary fields are filled or if origin and destination are the same
                 if (origin.equals("Select Location") || destination.equals("Select Destination") ||
-                        fxCheckIn.getValue() == null || fxCheckOut.getValue() == null) {
-                    System.out.println("Please complete all fields.");
+                        fxCheckIn.getValue() == null || fxCheckOut.getValue() == null || persons == 0) {
                     showAlert(AlertType.WARNING, "Please complete all fields.");
                     return;
                 }
 
                 if (origin.equals(destination)) {
-                    System.out.print("Origin can not be the same as destination.");
-                    showAlert(AlertType.WARNING, "Origin can not be the same as destination.");
+                    showAlert(AlertType.WARNING, "Origin cannot be the same as destination.");
                     return;
                 }
 
                 if (fxCheckOut.getValue().isBefore(fxCheckIn.getValue())) {
-                    System.out.print("Invalid dates.");
-                    showAlert(AlertType.WARNING, "Invalid dates.");
+                    showAlert(AlertType.WARNING, "Please complete all fields."); // Generalizing the alert for invalid dates
                     return;
                 }
 
-                packageController = new PackageController(null, origin, destination, fxCheckIn.getValue(),
-                        fxCheckOut.getValue(), persons);
+                // Retrieve the current user from DataManager
+                User currentUser = DataManager.getInstance().getCurrentUser();
+                if (currentUser == null) {
+                    showAlert(AlertType.ERROR, "No user data available. Please complete user registration.");
+                    return;
+                }
+
+                // Initialize the package controller with user data and trip details
+                packageController = new PackageController(currentUser, origin, destination,
+                        fxCheckIn.getValue(), fxCheckOut.getValue(), persons);
+
+                /*packageController.setOrigin(origin);
+                packageController.setDestination(destination);
+                packageController.setCheckIn(fxCheckIn.getValue());
+                packageController.setCheckOut(fxCheckOut.getValue());
+                packageController.setPersons(persons);*/
+
                 ViewSwitcher.switchTo(View.BOOKINGSELECTOR);
             } else {
-                System.out.println("Please select a valid number of persons.");
-                showAlert(AlertType.WARNING, "Please select a valid number of persons.");
-                return;
+                showAlert(AlertType.WARNING, "Please complete all fields."); // Generalizing the alert for invalid person count
             }
-
         } catch (NumberFormatException e) {
-            System.out.println("Error in number of persons: " + e.getMessage());
+            showAlert(AlertType.ERROR, "Please complete all fields."); // Generalizing the alert for format errors
         } catch (Exception e) {
-            System.out.println("An error occurred: " + e.getMessage());
+            showAlert(AlertType.ERROR, "An error occurred: " + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -86,16 +103,19 @@ public class DateSelectorView {
 
     @FXML
     public void initialize() {
-        setupMenuButton(fxOrigin, "Select Location");
-        setupMenuButton(fxDestination, "Select Destination");
-        setupMenuButton(fxPeople, "Select Number");
-        packageController = new PackageController(null, "Default Origin", "Default Destination",
-                LocalDate.now(), LocalDate.now().plusDays(1), 1); //placeholders
+       // if (packageController == null) {
+        //    getPackageController(); // Ensure the controller is initialized
+       // }
+        packageController = getPackageController();
+        setupMenuButton(fxOrigin, "Select Location", packageController.getOrigin());
+        setupMenuButton(fxDestination, "Select Destination", packageController.getDestination());
+        setupMenuButton(fxPeople, "Select Number", Integer.toString(packageController.getPersons()));
+        fxCheckIn.setValue(packageController.getCheckIn());
+        fxCheckOut.setValue(packageController.getCheckOut());
     }
 
-    private void setupMenuButton(MenuButton menuButton, String defaultText) {
-        menuButton.setText(defaultText);
-
+    private void setupMenuButton(MenuButton menuButton, String defaultText, String value) {
+        menuButton.setText(value.equals("Default Origin") || value.equals("Default Destination") ? defaultText : value);
         menuButton.getItems().forEach(item -> item.setOnAction(e -> {
             menuButton.setText(item.getText());
         }));
@@ -105,23 +125,44 @@ public class DateSelectorView {
         ViewSwitcher.switchTo(View.CART);
     }
 
-    @FXML
+   /* @FXML
     public void fxUserHandler(ActionEvent actionEvent) {
-        if (packageController.getUser() != null) {
-            // User is already registered, open the User Area dialog
-            showUserArea(packageController.getUser());
+        if (getPackageController() == null) {
+            showAlert(AlertType.ERROR, "Operation cannot be completed at this time.");
+            return;
+        }
+        if (getPackageController().getUser() != null) {
+            showUserArea(getPackageController().getUser());
         } else {
             // No user registered, open the registration dialog
             UserDialog dialog = new UserDialog();
             Optional<User> result = dialog.showAndWait();
             result.ifPresent(user -> {
-                packageController.setUser(user.getName(), user.getEmail(), user.getPaymentInfo(), user.getBookingIds());
+                getPackageController().setUser(user.getName(), user.getEmail(), user.getPaymentInfo(), user.getBookingIds());
                 System.out.println("New user created: " + user.getName());
                 showUserInfo(user);  // Optionally show immediate confirmation
             });
         }
+    }*/
+
+    @FXML
+    public void fxUserHandler(ActionEvent actionEvent) {
+        User currentUser = DataManager.getInstance().getCurrentUser();
+        if (currentUser != null) {
+            showUserArea(currentUser);
+        } else {
+            // No user registered, open the registration dialog
+            UserDialog dialog = new UserDialog();
+            Optional<User> result = dialog.showAndWait();
+            result.ifPresent(user -> {
+                DataManager.getInstance().setCurrentUser(user);  // Update DataManager with the new user
+                packageController.setUser(user);  // Also update the package controller with the new user
+                showUserArea(user);  // Display user area with new user info
+            });
+        }
     }
-    private void showUserInfo(User user) {
+
+    public void showUserInfo(User user) {
         Alert infoAlert = new Alert(Alert.AlertType.INFORMATION);
         infoAlert.setTitle("User Information");
         infoAlert.setHeaderText("Welcome, " + user.getName());
@@ -129,7 +170,8 @@ public class DateSelectorView {
                 "\n\nYou can now use the system features to view and manage your bookings.");
         infoAlert.showAndWait();
     }
-    private void showUserArea(User user) {
+
+    public void showUserArea(User user) {
         // Create a new dialog or window to display user information
         UserAreaDialog userAreaDialog = new UserAreaDialog(user);
         userAreaDialog.showAndWait();

@@ -84,5 +84,6 @@ public class User {
         return bookingIds.stream()
                 .map(id -> "Booking ID: " + id + " - Details of booking here.")
                 .collect(Collectors.toList());
+        
     }
 }

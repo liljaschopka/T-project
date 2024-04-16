@@ -1,43 +1,76 @@
 package model;
 
-/******************************************************************************
- *  Nafn    : Lilja Kolbrún Schopka
- *  T-póstur: lks17@hi.is
- *
- *  Lýsing  :
- *
- *
- *
- *
- *****************************************************************************/
-public class Flight{
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+public class Flight {
     private int flightID;
     private String origin;
     private String destination;
     private int duration;
-    private String departureTime;
-    private String arrivalTime;
+    private LocalDate date;
+    private LocalDateTime departureTime;
+    private LocalDateTime arrivalTime;
     private int price;
+    private int totalSeats;
+    private int availableSeats;
 
-    public Flight(int flightID, String origin, String destination, int duration, String departureTime, String arrivalTime, int price) {
+    public Flight(int flightID, String origin, String destination, int duration,
+                  LocalDate date, LocalDateTime departureTime, LocalDateTime arrivalTime,
+                  int price, int totalSeats, int availableSeats) {
         this.flightID = flightID;
         this.origin = origin;
         this.destination = destination;
         this.duration = duration;
+        this.date = date;
         this.departureTime = departureTime;
         this.arrivalTime = arrivalTime;
         this.price = price;
+        this.totalSeats = totalSeats;
+        this.availableSeats = availableSeats;
     }
 
     @Override
     public String toString() {
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
         return "FlightID: " + flightID +
                 ", Origin: " + origin +
                 ", Destination: " + destination +
                 ", Duration: " + duration +
-                ", DepartureTime: " + departureTime +
-                ", ArrivalTime: " + arrivalTime +
-                ", Price: " + price;
+                ", Date: " + date.format(dateFormatter) +
+                ", DepartureTime: " + departureTime.format(timeFormatter) +
+                ", ArrivalTime: " + arrivalTime.format(timeFormatter) +
+                ", Price: " + price +
+                ", Total Seats: " + totalSeats +
+                ", Available Seats: " + availableSeats;
+    }
+
+    public boolean bookSeat() {
+        if (availableSeats > 0) {
+            availableSeats--;
+            return true;
+        }
+        return false;
+    }
+
+    public String getDepartureTime() {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+        return departureTime.format(dateTimeFormatter);
+    }
+
+    public String getArrivalTime() {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+        return arrivalTime.format(dateTimeFormatter);
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
     public int getFlightID() {
@@ -60,20 +93,18 @@ public class Flight{
         return duration;
     }
 
-    public String getDepartureTime() {
-        return departureTime;
-    }
-
-    public String getArrivalTime() {
-        return arrivalTime;
-    }
-
     public int getPrice() {
         return price;
     }
 
-    //TODO þetta
-    public String getDescription() {
-        return null;
+    public int getAvailableSeats() {
+        return availableSeats;
+    }
+
+    //bætti við þessu fyrir cartview:
+    public String getFlightDetails() {
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+        return "FlightID: " + flightID + ", Departure: " + departureTime.format(timeFormatter) +
+                ", Arrival: " + arrivalTime.format(timeFormatter);
     }
 }

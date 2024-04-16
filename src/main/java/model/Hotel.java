@@ -35,6 +35,14 @@ public class Hotel {
         return price;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
     public List<HotelRoom> getAvailableRooms(int persons, LocalDateTime checkIn, LocalDateTime checkOut) {
         return null;
     }

@@ -39,6 +39,18 @@ public class HotelRoom {
         return price;
     }
 
+    public int getPersons() {
+        return persons;
+    }
+
+    public String getHotelName() {
+        return hotel.getName();
+    }
+
+    public int getRoomNumber() {
+        return RoomNumber;
+    }
+
     //TODO:
     public String getDescription() {
         return null;

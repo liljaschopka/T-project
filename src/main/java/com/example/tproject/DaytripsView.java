@@ -7,10 +7,7 @@ import daytrip.model.Tour;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import model.Cart;
 
 import java.util.List;
@@ -24,7 +21,9 @@ public class DaytripsView {
     @FXML
     private ListView<Tour> fxToursList;
     @FXML
-    private Label fxTourDescription;
+    private Label fxIntroLabel;
+    @FXML
+    private Label fxTourDetails;
 
     private TourController tourController = new TourController(new TourDAL());
     private PackageController packageController = DateSelectorView.getPackageController();
@@ -32,6 +31,10 @@ public class DaytripsView {
 
     public void setTourController(TourController tourController) {
         this.tourController = tourController;
+    }
+
+    public TourController getTourController() {
+        return tourController;
     }
 
     public void setPackageController(PackageController packageController) {
@@ -56,7 +59,7 @@ public class DaytripsView {
             fxToursList.setItems(FXCollections.observableArrayList(availableTours));
         } catch (Exception e) {
             System.out.println("Error loading tours: " + e.getMessage());
-            fxTourDescription.setText("Error loading tours. Please try again.");
+            fxIntroLabel.setText("Error loading tours. Please try again.");
             // Clears the list view in case of an error
             fxToursList.setItems(FXCollections.observableArrayList());
         }
@@ -70,12 +73,18 @@ public class DaytripsView {
             @Override
             protected void updateItem(Tour tour, boolean empty) {
                 super.updateItem(tour, empty);
-                setText(empty || tour == null ? null : (tour.getName() + ", " + tour.getPrice() + "€"));
+                setText(empty || tour == null ? null : (tour.getName() + ", " + tour.getPrice() + " ISK" + ", Max Participants: " + tour.getMaxParticipants()) + ", date: " + tour.getDate());
             }
         });
 
         fxToursList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            fxTourDescription.setText(newValue != null ? newValue.getDescription() : "Select a tour to see details");
+            if (newValue != null) {
+                fxTourDetails.setText(newValue.getDescription());  // Show description in the new label
+                fxTourDetails.setVisible(true);  // Make sure the label is visible when an item is selected
+            } else {
+                fxTourDetails.setText("Select a tour to see details");
+                fxTourDetails.setVisible(false);  // Optionally hide the label when there is no selection
+            }
         });
     }
 
@@ -91,6 +100,11 @@ public class DaytripsView {
         } else {
             System.out.println("No tour selected. Please select a tour first.");
         }
+        Alert infoAlert = new Alert(Alert.AlertType.INFORMATION);
+        infoAlert.setTitle("User Information");
+        infoAlert.setHeaderText("Added to cart!");
+        infoAlert.setContentText(selectedTour.getName() + " has been added to your cart.");
+        infoAlert.showAndWait();
     }
 
     /**

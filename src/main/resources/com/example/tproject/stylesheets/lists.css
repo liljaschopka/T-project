@@ -48,3 +48,14 @@
 .button:hover {
     -fx-background-color: #3B6978;
 }
+
+.details-label {
+    -fx-font-size: 14px;
+    -fx-font-family: 'Courier New', Courier, monospace;
+    -fx-font-weight: normal;
+    -fx-text-fill: #345995;
+    -fx-background-color: linear-gradient(to bottom, #cae8d5 0%, #a7d8c9 100%);
+    -fx-background-radius: 10;
+    -fx-padding: 4;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 0);
+}

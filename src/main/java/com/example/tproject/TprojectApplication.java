@@ -4,7 +4,6 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 
 public class TprojectApplication extends Application {
@@ -14,6 +13,7 @@ public class TprojectApplication extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 600, 400);
         stage.setTitle("T-project");
         ViewSwitcher.setScene(scene);
+        ViewSwitcher.pushToHistory(View.DATESELECTOR);   //bætt við
         stage.setScene(scene);
         stage.show();
     }

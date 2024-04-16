@@ -7,7 +7,7 @@
 }
 
 .title {
-    -fx-font-size: 26px;
+    -fx-font-size: 20px;
     -fx-font-family: 'Courier New', Courier, monospace;
     -fx-font-weight: bold;
     -fx-text-fill: #345995;
@@ -15,6 +15,7 @@
     -fx-padding: 10;
     -fx-background-radius: 10;
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 0);
+    -fx-alignment: center;
 }
 
 .function-button {
@@ -33,4 +34,19 @@
 .function-button:hover {
     -fx-background-color: linear-gradient(to bottom, #a7d8c9 0%, #cae8d5 100%);
     -fx-text-fill: #262626;
+}
+
+.user-cart-button {
+    -fx-background-color: #005A69;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 5;
+    -fx-border-color: #88a2ac;
+    -fx-border-width: 0.5;
+    -fx-padding: 2px 5px;
+    -fx-effect: dropshadow(one-pass-box, black, 5, 0.5, 1, 1);
+}
+
+.user-cart-button:hover {
+    -fx-background-color: #3B6978;
 }
