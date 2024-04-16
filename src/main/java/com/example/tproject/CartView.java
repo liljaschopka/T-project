@@ -98,7 +98,7 @@ public class CartView {
     private void borga() {
         User loggedInUser = packageController.getUser();
         packageController.createHotelBooking(bookingController);
-        // packageController.createFlightBooking(bookingController);
+        packageController.createFlightBooking(bookingController);
         packageController.createDayTripBooking(bookingController);
         packageController.clearSelection();
         Alert infoAlert = new Alert(Alert.AlertType.INFORMATION);
@@ -209,7 +209,8 @@ public class CartView {
         //selectedHotel = null;
         // }
         for (Flight flight : cart.getSelectedFlights()) {
-            fxCart.getItems().add("Flight: " + flight.getFlightDetails() + " Price: " + flight.getPrice() + " ISK");
+            fxCart.getItems().add("Flight: " + flight.getFlightDetails() + " Price: "
+                    + flight.getPrice() + " ISK" + ", " + flight.getAvailableSeats());
         }
         for (Tour tour : cart.getSelectedTours()) {
             fxCart.getItems().add("Tour: " + tour.getName() + " Price: " + tour.getPrice() + " ISK");
