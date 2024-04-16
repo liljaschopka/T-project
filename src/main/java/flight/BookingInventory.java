@@ -43,8 +43,14 @@ public class BookingInventory {
     }
 
     public boolean removeBooking(int bookingID) {
+    Booking booking = getBookingByID(bookingID);
+    if (booking != null) {
+        bookings.remove(booking);
         return true;
     }
+    return false;
+    }
+
 
     public List<Booking> search(String criteria) {
         return new ArrayList<>();
