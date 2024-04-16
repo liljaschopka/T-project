@@ -97,9 +97,15 @@ public class CartView {
 
     private void borga() {
         User loggedInUser = packageController.getUser();
-        packageController.createHotelBooking(bookingController);
-        packageController.createFlightBooking(bookingController);
-        packageController.createDayTripBooking(bookingController);
+        if (!cart.getSelectedHotelRooms().isEmpty()) {
+            packageController.createHotelBooking(bookingController);
+        }
+        if (!cart.getSelectedFlights().isEmpty()) {
+            packageController.createFlightBooking(bookingController);
+        }
+        if (!cart.getSelectedTours().isEmpty()) {
+            packageController.createDayTripBooking(bookingController);
+        }
         packageController.clearSelection();
         Alert infoAlert = new Alert(Alert.AlertType.INFORMATION);
         infoAlert.setTitle(loggedInUser.getName());

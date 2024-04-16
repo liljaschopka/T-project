@@ -1,5 +1,6 @@
 package controllers;
 
+import com.example.tproject.DataManager;
 import daytrip.controller.CustomerController;
 import daytrip.controller.ReservationController;
 import daytrip.controller.TourController;
@@ -147,15 +148,53 @@ public class BookingController {
         return tourController.getTourDetails(tourID);
     }
 
-    public void cancelHotelBooking(hotel.model.Booking booking) {
-        hotelController.deleteBooking(booking);
+    public boolean cancelHotelBooking(int bookingID) {
+        User user = DataManager.getInstance().getCurrentUser();
+        if (user == null) {
+            System.err.println("Operation failed: No user logged in.");
+            return false;
+        }
+
+        try {
+            List<hotel.model.Booking> allBookings = hotelController.getBookings(user);
+            hotel.model.Booking bookingToCancel = allBookings.stream()
+                    .filter(booking -> booking.getBookingID() == bookingID)
+                    .findFirst()
+                    .orElse(null);
+
+            if (bookingToCancel != null) {
+                hotelController.deleteBooking(bookingToCancel);
+                System.out.println("Hotel booking cancelled successfully.");
+                return true;
+            } else {
+                System.err.println("No booking found with ID: " + bookingID);
+                return false;
+            }
+        } catch (Exception e) {
+            System.err.println("Error cancelling hotel booking: " + e.getMessage());
+            return false;
+        }
     }
 
-    public void cancelFlightBooking(int bookingID) {
-        flightBookingController.cancelBooking(bookingID);
+    public boolean cancelFlightBooking(int bookingID) {
+        try {
+            flightBookingController.cancelBooking(bookingID);
+            System.out.println("Flight booking cancelled successfully.");
+            return true;
+        } catch (Exception e) {
+            System.err.println("Error cancelling flight booking: " + e.getMessage());
+            return false;
+        }
     }
 
-    public void cancelDaytripBooking(Reservation reservation) {
-        reservationController.cancelReservation(reservation.getReservationID());
+    public boolean cancelTourBooking(int reservationID) {
+        try {
+            reservationController.cancelReservation(reservationID);
+            System.out.println("Tour booking cancelled successfully.");
+            return true;
+        } catch (Exception e) {
+            System.err.println("Error cancelling tour booking: " + e.getMessage());
+            return false;
+        }
     }
 }

@@ -10,6 +10,10 @@ module com.example.tproject {
     exports model;
     exports flight;
     exports controllers;
+    exports daytrip.controller;
+    exports daytrip.dal;
+    exports daytrip.model;
+    exports daytrip.repository;
     opens controllers to javafx.fxml;
     opens flight to javafx.fxml;
     exports Mock_objects;

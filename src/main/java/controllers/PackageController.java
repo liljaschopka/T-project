@@ -189,13 +189,20 @@ public class PackageController {
     }
 
     public void createFlightBooking(BookingController bookingController) {
-        if (user != null && !cart.getSelectedFlights().isEmpty()) {
-            bookingController.createFlightBooking(user, cart);
-            System.out.println("Attempting to create a flight booking");
-        } else
-            throw new IllegalArgumentException("You have to be logged in to make a booking");
+        if (user != null) {
+            List<Flight> selectedFlights = cart.getSelectedFlights();
+            if (!selectedFlights.isEmpty()) {
+                bookingController.createFlightBooking(user, cart);
+                System.out.println("Attempting to create a flight booking");
+            } else {
+                // Throw an exception or show an error message indicating that no flights are selected
+                throw new IllegalStateException("No flights selected for booking");
+            }
+        } else {
+            // Throw an exception or show an error message indicating that the user needs to be logged in
+            throw new IllegalStateException("You have to be logged in to make a booking");
+        }
     }
-
 
     public List<Reservation> findTourReservations(BookingController bookingController) {
         return bookingController.findDaytripBookings(user);
