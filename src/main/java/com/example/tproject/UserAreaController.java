@@ -62,6 +62,7 @@ public class UserAreaController {
             bookingsListView.getItems().add("Tour Reservation ID: " + reservation.getReservationID() + ", Date: " + reservation.getDateBooked() + ", Name: " + tour.getName());
         }
     }
+
     @FXML
     private void handleCancelBooking() {
         int selectedIndex = bookingsListView.getSelectionModel().getSelectedIndex();
@@ -81,6 +82,7 @@ public class UserAreaController {
             showAlert("No Selection", "Please select a booking to cancel.", Alert.AlertType.WARNING);
         }
     }
+
     private void updateListViewWithBookings(User user) {
         // Clear the existing items in the list view
         bookingsListView.getItems().clear();
@@ -115,7 +117,7 @@ public class UserAreaController {
             tourReservations.forEach(reservation -> {
                 Tour tour = bookingController.getTourDetails(reservation.getTourID());
                 String reservationInfo = String.format("Tour Reservation ID: %d, Date: %s, Name: %s",
-                        tour.getTourID(), reservation.getDateBooked(), tour.getName());
+                        reservation.getReservationID(), reservation.getDateBooked(), tour.getName());
                 bookingsListView.getItems().add(reservationInfo);
             });
         }
