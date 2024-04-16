@@ -18,6 +18,7 @@ import model.User;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -105,8 +106,13 @@ public class BookingController {
      */
     public void createDayTripBooking(User user, Cart cart, int persons) {
         List<Tour> selectedTours = cart.getSelectedTours();
+        if (selectedTours.isEmpty()) {
+            System.out.println("No tours selected for booking.");
+            return;
+        }
 
-        // TODO: create booking by using the ReservationController from the D-team
+        boolean anySuccess = false;
+        List<Integer> failedBookings = new ArrayList<>();
 
         for (Tour tour : selectedTours) {
             int daytripId = tour.getTourID();
@@ -114,14 +120,27 @@ public class BookingController {
             String userEmail = user.getEmail();
             LocalDate date = tour.getDate();
 
-            boolean success = reservationController.makeReservation(daytripId, userName, userEmail, date, persons, Optional.empty());
-            if (success) {
-                System.out.println("Daytrip booking successful.");
-                // bæta bookingID við BookingIds hjá user
-                // user.addBookingId(String.valueOf(daytripId));
-            } else {
-                System.out.println("Daytrip booking failed. Please try again or check the tour availability.");
+            try {
+                boolean success = reservationController.makeReservation(daytripId, userName, userEmail, date, persons, Optional.empty());
+                if (success) {
+                    System.out.println("Daytrip booking successful for Tour ID: " + daytripId);
+                    // Optional: add booking ID to user's booking list if required
+                    // user.addBookingId(String.valueOf(daytripId));
+                    anySuccess = true;
+                } else {
+                    System.out.println("Daytrip booking failed for Tour ID: " + daytripId + ". Please check tour availability.");
+                    failedBookings.add(daytripId);
+                }
+            } catch (IllegalArgumentException e) {
+                System.out.println("Failed to book tour ID " + daytripId + ": " + e.getMessage());
+                failedBookings.add(daytripId);
             }
+        }
+
+        if (anySuccess) {
+            System.out.println("One or more daytrip bookings completed successfully.");
+        } else {
+            System.out.println("All daytrip bookings failed. Failed tour IDs: " + failedBookings);
         }
     }
 
@@ -189,11 +208,23 @@ public class BookingController {
 
     public boolean cancelTourBooking(int reservationID) {
         try {
-            reservationController.cancelReservation(reservationID);
-            System.out.println("Tour booking cancelled successfully.");
-            return true;
+            // Check if reservation exists before attempting to cancel
+            if (!reservationController.isReservationExists(reservationID)) {
+                System.err.println("No reservation found with ID: " + reservationID);
+                return false;
+            }
+
+            // Attempt to cancel the reservation
+            boolean cancellationResult = reservationController.cancelReservation(reservationID);
+            if (cancellationResult) {
+                System.out.println("Tour booking cancelled successfully.");
+                // Optional: Add additional business logic here, like sending a notification to the user
+            } else {
+                System.err.println("Failed to cancel tour booking.");
+            }
+            return cancellationResult;
         } catch (Exception e) {
-            System.err.println("Error cancelling tour booking: " + e.getMessage());
+            System.err.println("Error in cancelling tour booking: " + e.getMessage());
             return false;
         }
     }

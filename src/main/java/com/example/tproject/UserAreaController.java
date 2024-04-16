@@ -135,6 +135,7 @@ public class UserAreaController {
             } else if (selected.startsWith("Flight ID: ")) {
                 return bookingController.cancelFlightBooking(bookingID);
             } else {
+                showAlert("Error", "Unrecognized booking type.", Alert.AlertType.ERROR);
                 return false;
             }
         } catch (NumberFormatException e) {
