@@ -42,7 +42,16 @@ public class FlightInventory implements FlightInventoryInterface {
                 .findFirst()
                 .orElse(null); // Return null if no flight matches the ID
     }
-
+    
+    public boolean bookFlight(int flightID) {
+        for (Flight flight : flights) {
+            if (flight.getFlightID() == flightID) {
+                return flight.bookSeat();
+            }
+        }
+        return false; 
+    }
+    
     private void loadFlights(String filePath) throws IOException {
         InputStream is = getClass().getClassLoader().getResourceAsStream(filePath);
         if (is == null) {

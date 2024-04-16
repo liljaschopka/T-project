@@ -2,6 +2,7 @@ package com.example.tproject;
 
 import Mock_objects.HotelControllerListMock;
 import controllers.PackageController;
+import hotel.model.Hotel;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -72,7 +73,7 @@ public class HotelsView {
 
     @FXML
     public void handleHotelSelection(MouseEvent event) {
-        hotel.model.Hotel selectedHotel = fxHotelsList.getSelectionModel().getSelectedItem();
+        Hotel selectedHotel = fxHotelsList.getSelectionModel().getSelectedItem();
         if (selectedHotel != null) {
             List<hotel.model.HotelRoom> availableRooms = packageController.getAvailableRooms(selectedHotel, hotelController);
             //List<HotelRoom> availableRooms = packageController.getAvailableRooms(selectedHotel, hotelControllerListMock);
