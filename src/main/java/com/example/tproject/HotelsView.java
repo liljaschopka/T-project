@@ -81,7 +81,11 @@ public class HotelsView {
             fxHotelRoomsList.setVisible(true);
             fxAddToCart.setVisible(true);
 
-
+            // Setja mynd (vantar URL frá Hotel)
+            /*String imageName = selectedHotel.getPicture();
+            Image hotelImage = new Image(imageName);
+            fxHotelImageView.setImage(hotelImage);*/
+            //System.out.println(selectedHotel.getPicture());
         } else {
             fxHotelRoomsList.setVisible(false);
             fxAddToCart.setVisible(false);

@@ -25,6 +25,7 @@ public class BookingController {
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
 
+
         if (flightsToBook.isEmpty()) {
             System.out.println("No flights found with the given flight numbers.");
             return;

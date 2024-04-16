@@ -37,7 +37,10 @@ public class FlightInventory implements FlightInventoryInterface {
 
     @Override
     public Flight searchFlightByID(int flightID) {
-        return null;
+        return flights.stream()
+                .filter(flight -> flight.getFlightID() == flightID)
+                .findFirst()
+                .orElse(null); // Return null if no flight matches the ID
     }
 
     private void loadFlights(String filePath) throws IOException {

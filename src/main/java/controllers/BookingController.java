@@ -84,11 +84,14 @@ public class BookingController {
         List<Flight> selectedFlights = cart.getSelectedFlights();
         int userId = user.getId();
 
-        List<Integer> flightIds = List.of();
+        List<Integer> flightIds = new java.util.ArrayList<>(List.of());
         for (Flight flight : selectedFlights) {
+            System.out.println(flight.getFlightID());
             Integer flightId = flight.getFlightID();
             flightIds.add(flightId);
         }
+
+        System.out.println(flightIds);
         flightBookingController.createBooking(userId, flightIds);
         System.out.println("Flight booking created successfully.");
     }
