@@ -111,38 +111,38 @@ public class BookingController {
             return;
         }
 
-        boolean anySuccess = false;
+        List<Integer> successfulBookings = new ArrayList<>();
         List<Integer> failedBookings = new ArrayList<>();
 
         for (Tour tour : selectedTours) {
-            int daytripId = tour.getTourID();
             String userName = user.getName();
             String userEmail = user.getEmail();
             LocalDate date = tour.getDate();
+            int tourID = tour.getTourID();
 
             try {
-                boolean success = reservationController.makeReservation(daytripId, userName, userEmail, date, persons, Optional.empty());
-                if (success) {
-                    System.out.println("Daytrip booking successful for Tour ID: " + daytripId);
-                    // Optional: add booking ID to user's booking list if required
-                    // user.addBookingId(String.valueOf(daytripId));
-                    anySuccess = true;
+                if (reservationController.makeReservation(tourID, userName, userEmail, date, persons, Optional.empty())) {
+                    System.out.println("Booking successful for Tour ID: " + tourID);
+                    successfulBookings.add(tourID);
                 } else {
-                    System.out.println("Daytrip booking failed for Tour ID: " + daytripId + ". Please check tour availability.");
-                    failedBookings.add(daytripId);
+                    System.out.println("Booking failed for Tour ID: " + tourID + ". Please check tour availability.");
+                    failedBookings.add(tourID);
                 }
             } catch (IllegalArgumentException e) {
-                System.out.println("Failed to book tour ID " + daytripId + ": " + e.getMessage());
-                failedBookings.add(daytripId);
+                System.out.println("Booking failure for Tour ID " + tourID + ": " + e.getMessage());
+                failedBookings.add(tourID);
             }
         }
 
-        if (anySuccess) {
-            System.out.println("One or more daytrip bookings completed successfully.");
-        } else {
-            System.out.println("All daytrip bookings failed. Failed tour IDs: " + failedBookings);
+        if (!successfulBookings.isEmpty()) {
+            System.out.println("Successfully booked tours: " + successfulBookings);
+        }
+        if (!failedBookings.isEmpty()) {
+            System.out.println("Failed bookings for tours: " + failedBookings);
         }
     }
+
+
 
     public List<hotel.model.Booking> findHotelBookings(User user) {
         return hotelController.getBookings(user);
@@ -208,23 +208,22 @@ public class BookingController {
 
     public boolean cancelTourBooking(int reservationID) {
         try {
-            // Check if reservation exists before attempting to cancel
+            // Validate the existence of the reservation before attempting cancellation
             if (!reservationController.isReservationExists(reservationID)) {
                 System.err.println("No reservation found with ID: " + reservationID);
                 return false;
             }
 
             // Attempt to cancel the reservation
-            boolean cancellationResult = reservationController.cancelReservation(reservationID);
-            if (cancellationResult) {
+            boolean cancellationSuccess = reservationController.cancelReservation(reservationID);
+            if (cancellationSuccess) {
                 System.out.println("Tour booking cancelled successfully.");
-                // Optional: Add additional business logic here, like sending a notification to the user
             } else {
-                System.err.println("Failed to cancel tour booking.");
+                System.err.println("Failed to cancel tour booking with reservation ID: " + reservationID);
             }
-            return cancellationResult;
+            return cancellationSuccess;
         } catch (Exception e) {
-            System.err.println("Error in cancelling tour booking: " + e.getMessage());
+            System.err.println("Error cancelling tour booking with reservation ID " + reservationID + ": " + e.getMessage());
             return false;
         }
     }

@@ -59,7 +59,7 @@ public class UserAreaController {
 
         for (Reservation reservation : tourReservations) {
             Tour tour = packageController.getTourDetails(bookingController, reservation.getTourID());
-            bookingsListView.getItems().add("Tour Reservation ID: " + tour.getTourID() + ", Date: " + reservation.getDateBooked() + ", Name: " + tour.getName());
+            bookingsListView.getItems().add("Tour Reservation ID: " + reservation.getReservationID() + ", Date: " + reservation.getDateBooked() + ", Name: " + tour.getName());
         }
     }
     @FXML
