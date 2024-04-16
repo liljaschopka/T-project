@@ -6,10 +6,7 @@ import hotel.model.Hotel;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import model.Cart;
@@ -75,12 +72,29 @@ public class HotelsView {
     public void handleHotelSelection(MouseEvent event) {
         Hotel selectedHotel = fxHotelsList.getSelectionModel().getSelectedItem();
         if (selectedHotel != null) {
-            List<hotel.model.HotelRoom> availableRooms = packageController.getAvailableRooms(selectedHotel, hotelController);
-            //List<HotelRoom> availableRooms = packageController.getAvailableRooms(selectedHotel, hotelControllerListMock);
-            setupHotelRoomListView();
-            fxHotelRoomsList.setItems(FXCollections.observableArrayList(availableRooms));
-            fxHotelRoomsList.setVisible(true);
-            fxAddToCart.setVisible(true);
+            try {
+                List<hotel.model.HotelRoom> availableRooms = packageController.getAvailableRooms(selectedHotel, hotelController);
+                //List<HotelRoom> availableRooms = packageController.getAvailableRooms(selectedHotel, hotelControllerListMock);
+                setupHotelRoomListView();
+                if (availableRooms.isEmpty()) {
+                    fxHotelRoomsList.setItems(FXCollections.observableArrayList());
+                    fxHotelRoomsList.setPlaceholder(new Label("No available rooms"));
+                } else {
+                    fxHotelRoomsList.setItems(FXCollections.observableArrayList(availableRooms));
+                }
+                fxHotelRoomsList.setVisible(true);
+                fxAddToCart.setVisible(true);
+            } catch (IllegalArgumentException e) {
+                fxHotelRoomsList.setItems(FXCollections.observableArrayList());  // Ensure the list is empty
+                fxHotelRoomsList.setPlaceholder(new Label("No available rooms"));  // Set placeholder text
+                fxHotelRoomsList.setVisible(true);
+                fxAddToCart.setVisible(false);  // Optionally, hide the Add to Cart button as there are no rooms to add
+                System.out.println("Error: " + e.getMessage());  // Optionally log the error
+            }
+
+            //fxHotelRoomsList.setItems(FXCollections.observableArrayList(availableRooms));
+            //fxHotelRoomsList.setVisible(true);
+            //fxAddToCart.setVisible(true);
 
             // Setja mynd (vantar URL frá Hotel)
             /*String imageName = selectedHotel.getPicture();
