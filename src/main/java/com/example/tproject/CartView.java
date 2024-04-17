@@ -216,7 +216,7 @@ public class CartView {
         // }
         for (Flight flight : cart.getSelectedFlights()) {
             fxCart.getItems().add("Flight: " + flight.getFlightDetails() + " Price: "
-                    + flight.getPrice() + " ISK per person" + ", " + flight.getAvailableSeats());
+                    + flight.getPrice() + " ISK per person");
         }
         for (Tour tour : cart.getSelectedTours()) {
             fxCart.getItems().add("Tour: " + tour.getName() + " Price: " + tour.getPrice() + " ISK per person");
