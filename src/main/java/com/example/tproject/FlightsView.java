@@ -90,7 +90,8 @@ public class FlightsView {
             @Override
             protected void updateItem(Flight flight, boolean empty) {
                 super.updateItem(flight, empty);
-                setText(empty || flight == null ? null : (flight.getOrigin() + "-" + flight.getDestination() + ", " + flight.getDepartureTime() + ", " + flight.getPrice() + " ISK" + ", available seats: " + flight.getAvailableSeats()))
+                setText(empty || flight == null ? null : (flight.getOrigin() + "-" + flight.getDestination() + ", " + flight.getDepartureTime()
+                        + ", " + flight.getPrice() + " ISK" + ", available seats: " + flight.getAvailableSeats()));
 
             }
         });
