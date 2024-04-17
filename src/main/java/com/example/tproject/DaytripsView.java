@@ -73,7 +73,7 @@ public class DaytripsView {
             @Override
             protected void updateItem(Tour tour, boolean empty) {
                 super.updateItem(tour, empty);
-                setText(empty || tour == null ? null : (tour.getName() + ", " + tour.getPrice() + " ISK" + ", Available spots: " + tour.getMaxParticipants()) + ", date: " + tour.getDate());
+                setText(empty || tour == null ? null : (tour.getName() + ", " + tour.getPrice() + " ISK per person" + ", Available spots: " + tour.getMaxParticipants()) + ", date: " + tour.getDate());
             }
         });
 
