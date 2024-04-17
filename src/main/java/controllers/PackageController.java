@@ -69,8 +69,7 @@ public class PackageController {
         customerController.addNewCustomer(user.getName(), user.getEmail(), user.getPaymentInfo());
     }
 
-
-    //þurfti að breyta findavailablehotels aðeins svo ég gæti keyrt með tóman lista af hotelum:
+    
     public List<hotel.model.Hotel> findAvailableHotels(HotelController hotelController) {
         if (!validDates(checkIn, checkOut)) {
             System.out.println("Invalid dates provided");
@@ -89,8 +88,6 @@ public class PackageController {
             return Collections.emptyList();
         }
 
-        // hotels.sort(Comparator.comparingInt(Hotel::getPrice));
-
         return hotels;
     }
 
@@ -101,8 +98,7 @@ public class PackageController {
         if (availableRooms.isEmpty()) {
             throw new IllegalArgumentException("No rooms found");
         }
-
-        // availabeRooms.sort(Comparator.comparingInt(HotelRoom::getPrice));
+        availableRooms.sort(Comparator.comparingInt(HotelRoom::getPrice));
 
         return availableRooms;
     }
@@ -282,21 +278,6 @@ public class PackageController {
         return user;
     }
 
-    public void setCheckIn(LocalDate checkIn) {
-        this.checkIn = checkIn;
-    }
-
-    public void setCheckOut(LocalDate checkOut) {
-        this.checkOut = checkOut;
-    }
-
-    public void setDestination(String destination) {
-        this.destination = destination;
-    }
-
-    public void setOrigin(String origin) {
-        this.origin = origin;
-    }
 
     public void setPersons(int persons) {
         this.persons = persons;

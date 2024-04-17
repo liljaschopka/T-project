@@ -36,27 +36,11 @@ public class Cart {
     public int getTotalAmount() {
         return totalAmount;
     }
-    /*
-    private void updateTotalAmount() {
-        if (selectedRoom != null) {
-            totalAmount += selectedRoom.getPrice();
-        }
-        if (selectedFlight != null) {
-            totalAmount += selectedFlight.getPrice();
-        }
-        if (selectedTour != null) {
-            totalAmount += selectedTour.getPrice();
-        }
-    }
-
-     */
 
     public void addHotelRoomToCart(hotel.model.HotelRoom room, hotel.model.Hotel hotel) {
         selectedHotelRooms.add(room);
         selectedRoom = room;
         selectedHotel = hotel;
-        //selectedHotel = hotel;
-        //totalAmount += room.getPrice();
         updateTotalAmount();
     }
 
@@ -101,11 +85,6 @@ public class Cart {
     public hotel.model.Hotel getSelectedHotel() {
         return selectedHotel;
     }
-
-    // public void removeSelectedHotelRoom(HotelRoom room) {
-    //   totalAmount -= room.getPrice();
-    // selectedHotelRooms.remove(room);
-    // }
 
     public void addFlightToCart(Flight flight) {
         selectedFlights.add(flight);

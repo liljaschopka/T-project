@@ -172,7 +172,6 @@ public class CartView {
             }
             if (tourToRemove != null) {
                 cart.removeSelectedTour(tourToRemove);
-                //cart.getSelectedTours().remove(tourToRemove);
             }
         }
         updateCartDisplay();
@@ -182,15 +181,6 @@ public class CartView {
         fxTotalPrice.setText(String.valueOf(cart.getTotalAmount()));
         updateCartDisplay();
     }
-
-    /*private void newUser() {
-        UserDialog dialog = new UserDialog();
-        Optional<User> result = dialog.showAndWait();
-        result.ifPresent(user -> {
-            packageController.setUser(user.getName(), user.getEmail(), user.getPaymentInfo(), user.getBookingIds());
-            System.out.println("New user created: " + user.getName());
-        });
-    }*/
 
     private void newUser() {
         UserDialog dialog = new UserDialog();
@@ -204,16 +194,12 @@ public class CartView {
 
     public void updateCartDisplay() {
         fxCart.getItems().clear(); // Clear existing items
-        //hotel.Mock_objects.Hotel selectedHotel = cart.getSelectedHotel();
-        hotel.model.HotelRoom selectedRoom = cart.getSelectedHotelRoom();
-        // if (selectedHotel != null) {
+
         for (hotel.model.HotelRoom hotelRoom : cart.getSelectedHotelRooms()) {
             hotel.model.Hotel selectedHotel = cart.getSelectedHotel();
             fxCart.getItems().add("Room number: " + hotelRoom.getRoomNumber() + " in " + selectedHotel.getName() + ", price: " + hotelRoom.getPrice() + " ISK per night");
-            //selectedHotel = null;
         }
-        //selectedHotel = null;
-        // }
+
         for (Flight flight : cart.getSelectedFlights()) {
             fxCart.getItems().add("Flight: " + flight.getFlightDetails() + " Price: "
                     + flight.getPrice() + " ISK per person" + ", " + flight.getAvailableSeats());

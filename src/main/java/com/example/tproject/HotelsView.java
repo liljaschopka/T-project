@@ -1,6 +1,5 @@
 package com.example.tproject;
 
-import Mock_objects.HotelControllerListMock;
 import controllers.PackageController;
 import hotel.model.Hotel;
 import hotel.model.HotelRoom;
@@ -27,7 +26,6 @@ public class HotelsView {
     private ListView<hotel.model.HotelRoom> fxHotelRoomsList;
 
     private hotel.controller.HotelController hotelController;
-    private HotelControllerListMock hotelControllerListMock;
     private PackageController packageController;
     private Cart cart;
     private CartView cartView;
@@ -36,28 +34,18 @@ public class HotelsView {
         hotelController = new hotel.controller.HotelController();
         packageController = DateSelectorView.getPackageController();
         cart = packageController.getCart();
-        hotelControllerListMock = new HotelControllerListMock();
-    }
-
-    public hotel.controller.HotelController getHotelController() {
-        return hotelController;
     }
 
     @FXML
     public void initialize() {
-
         setupHotelListView();
         List<hotel.model.Hotel> hotels = packageController.findAvailableHotels(hotelController);
-        // List<Hotel> hotels = packageController.findAvailableHotels(hotelControllerListMock);
         if (hotels.isEmpty()) {
             fxHotelsList.setItems(FXCollections.observableArrayList());
             System.out.println("No hotels found.");
         } else {
             fxHotelsList.setItems(FXCollections.observableArrayList(hotels));
         }
-
-        //Image placeholderImage = new Image("/com/example/tproject/myndir/HotelPlaceholder.png");
-        //fxHotelImageView.setImage(placeholderImage);
     }
 
     private void setupHotelListView() {
@@ -142,7 +130,6 @@ public class HotelsView {
         hotel.model.Hotel selectedHotel = fxHotelsList.getSelectionModel().getSelectedItem();
         if (selectedRoom != null) {
             cart.addHotelRoomToCart(selectedRoom, selectedHotel);
-            //cart.addHotelRoomToCart(selectedRoom);
             cart.setSelectedHotel(selectedHotel);
         }
         Alert infoAlert = new Alert(Alert.AlertType.INFORMATION);

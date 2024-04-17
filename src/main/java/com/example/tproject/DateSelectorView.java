@@ -34,7 +34,7 @@ public class DateSelectorView {
     public static PackageController getPackageController() {
         if (packageController == null) {
             packageController = new PackageController(DataManager.getInstance().getCurrentUser(), "Default Origin", "Default Destination",
-                    LocalDate.of(2024, Month.MAY,1), LocalDate.of(2024, Month.MAY,2), 0);
+                    LocalDate.of(2024, Month.MAY, 1), LocalDate.of(2024, Month.MAY, 2), 0);
         }
         return packageController;
     }
@@ -77,12 +77,6 @@ public class DateSelectorView {
                 packageController = new PackageController(currentUser, origin, destination,
                         fxCheckIn.getValue(), fxCheckOut.getValue(), persons);
 
-                /*packageController.setOrigin(origin);
-                packageController.setDestination(destination);
-                packageController.setCheckIn(fxCheckIn.getValue());
-                packageController.setCheckOut(fxCheckOut.getValue());
-                packageController.setPersons(persons);*/
-
                 ViewSwitcher.switchTo(View.BOOKINGSELECTOR);
             } else {
                 showAlert(AlertType.WARNING, "Please complete all fields."); // Generalizing the alert for invalid person count
@@ -103,9 +97,6 @@ public class DateSelectorView {
 
     @FXML
     public void initialize() {
-       // if (packageController == null) {
-        //    getPackageController(); // Ensure the controller is initialized
-       // }
         packageController = getPackageController();
         setupMenuButton(fxOrigin, "Select Location", packageController.getOrigin());
         setupMenuButton(fxDestination, "Select Destination", packageController.getDestination());
@@ -125,25 +116,6 @@ public class DateSelectorView {
         ViewSwitcher.switchTo(View.CART);
     }
 
-   /* @FXML
-    public void fxUserHandler(ActionEvent actionEvent) {
-        if (getPackageController() == null) {
-            showAlert(AlertType.ERROR, "Operation cannot be completed at this time.");
-            return;
-        }
-        if (getPackageController().getUser() != null) {
-            showUserArea(getPackageController().getUser());
-        } else {
-            // No user registered, open the registration dialog
-            UserDialog dialog = new UserDialog();
-            Optional<User> result = dialog.showAndWait();
-            result.ifPresent(user -> {
-                getPackageController().setUser(user.getName(), user.getEmail(), user.getPaymentInfo(), user.getBookingIds());
-                System.out.println("New user created: " + user.getName());
-                showUserInfo(user);  // Optionally show immediate confirmation
-            });
-        }
-    }*/
 
     @FXML
     public void fxUserHandler(ActionEvent actionEvent) {

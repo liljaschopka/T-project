@@ -63,7 +63,6 @@ public class BookingSelectorView {
     }
 
 
-
     public static PackageController getPackageController() {
         if (packageController == null) {
             packageController = new PackageController(null, "Default Origin", "Default Destination",
@@ -85,28 +84,6 @@ public class BookingSelectorView {
         }
     }
 
-    /*
-    @FXML
-    public void fxUserHandler(ActionEvent actionEvent) {
-        if (getPackageController() == null) {
-            showAlert(Alert.AlertType.ERROR, "Operation cannot be completed at this time.");
-            return;
-        }
-        if (getPackageController().getUser() != null) {
-            showUserArea(getPackageController().getUser());
-        } else {
-            // No user registered, open the registration dialog
-            UserDialog dialog = new UserDialog();
-            Optional<User> result = dialog.showAndWait();
-            result.ifPresent(user -> {
-                getPackageController().setUser(user.getName(), user.getEmail(), user.getPaymentInfo(), user.getBookingIds());
-                System.out.println("New user created: " + user.getName());
-                showUserInfo(user);  // Optionally show immediate confirmation
-            });
-        }
-    }
-*/
-
     @FXML
     public void fxUserHandler(ActionEvent actionEvent) {
         User currentUser = DataManager.getInstance().getCurrentUser();
@@ -123,6 +100,7 @@ public class BookingSelectorView {
             });
         }
     }
+
     public void showUserInfo(User user) {
         Alert infoAlert = new Alert(Alert.AlertType.INFORMATION);
         infoAlert.setTitle("User Information");
