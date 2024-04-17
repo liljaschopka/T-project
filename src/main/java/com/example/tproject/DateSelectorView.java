@@ -69,7 +69,7 @@ public class DateSelectorView {
                 // Retrieve the current user from DataManager
                 User currentUser = DataManager.getInstance().getCurrentUser();
                 if (currentUser == null) {
-                    showAlert(AlertType.ERROR, "No user data available. Please complete user registration.");
+                    showAlert(AlertType.ERROR, "Please log in through the User button (upper right corner) before continuing! :)");
                     return;
                 }
 
